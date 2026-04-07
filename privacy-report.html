@@ -2706,10 +2706,12 @@
     const themeToggle = document.getElementById('theme-toggle');
     const html = document.documentElement;
 
-    // Check for saved theme preference
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    html.setAttribute('data-theme', savedTheme);
-    updateThemeIcon(savedTheme);
+    // Theme preference: saved setting > system preference
+    const savedTheme = localStorage.getItem('theme');
+    const systemTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const initialTheme = savedTheme || systemTheme;
+    html.setAttribute('data-theme', initialTheme);
+    updateThemeIcon(initialTheme);
 
     themeToggle.addEventListener('click', () => {
       const currentTheme = html.getAttribute('data-theme');
