@@ -1346,13 +1346,35 @@
         gap: 0.25rem;
       }
 
+      /* Mobile-first: prevent horizontal scrolling */
+      .matrix-container {
+        overflow-x: hidden;
+      }
+
+      table,
       .coverage-matrix {
-        font-size: 0.75rem;
+        width: 100% !important;
+        min-width: 0 !important;
+        table-layout: fixed;
+        font-size: 0.85rem;
       }
 
       .coverage-matrix th,
       .coverage-matrix td {
         padding: 0.75rem 0.5rem;
+        white-space: normal;
+        word-break: break-word;
+      }
+
+      /* Override inline min-width styles set on some tables */
+      table[style*="min-width"] {
+        min-width: 0 !important;
+      }
+
+      /* Make link pills tappable */
+      a {
+        text-decoration: underline;
+        text-underline-offset: 0.15em;
       }
     }
 
