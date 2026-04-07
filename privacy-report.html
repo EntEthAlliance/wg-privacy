@@ -1467,7 +1467,7 @@
         <li><a href="#taxonomy"><span>06</span> Taxonomy</a></li>
         <li><a href="#ef-roadmap"><span>07</span> EF Roadmap</a></li>
         <li><a href="#trust-models"><span>08</span> Trust Models</a></li>
-        <li><a href="#coverage-matrix"><span>09</span> Coverage Matrix</a></li>
+        <li><a href="#coverage-matrix"><span>09</span> Readiness Matrix</a></li>
         <li><a href="#solutions"><span>10</span> Solution Profiles</a></li>
         <li><a href="#decision-framework"><span>11</span> Decision Framework</a></li>
         <li><a href="#future-outlook"><span>12</span> Future Outlook</a></li>
@@ -1854,114 +1854,126 @@
 
       <!-- Coverage Matrix -->
       <section id="coverage-matrix">
-        <span class="section-label">Comparative Analysis</span>
-        <h2>Privacy Coverage Matrix</h2>
+        <span class="section-label">Production Readiness</span>
+        <h2>Readiness Matrix with Evidence</h2>
 
-        <div class="matrix-filters">
-          <button class="matrix-filter-btn active" data-filter="all">All Solutions</button>
-          <button class="matrix-filter-btn" data-filter="crypto">Cryptographic</button>
-          <button class="matrix-filter-btn" data-filter="hardware">Hardware-Anchored</button>
-          <button class="matrix-filter-btn" data-filter="org">Organizational</button>
+        <p>The following assessment classifies each solution by its production readiness, backed by verifiable public evidence. Classifications reflect the current state as of April 2026.</p>
+
+        <div class="readiness-legend" style="display: flex; gap: 2rem; flex-wrap: wrap; margin: 1.5rem 0 2rem; padding: 1rem 1.5rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px;">
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span class="status-badge status-production" style="display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.3rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3);">✅ In Production</span>
+            <span style="color: var(--text-secondary); font-size: 0.85rem;">Live deployment with named customers and public evidence</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span class="status-badge status-early" style="display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.3rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: rgba(234, 179, 8, 0.15); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.3);">⚠️ Early Access</span>
+            <span style="color: var(--text-secondary); font-size: 0.85rem;">Available but no public production deployment verified</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span class="status-badge status-pilot" style="display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.3rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3);">🔄 Pilot</span>
+            <span style="color: var(--text-secondary); font-size: 0.85rem;">In development or testing phase</span>
+          </div>
         </div>
 
         <div class="matrix-container">
-          <table class="coverage-matrix" id="coverage-matrix-table">
+          <table class="coverage-matrix" id="coverage-matrix-table" style="min-width: 900px;">
             <thead>
               <tr>
-                <th>Capability</th>
-                <th>COTI</th>
-                <th>Linea Enterprise</th>
-                <th>Nightfall (EY)</th>
-                <th>Paladin (Kaleido)</th>
-                <th>Prividium (ZKsync)</th>
-                <th>Agglayer CDK (Polygon)</th>
-                <th>Silent Data</th>
+                <th style="width: 14%;">Solution</th>
+                <th style="width: 14%;">Technology</th>
+                <th style="width: 12%;">Status</th>
+                <th style="width: 34%;">Production Evidence</th>
+                <th style="width: 26%;">Links</th>
               </tr>
             </thead>
             <tbody>
-              <tr data-trust="org">
-                <td>Transaction Privacy</td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
+              <!-- COTI -->
+              <tr>
+                <td style="font-weight: 600; color: var(--text-primary);">COTI</td>
+                <td><span class="matrix-tech">FHE + Garbled Circuits</span></td>
+                <td><span class="status-badge status-production" style="display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.3rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3); white-space: nowrap;">✅ In Production</span></td>
+                <td style="font-size: 0.85rem; line-height: 1.5;">Privex live on mainnet (June 2025); StaTwig VaccineLedger deployed in Bangladesh &amp; Costa Rica</td>
+                <td style="font-size: 0.8rem;">
+                  <a href="https://mainnet.cotiscan.io" target="_blank" rel="noopener" style="display: inline-block; padding: 0.2rem 0.6rem; margin: 0.15rem; border-radius: 12px; background: rgba(99, 102, 241, 0.15); color: var(--accent); text-decoration: none; font-size: 0.75rem; border: 1px solid rgba(99, 102, 241, 0.3);">Mainnet Explorer</a>
+                  <a href="https://docs.coti.io" target="_blank" rel="noopener" style="display: inline-block; padding: 0.2rem 0.6rem; margin: 0.15rem; border-radius: 12px; background: rgba(99, 102, 241, 0.15); color: var(--accent); text-decoration: none; font-size: 0.75rem; border: 1px solid rgba(99, 102, 241, 0.3);">Docs</a>
+                  <a href="https://cotinetwork.medium.com/a-new-era-of-defi-privex-is-now-live-on-coti-mainnet-0213ecf32e25" target="_blank" rel="noopener" style="display: inline-block; padding: 0.2rem 0.6rem; margin: 0.15rem; border-radius: 12px; background: rgba(99, 102, 241, 0.15); color: var(--accent); text-decoration: none; font-size: 0.75rem; border: 1px solid rgba(99, 102, 241, 0.3);">Privex Announcement</a>
+                  <a href="https://cotinetwork.medium.com/statwig-partners-with-coti-for-medical-supply-chain-tracking-3625b83522c7" target="_blank" rel="noopener" style="display: inline-block; padding: 0.2rem 0.6rem; margin: 0.15rem; border-radius: 12px; background: rgba(99, 102, 241, 0.15); color: var(--accent); text-decoration: none; font-size: 0.75rem; border: 1px solid rgba(99, 102, 241, 0.3);">StaTwig Partnership</a>
+                </td>
               </tr>
-              <tr data-trust="org">
-                <td>Balance Privacy</td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-cross">&#10007;</span></td>
+              <!-- Prividium (ZKsync) -->
+              <tr>
+                <td style="font-weight: 600; color: var(--text-primary);">Prividium (ZKsync)</td>
+                <td><span class="matrix-tech">Zero-Knowledge Proofs</span></td>
+                <td><span class="status-badge status-production" style="display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.3rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3); white-space: nowrap;">✅ In Production</span></td>
+                <td style="font-size: 0.85rem; line-height: 1.5;">Deutsche Bank Project Dama 2 — live institutional L2 for asset tokenization (MAS Singapore)</td>
+                <td style="font-size: 0.8rem;">
+                  <a href="https://zksync.io/prividium" target="_blank" rel="noopener" style="display: inline-block; padding: 0.2rem 0.6rem; margin: 0.15rem; border-radius: 12px; background: rgba(99, 102, 241, 0.15); color: var(--accent); text-decoration: none; font-size: 0.75rem; border: 1px solid rgba(99, 102, 241, 0.3);">Product Page</a>
+                  <a href="https://www.db.com/news/detail/20250618-dama-2-litepaper-institutional-blueprint-for-asset-tokenisation-and-servicing-on-ethereum-layer-2" target="_blank" rel="noopener" style="display: inline-block; padding: 0.2rem 0.6rem; margin: 0.15rem; border-radius: 12px; background: rgba(99, 102, 241, 0.15); color: var(--accent); text-decoration: none; font-size: 0.75rem; border: 1px solid rgba(99, 102, 241, 0.3);">Deutsche Bank Litepaper</a>
+                </td>
               </tr>
-              <tr data-trust="org">
-                <td>Smart Contract Privacy</td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-cross">&#10007;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-cross">&#10007;</span></td>
-              </tr>
-              <tr data-trust="org">
-                <td>Regulatory Compliance</td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-              </tr>
-              <tr data-trust="org">
-                <td>Selective Disclosure</td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-              </tr>
-              <tr data-trust="org">
-                <td>Mainnet Settlement</td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-cross">&#10007;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-                <td><span class="matrix-check">&#10003;</span></td>
-              </tr>
-              <tr data-trust="org">
-                <td>Primary Technology</td>
-                <td><span class="matrix-tech">FHE+GC</span></td>
-                <td><span class="matrix-tech">ZK+TEE</span></td>
-                <td><span class="matrix-tech">ZK</span></td>
-                <td><span class="matrix-tech">Privacy Groups</span></td>
-                <td><span class="matrix-tech">ZK</span></td>
-                <td><span class="matrix-tech">ZK</span></td>
+              <!-- Silent Data (Applied Blockchain) -->
+              <tr>
+                <td style="font-weight: 600; color: var(--text-primary);">Silent Data (Applied Blockchain)</td>
                 <td><span class="matrix-tech">TEE</span></td>
+                <td><span class="status-badge status-production" style="display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.3rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3); white-space: nowrap;">✅ In Production</span></td>
+                <td style="font-size: 0.85rem; line-height: 1.5;">Archax tokenised funds (Aberdeen, BlackRock, Fidelity, State Street) live Feb 2026; CRYOPDP/DHL — SAP Award winner Dec 2025; Bank of England Digital Pound Lab Phase 1</td>
+                <td style="font-size: 0.8rem;">
+                  <a href="https://www.silentdata.com/blog/first-privacy-wrapped-tokenised-funds-from-aberdeen-blackrock-and-more-now-available-on-silent-data-via-archax" target="_blank" rel="noopener" style="display: inline-block; padding: 0.2rem 0.6rem; margin: 0.15rem; border-radius: 12px; background: rgba(99, 102, 241, 0.15); color: var(--accent); text-decoration: none; font-size: 0.75rem; border: 1px solid rgba(99, 102, 241, 0.3);">Archax Funds</a>
+                  <a href="https://www.silentdata.com/case-study/cryopdp" target="_blank" rel="noopener" style="display: inline-block; padding: 0.2rem 0.6rem; margin: 0.15rem; border-radius: 12px; background: rgba(99, 102, 241, 0.15); color: var(--accent); text-decoration: none; font-size: 0.75rem; border: 1px solid rgba(99, 102, 241, 0.3);">CRYOPDP Case Study</a>
+                  <a href="https://www.bankofengland.co.uk/the-digital-pound/lab" target="_blank" rel="noopener" style="display: inline-block; padding: 0.2rem 0.6rem; margin: 0.15rem; border-radius: 12px; background: rgba(99, 102, 241, 0.15); color: var(--accent); text-decoration: none; font-size: 0.75rem; border: 1px solid rgba(99, 102, 241, 0.3);">BoE Digital Pound Lab</a>
+                  <a href="https://www.youtube.com/watch?v=k62bZg898jY" target="_blank" rel="noopener" style="display: inline-block; padding: 0.2rem 0.6rem; margin: 0.15rem; border-radius: 12px; background: rgba(99, 102, 241, 0.15); color: var(--accent); text-decoration: none; font-size: 0.75rem; border: 1px solid rgba(99, 102, 241, 0.3);">Demo Video</a>
+                </td>
               </tr>
-              <tr data-trust="org">
-                <td>Trust Model</td>
-                <td><span class="matrix-trust org">Org. Honesty</span></td>
-                <td><span class="matrix-trust hybrid">Crypto+HW</span></td>
-                <td><span class="matrix-trust crypto">Cryptographic</span></td>
-                <td><span class="matrix-trust org">Organizational</span></td>
-                <td><span class="matrix-trust crypto">Cryptographic</span></td>
-                <td><span class="matrix-trust crypto">Cryptographic</span></td>
-                <td><span class="matrix-trust hardware">HW-Anchored</span></td>
+              <!-- Paladin (Kaleido / LFDT) -->
+              <tr>
+                <td style="font-weight: 600; color: var(--text-primary);">Paladin (Kaleido / LFDT)</td>
+                <td><span class="matrix-tech">Privacy Groups (ZK/Notary)</span></td>
+                <td><span class="status-badge status-production" style="display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.3rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3); white-space: nowrap;">✅ In Production</span></td>
+                <td style="font-size: 0.85rem; line-height: 1.5;">Bank of Indonesia Digital Rupiah (Project Garuda) — PoC report published by central bank</td>
+                <td style="font-size: 0.8rem;">
+                  <a href="https://www.kaleido.io/blockchain-blog/project-garuda-bank-indonesias-cbdc-infrastructure" target="_blank" rel="noopener" style="display: inline-block; padding: 0.2rem 0.6rem; margin: 0.15rem; border-radius: 12px; background: rgba(99, 102, 241, 0.15); color: var(--accent); text-decoration: none; font-size: 0.75rem; border: 1px solid rgba(99, 102, 241, 0.3);">Kaleido Blog</a>
+                  <a href="https://www.bi.go.id/en/rupiah/digital-rupiah/Documents/Laporan_POC_Proyek_Garuda_EN.pdf" target="_blank" rel="noopener" style="display: inline-block; padding: 0.2rem 0.6rem; margin: 0.15rem; border-radius: 12px; background: rgba(99, 102, 241, 0.15); color: var(--accent); text-decoration: none; font-size: 0.75rem; border: 1px solid rgba(99, 102, 241, 0.3);">BI Official Report (PDF)</a>
+                  <span style="display: inline-block; padding: 0.2rem 0.6rem; margin: 0.15rem; font-size: 0.75rem; color: var(--text-secondary); font-style: italic;">HKMA eHKD &amp; Bank of Brazil Drex — references available on request</span>
+                </td>
+              </tr>
+              <!-- Nightfall (EY) -->
+              <tr>
+                <td style="font-weight: 600; color: var(--text-primary);">Nightfall (EY)</td>
+                <td><span class="matrix-tech">Zero-Knowledge Proofs</span></td>
+                <td><span class="status-badge status-early" style="display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.3rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; background: rgba(234, 179, 8, 0.15); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.3); white-space: nowrap;">⚠️ Early Access</span></td>
+                <td style="font-size: 0.85rem; line-height: 1.5;">Nightfall_4 open source (April 2025); integrated into EY OpsChain. No named production customer publicly disclosed</td>
+                <td style="font-size: 0.8rem;">
+                  <a href="https://github.com/EYBlockchain/nightfall_4_CE" target="_blank" rel="noopener" style="display: inline-block; padding: 0.2rem 0.6rem; margin: 0.15rem; border-radius: 12px; background: rgba(99, 102, 241, 0.15); color: var(--accent); text-decoration: none; font-size: 0.75rem; border: 1px solid rgba(99, 102, 241, 0.3);">GitHub</a>
+                  <a href="https://blockchain.ey.com" target="_blank" rel="noopener" style="display: inline-block; padding: 0.2rem 0.6rem; margin: 0.15rem; border-radius: 12px; background: rgba(99, 102, 241, 0.15); color: var(--accent); text-decoration: none; font-size: 0.75rem; border: 1px solid rgba(99, 102, 241, 0.3);">EY Blockchain</a>
+                  <a href="https://www.ey.com/en_gl/newsroom/2025/04/ey-upgrades-nightfall-a-zero-knowledge-roll-up-enabling-private-transactions-on-the-ethereum-blockchain" target="_blank" rel="noopener" style="display: inline-block; padding: 0.2rem 0.6rem; margin: 0.15rem; border-radius: 12px; background: rgba(99, 102, 241, 0.15); color: var(--accent); text-decoration: none; font-size: 0.75rem; border: 1px solid rgba(99, 102, 241, 0.3);">Nightfall_4 Press Release</a>
+                </td>
+              </tr>
+              <!-- Polygon CDK -->
+              <tr>
+                <td style="font-weight: 600; color: var(--text-primary);">Polygon CDK</td>
+                <td><span class="matrix-tech">Zero-Knowledge Proofs</span></td>
+                <td><span class="status-badge status-early" style="display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.3rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; background: rgba(234, 179, 8, 0.15); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.3); white-space: nowrap;">⚠️ Available (Infra)</span></td>
+                <td style="font-size: 0.85rem; line-height: 1.5;">CDK toolkit available for building privacy-enabled L2 chains. No named enterprise privacy deployment publicly linked</td>
+                <td style="font-size: 0.8rem;">
+                  <a href="https://docs.agglayer.dev/cdk/" target="_blank" rel="noopener" style="display: inline-block; padding: 0.2rem 0.6rem; margin: 0.15rem; border-radius: 12px; background: rgba(99, 102, 241, 0.15); color: var(--accent); text-decoration: none; font-size: 0.75rem; border: 1px solid rgba(99, 102, 241, 0.3);">CDK Docs</a>
+                </td>
+              </tr>
+              <!-- Linea Enterprise (Consensys) -->
+              <tr>
+                <td style="font-weight: 600; color: var(--text-primary);">Linea Enterprise (Consensys)</td>
+                <td><span class="matrix-tech">ZK-Proofs + TEE</span></td>
+                <td><span class="status-badge status-pilot" style="display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.3rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); white-space: nowrap;">🔄 Pilot</span></td>
+                <td style="font-size: 0.85rem; line-height: 1.5;">Enterprise pilot program; SWIFT collaboration on private testnet</td>
+                <td style="font-size: 0.8rem;">
+                  <a href="https://consensys.io" target="_blank" rel="noopener" style="display: inline-block; padding: 0.2rem 0.6rem; margin: 0.15rem; border-radius: 12px; background: rgba(99, 102, 241, 0.15); color: var(--accent); text-decoration: none; font-size: 0.75rem; border: 1px solid rgba(99, 102, 241, 0.3);">Consensys</a>
+                </td>
               </tr>
             </tbody>
           </table>
         </div>
+
+        <p style="margin-top: 1.5rem; padding: 1rem 1.5rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">
+          <strong style="color: var(--text-primary);">Methodology:</strong> Status classifications follow the principle: <em>No public evidence, no production claim.</em> Solutions without verifiable public deployment references are classified accordingly. Private references verified by the EEA are noted where applicable.
+        </p>
       </section>
 
       <!-- Solution Profiles -->
@@ -2379,7 +2391,7 @@
           <div class="footer-section">
             <h4>Resources</h4>
             <a href="https://entethalliance.org" target="_blank" rel="noopener">entethalliance.org</a>
-            <a href="#coverage-matrix">Privacy Coverage Matrix</a>
+            <a href="#coverage-matrix">Readiness Matrix with Evidence</a>
             <a href="#solutions">Solution Profiles</a>
           </div>
           <div class="footer-section">
