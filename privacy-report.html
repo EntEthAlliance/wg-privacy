@@ -1540,11 +1540,11 @@
         <h2>Opening Statement</h2>
 
         <div class="opening-statement">
-          <p>This report represents a collective effort by the Enterprise Ethereum Alliance (EEA) Privacy Working Group to map the current landscape of privacy within the Ethereum ecosystem. From its inception, this report has been guided by neutrality as a core design principle. Our aim is to provide an objective, technical, and strategic framework for understanding how privacy is being integrated into enterprise-grade blockchain solutions.</p>
+          <p>This report represents a collective effort by the Enterprise Ethereum Alliance (EEA) Privacy Working Group to map the current landscape of privacy within the Ethereum ecosystem. This work reflects the contributions of 17 experts across 11 organizations—Applied Blockchain, Consensys, COTI, EY, Kaleido, Polygon, ZKsync/Matter Labs, the Ethereum Foundation, L2Beat, Nethermind, and the Enterprise Ethereum Alliance—over a dedicated three-month intensive study period.</p>
 
-          <p>The scope of this report is intentionally focused on the privacy solutions developed and maintained by EEA member organizations. By concentrating on the innovations within our ecosystem, we can ensure that solution characteristics are supported by live pilots, peer-reviewed empirical papers or enterprise deployments.</p>
+          <p>From its inception, this report has been guided by neutrality as a core design principle. Our methodology relied on cross-institutional validation, synthesizing technical documentation, stress-testing results, and deployment post-mortems from leading financial and cryptographic institutions. Our aim is to provide an objective, technical, and strategic framework for understanding how privacy is being integrated into enterprise-grade blockchain solutions.</p>
 
-          <p>While we recognize the broader ecosystem of privacy research, deep-dives into non-member solutions fall outside the primary scope of this mandate. However, in the interest of authenticity and inclusivity, a comprehensive taxonomy of non-member solutions and academic primitives can be found in the 'Additional Privacy Solutions' section at the conclusion of this paper.</p>
+          <p>The scope of this report is intentionally focused on the privacy solutions developed and maintained by EEA member organizations. By concentrating on the innovations within our ecosystem, we can ensure that solution characteristics are supported by live pilots, peer-reviewed empirical papers, or enterprise deployments. While we recognize the broader ecosystem of privacy research, deep-dives into non-member solutions fall outside the primary scope of this mandate. However, in the interest of authenticity and inclusivity, a comprehensive taxonomy of non-member solutions and academic primitives can be found in the 'Additional Privacy Solutions' section at the conclusion of this paper.</p>
         </div>
       </section>
 
@@ -1572,21 +1572,32 @@
           </div>
         </div>
 
-        <p>Financial institutions are increasingly deploying tokenized assets on Ethereum. However, on public blockchains, all transaction data is visible by default. Transaction amounts, counterparty identities, and business relationships are exposed on infrastructure that anyone can monitor.</p>
+        <h3 style="margin-top: 1rem;">The Challenge</h3>
+        <p>Financial institutions are increasingly deploying tokenized assets on Ethereum, but public blockchains expose all transaction data by default—amounts, counterparties, and business relationships are visible to anyone monitoring the network. This transparency creates a critical barrier: enterprises cannot move trillion-dollar bond markets, derivatives positions, or proprietary trading strategies onto infrastructure where competitors and adversaries can observe every move.</p>
 
-        <p><strong>Privacy and confidentiality are the missing pieces for enterprise adoption.</strong></p>
+        <p><strong>Privacy and confidentiality are not features—they are prerequisites for enterprise adoption.</strong></p>
 
-        <p>To address this, the Enterprise Ethereum Alliance, the member-driven organization connecting Fortune 500 companies, financial institutions, and technology providers with the Ethereum ecosystem, convened this Privacy Working Group to map the current landscape. Applied Blockchain, COTI, Consensys, EY (Nightfall), Kaleido, Polygon, and ZKsync contributed their solutions, creating the first comprehensive enterprise-focused view of privacy capabilities on Ethereum. In addition, the PSE and IPTF teams of the Ethereum Foundation provided guidance on the general privacy roadmap of Ethereum.</p>
+        <h3 style="margin-top: 2rem;">What This Report Provides</h3>
+        <p>The Enterprise Ethereum Alliance convened a Privacy Working Group of 17 experts across 11 organizations to map the current landscape. Seven EEA member organizations contributed their solutions, creating the first comprehensive enterprise-focused view of privacy capabilities on Ethereum:</p>
 
-        <p>This report reflects the work of 17 contributors across 11 organizations: Applied Blockchain, Consensys, COTI, EY, Kaleido, Polygon, ZKsync / Matter Labs, the Ethereum Foundation, L2BEAT, Nethermind, and the Enterprise Ethereum Alliance.</p>
+        <ul style="margin: 1rem 0 1.5rem 1.25rem; color: var(--text-secondary);">
+          <li><strong>COTI</strong> — Garbled Circuits for programmable privacy</li>
+          <li><strong>Linea Enterprise (Consensys)</strong> — Private Validium with ZK proofs</li>
+          <li><strong>Nightfall (EY)</strong> — Open-source ZK protocol for confidential tokens</li>
+          <li><strong>Paladin (Kaleido, LFDT)</strong> — Modular privacy framework supporting multiple cryptographic approaches</li>
+          <li><strong>Prividium (ZKsync/Matter Labs)</strong> — Permissioned ZK Layer 2 with institutional controls</li>
+          <li><strong>Polygon CDK</strong> — Configurable privacy spectrum for sovereign chains</li>
+          <li><strong>Silent Data (Applied Blockchain)</strong> — TEE-based programmable privacy on OP Stack</li>
+        </ul>
 
-        <p>This paper is designed to be a practical guide for enterprises to evaluate privacy solutions in order to utilize them for their own application of tokenized assets. It is designed for CIOs, compliance officers, and digital asset leads who need to evaluate options and ask the right questions.</p>
+        <h3 style="margin-top: 2rem;">Key Findings</h3>
+        <p>Privacy has multiple dimensions—transaction amounts, counterparty identities, business logic, and regulatory access all require different technical approaches. No single solution covers all requirements. Different solutions protect different aspects of operations using distinct trust models: cryptographic proofs (ZK), secure hardware (TEEs), multi-party computation (MPC), or organizational controls.</p>
 
-        <p>Privacy has various applications and implementations. Different solutions protect different aspects of operations. No single solution covers all requirements. This paper provides the framework to understand what exists, how each approach works, and what implementation requires, so institutions can make informed decisions for their specific needs.</p>
+        <h3 style="margin-top: 2rem;">Who Should Read This</h3>
+        <p>This paper is designed for CIOs, compliance officers, and digital asset leads who need to evaluate privacy options for tokenized asset deployments. It provides a practical framework to understand what exists, how each approach works, what trust assumptions apply, and what implementation requires—enabling institutions to make informed decisions for their specific regulatory and operational needs.</p>
 
-        <p>Privacy on Ethereum is a vibrant and fast-evolving ecosystem—what was true six months ago may already look different today. This report is a snapshot of the state of the technology at the time of publication.</p>
-
-        <p>In the next edition of this report, which we intend to publish twice a year, we will provide more in-depth information regarding the actual implementation of these technologies in production environments.</p>
+        <h3 style="margin-top: 2rem;">Bottom Line</h3>
+        <p>The enterprise privacy landscape on Ethereum is maturing rapidly, with production deployments already supporting central bank digital currencies, tokenized funds, and private trading platforms. This report maps the territory so institutions can navigate from experimentation to implementation.</p>
       </section>
 
       <!-- Research Methodology -->
