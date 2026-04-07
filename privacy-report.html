@@ -1019,7 +1019,7 @@
     }
 
     .solution-card.expanded .solution-content {
-      max-height: 500px;
+      max-height: 2000px;
     }
 
     .solution-content-inner {
@@ -1471,6 +1471,8 @@
         <li><a href="#solutions"><span>10</span> Solution Profiles</a></li>
         <li><a href="#decision-framework"><span>11</span> Decision Framework</a></li>
         <li><a href="#future-outlook"><span>12</span> Future Outlook</a></li>
+        <li><a href="#additional-solutions"><span>13</span> Additional Solutions</a></li>
+        <li><a href="#contact"><span>14</span> Contact</a></li>
       </ul>
 
       <div class="nav-footer">
@@ -1989,11 +1991,12 @@
             <div class="solution-header">
               <div class="solution-header-left">
                 <div class="solution-number">1</div>
+                <img src="logos/coti.png" alt="COTI" style="height: 40px; margin-right: 1rem;">
                 <div class="solution-header-info">
                   <h4>COTI</h4>
                   <div class="solution-header-meta">
                     <span>&#127970; COTI Group</span>
-                    <span>&#128272; FHE + Garbled Circuits</span>
+                    <span>&#128272; Garbled Circuits</span>
                     <span class="matrix-trust org">Organizational Honesty</span>
                   </div>
                 </div>
@@ -2002,28 +2005,38 @@
             </div>
             <div class="solution-content">
               <div class="solution-content-inner">
-                <div class="solution-details">
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Organization</span>
-                    <span class="solution-detail-value">COTI Group</span>
-                  </div>
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Technology</span>
-                    <span class="solution-detail-value">FHE + Garbled Circuits</span>
-                  </div>
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Trust Model</span>
-                    <span class="solution-detail-value">Organizational Honesty (majority of co-processor operators)</span>
-                  </div>
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Status</span>
-                    <span class="solution-detail-value">Devnet with enterprise pilots</span>
-                  </div>
-                </div>
-                <div class="solution-feature">
-                  <div class="solution-feature-label">Key Feature</div>
-                  <p>Data remains encrypted during computation; supports confidential smart contracts on Ethereum mainnet.</p>
-                </div>
+                <h4 style="margin-top: 0; margin-bottom: 1rem;">Summary</h4>
+                <p>COTI is the programmable privacy layer for Web3. Powered by high-performance Garbled Circuits, it delivers fast, low-cost, flexible, and compliant privacy across blockchains, and natively on its Ethereum Layer 2. COTI's architecture enables enterprises and developers to build privacy-preserving applications with end-to-end confidentiality and cost-efficiency at scale. It unlocks a wide variety of use cases in private DeFi, tokenized real-world assets (RWAs), trading, payments, and decentralized identity. COTI leads in private DeFi and enterprise adoption, with active collaborations in banking, government, and global forums.</p>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Privacy Approach</h4>
+                <p>COTI uses Garbled Circuits (GC), an advanced multi-party computation (MPC) technique, to enable encrypted computation within workflows. Sensitive data including inputs, balances, on-chain state, and smart contract logic, remains encrypted end-to-end across storage, computation and transmission. "Input Text" is converted into "Garbled Text", where encrypted Boolean gates are securely evaluated, supporting complex operations over private data without exposing data. Garbled Circuits deliver strong confidentiality with high throughput, low latency, low cost, EVM compatibility, and multi-chain support. Programmable smart contracts allow selective disclosure for audits, compliance, or permissions, keeping data private yet revealable to authorized parties via permissioned view-keys.</p>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Integration Requirements</h4>
+                <ul style="margin-left: 1.25rem; color: var(--text-secondary);">
+                  <li>Deploy on COTI network or bridge existing assets</li>
+                  <li>Standard Solidity with parameters specifying confidential data elements</li>
+                  <li>TypeScript, Python, Hardhat tooling available</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Case Studies</h4>
+                <ul style="margin-left: 1.25rem; color: var(--text-secondary);">
+                  <li><strong>Central Bank of Europe - Digital Euro:</strong> Pioneer Partner with the European Central Bank to establish confidential consumer applications on top of a Euro CBDC settlement layer.</li>
+                  <li><strong>Privex:</strong> A COTI native privacy-preserving perpetual exchange that processes in excess of $25bn in aggregate volume and extends both confidential user and agentic trading.</li>
+                  <li><strong>Unicef, Bangladesh Government, StaTwig:</strong> Integrated COTI for a national-scale rollout in Bangladesh, completing 10 million private computations on encrypted IoT-enabled vaccine data for approximately 7 USD total.</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Solution Characteristics (as stated by provider)</h4>
+                <ul style="margin-left: 1.25rem; color: var(--text-secondary);">
+                  <li>Extends confidential tokens, concealing transaction values and account balances</li>
+                  <li>Real-time, scalable, confidential computations; private transactions at $0.0000007</li>
+                  <li>Multi-party: Extends to scenarios where multiple parties need to contribute private data</li>
+                  <li>Performative: 1000x faster & 250x lighter than alternative privacy solutions (FHE)</li>
+                  <li>Roadmap: Multichain expansion, extending a privacy-on-demand capability that can be used on 70+ chains (planned 2026)</li>
+                  <li>Maturity: Production ready</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">GitHub Libraries & Developer Documentation</h4>
+                <p><a href="https://docs.coti.io" target="_blank" rel="noopener">Documentation</a> | <a href="https://github.com/coti-io" target="_blank" rel="noopener">GitHub</a></p>
               </div>
             </div>
           </div>
@@ -2033,12 +2046,13 @@
             <div class="solution-header">
               <div class="solution-header-left">
                 <div class="solution-number">2</div>
+                <img src="logos/consensys.png" alt="Consensys" style="height: 40px; margin-right: 1rem;">
                 <div class="solution-header-info">
                   <h4>Linea Enterprise</h4>
                   <div class="solution-header-meta">
                     <span>&#127970; Consensys</span>
-                    <span>&#128272; ZK-Proofs + TEE</span>
-                    <span class="matrix-trust hybrid">Crypto + HW</span>
+                    <span>&#128272; Zero-Knowledge Proofs</span>
+                    <span class="matrix-trust crypto">Cryptographic</span>
                   </div>
                 </div>
               </div>
@@ -2046,28 +2060,37 @@
             </div>
             <div class="solution-content">
               <div class="solution-content-inner">
-                <div class="solution-details">
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Organization</span>
-                    <span class="solution-detail-value">Consensys</span>
-                  </div>
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Technology</span>
-                    <span class="solution-detail-value">ZK-Proofs + TEE hybrid</span>
-                  </div>
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Trust Model</span>
-                    <span class="solution-detail-value">Cryptographic + Hardware-Anchored</span>
-                  </div>
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Status</span>
-                    <span class="solution-detail-value">Enterprise pilot program active</span>
-                  </div>
-                </div>
-                <div class="solution-feature">
-                  <div class="solution-feature-label">Key Feature</div>
-                  <p>Enterprise-grade privacy on Ethereum L2 with regulatory compliance built in.</p>
-                </div>
+                <h4 style="margin-top: 0; margin-bottom: 1rem;">Summary</h4>
+                <p>An Ethereum Layer 2 solution that can be deployed as a private, permissioned "Validium" where the state remains private. Zero knowledge proofs are used to prove the validity of the state while keeping transaction data confidential as well as to enable trustless interoperability with Ethereum. This guarantees full access to the Ethereum ecosystem including its liquidity while providing institutional privacy.</p>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Privacy Approach</h4>
+                <p>Uses a Private Validium architecture combined with an Access Control Engine. Transaction data and ledger state stay within the operator-controlled infrastructure and are never published externally. Only zero-knowledge validity proofs (ZKPs) and commitments to these data are posted to Ethereum to prove correctness. Role-Based Access Control (RBAC) restricts data visibility so that participants (auditors, banks) only see the specific transaction data they are entitled to view.</p>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Integration Requirements</h4>
+                <ul style="margin-left: 1.25rem; color: var(--text-secondary);">
+                  <li><strong>Existing Smart Contracts:</strong> Full EVM equivalence allows existing Ethereum smart contracts to deploy without modification.</li>
+                  <li><strong>Tokens:</strong> Native support for all ERC standards (ERC-20, ERC-721, ERC-1155, ERC-3643).</li>
+                  <li><strong>Tooling:</strong> Compatible with standard Ethereum developer tools (Hardhat, Foundry).</li>
+                  <li><strong>Identity:</strong> Users/Institutions can integrate with the Linea Enterprise Gateway (e.g., via standards like OAuth2, wallet signing).</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Case Studies</h4>
+                <ul style="margin-left: 1.25rem; color: var(--text-secondary);">
+                  <li><strong>SWIFT September 2025 pilot:</strong> 12+ banks including BNP Paribas, BNY Mellon</li>
+                  <li><strong>SharpLink Gaming:</strong> $170M ETH with Anchorage Digital custody</li>
+                  <li>Total value secure on Linea Mainnet public chain: $750M+ per public sources</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Solution Characteristics (as stated by provider)</h4>
+                <ul style="margin-left: 1.25rem; color: var(--text-secondary);">
+                  <li><strong>Throughput:</strong> benchmarks with ~1000 TPS for simple transfers, and a roadmap to 30,000+ TPS.</li>
+                  <li><strong>Finality:</strong> instant/single-slot finality on Layer 2; L1 finality depends on proof posting frequency.</li>
+                  <li><strong>Cost:</strong> sub-$0.01 per transaction.</li>
+                  <li><strong>Maturity:</strong> production ready, the core stack has been running Linea mainnet for two years.</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">GitHub Libraries & Developer Documentation</h4>
+                <p><a href="https://github.com/Consensys/linea-monorepo" target="_blank" rel="noopener">GitHub</a> | <a href="https://docs.linea.build/stack" target="_blank" rel="noopener">Documentation</a></p>
               </div>
             </div>
           </div>
@@ -2077,6 +2100,7 @@
             <div class="solution-header">
               <div class="solution-header-left">
                 <div class="solution-number">3</div>
+                <img src="logos/ey.png" alt="EY" style="height: 40px; margin-right: 1rem;">
                 <div class="solution-header-info">
                   <h4>Nightfall</h4>
                   <div class="solution-header-meta">
@@ -2090,28 +2114,39 @@
             </div>
             <div class="solution-content">
               <div class="solution-content-inner">
-                <div class="solution-details">
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Organization</span>
-                    <span class="solution-detail-value">Ernst &amp; Young</span>
-                  </div>
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Technology</span>
-                    <span class="solution-detail-value">Zero-Knowledge Proofs (Optimistic ZK-Rollup)</span>
-                  </div>
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Trust Model</span>
-                    <span class="solution-detail-value">Cryptographic</span>
-                  </div>
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Status</span>
-                    <span class="solution-detail-value">Production-ready, deployed with enterprise clients</span>
-                  </div>
-                </div>
-                <div class="solution-feature">
-                  <div class="solution-feature-label">Key Feature</div>
-                  <p>Privacy-first token transfers with regulatory compliance; EY's flagship blockchain privacy solution.</p>
-                </div>
+                <h4 style="margin-top: 0; margin-bottom: 1rem;">Summary</h4>
+                <p>Nightfall_4 is an open-source zero-knowledge-based privacy protocol developed and maintained by EY that enables confidential token transfers on Ethereum-compatible networks. It uses cryptographic commitments and zero-knowledge validity proofs to ensure transaction correctness while keeping amounts and counterparties private. The protocol is designed for enterprise and institutional use cases, supporting selective disclosure for compliance and audit without introducing global decryption keys or protocol backdoors. Identity, permissioning, and KYC integration are deployment-configurable rather than hard-coded. Nightfall_4 focuses on practical privacy for regulated environments, balancing confidentiality, auditability, and interoperability with public blockchain infrastructure.</p>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Privacy Approach</h4>
+                <p>Converts tokens (ERC-20, ERC-721, ERC-1155, ERC-3525) into cryptographic 'commitments' using ZK-ZK rollup architecture. Validity proofs verify correctness without revealing amounts, parties, or transfer details.</p>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Integration Requirements</h4>
+                <ul style="margin-left: 1.25rem; color: var(--text-secondary);">
+                  <li>Tokens deposit to receive private commitments</li>
+                  <li>Supports decentralized permissioning and KYC-gating</li>
+                  <li>X.509 enterprise identity certificates supported for deposit/withdrawal</li>
+                  <li>Gas fee abstraction available for ERC-20 tokens</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Case Studies</h4>
+                <ul style="margin-left: 1.25rem; color: var(--text-secondary);">
+                  <li><strong>Starknet Ecosystem:</strong> Integration to enable high-throughput privacy-preserving payments leveraging zk-based scalability infrastructure.</li>
+                  <li><strong>Plume Network:</strong> Layer-3 deployment for privacy-enabled institutional RWA tokenization with sequencer-level AML compliance.</li>
+                  <li><strong>Celo Foundation:</strong> First payments-focused blockchain to deploy Nightfall; targeting enterprise B2B cross-border payment ($180T market)</li>
+                  <li><strong>Microsoft:</strong> Supply chain proof-of-concept</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Solution Characteristics (as stated by provider)</h4>
+                <ul style="margin-left: 1.25rem; color: var(--text-secondary);">
+                  <li><strong>Cost:</strong> 3.5x cost reduction vs. public ERC-20 transfers</li>
+                  <li><strong>Development history:</strong> Since 2019</li>
+                  <li><strong>Open source:</strong> Fully public domain, no commercial licensing required</li>
+                  <li><strong>Business logic:</strong> Smart contract code remains publicly verifiable to preserve transparency and composability, while transaction amounts, counterparties, and token balances are cryptographically shielded from public view</li>
+                  <li><strong>Maturity:</strong> Deployed across multiple networks including Plume Network, Celo Foundation, and Starknet Ecosystem</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">GitHub Libraries & Developer Documentation</h4>
+                <p><a href="https://github.com/EYBlockchain/nightfall_4_CE" target="_blank" rel="noopener">GitHub</a></p>
               </div>
             </div>
           </div>
@@ -2121,12 +2156,13 @@
             <div class="solution-header">
               <div class="solution-header-left">
                 <div class="solution-number">4</div>
+                <img src="logos/kaleido.png" alt="Kaleido" style="height: 40px; margin-right: 1rem;">
                 <div class="solution-header-info">
                   <h4>Paladin</h4>
                   <div class="solution-header-meta">
                     <span>&#127970; Kaleido / LFDT</span>
-                    <span>&#128272; Privacy Groups</span>
-                    <span class="matrix-trust org">Organizational</span>
+                    <span>&#128272; ZK/Notary (Privacy Groups)</span>
+                    <span class="matrix-trust hybrid">Crypto + Organizational</span>
                   </div>
                 </div>
               </div>
@@ -2134,28 +2170,44 @@
             </div>
             <div class="solution-content">
               <div class="solution-content-inner">
-                <div class="solution-details">
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Organization</span>
-                    <span class="solution-detail-value">Kaleido / LFDT Hyperledger</span>
-                  </div>
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Technology</span>
-                    <span class="solution-detail-value">Privacy Groups (notary-based)</span>
-                  </div>
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Trust Model</span>
-                    <span class="solution-detail-value">Organizational Honesty</span>
-                  </div>
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Status</span>
-                    <span class="solution-detail-value">Production deployments</span>
-                  </div>
-                </div>
-                <div class="solution-feature">
-                  <div class="solution-feature-label">Key Feature</div>
-                  <p>Private business logic execution with shared state commitments on public ledger.</p>
-                </div>
+                <h4 style="margin-top: 0; margin-bottom: 1rem;">Summary</h4>
+                <p>Paladin, a top-level project of the Linux Foundation Decentralized Trust (LFDT), is a unified framework for "Programmable Privacy" designed to bring enterprise-grade confidentiality to any Ethereum Virtual Machine (EVM) compatible blockchain. Paladin is a modular runtime that allows developers to plug in diverse cryptographic technologies such as Zero-Knowledge Proofs (ZKP), private notary systems, and Fully Homomorphic Encryption (FHE). Its standout feature is its ability to facilitate atomic, all-or-nothing transactions across multiple privacy domains, enabling complex business logic (e.g., Delivery vs. Payment) where different legs of a trade might use different privacy models (like a ZKP-based token vs. a notary-based system).</p>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Privacy Approach</h4>
+                <p>Paladin achieves confidentiality via localized Privacy Domains, with three built-in protocols:</p>
+                <ul style="margin-left: 1.25rem; color: var(--text-secondary);">
+                  <li><strong>Pente:</strong> private smart contract execution through "ephemeral EVMs" with state commitments recorded on-chain</li>
+                  <li><strong>Zeto:</strong> a ZKP based token implementation</li>
+                  <li><strong>Noto:</strong> a notary based token implementation for regulated assets</li>
+                </ul>
+                <p>By abstracting diverse cryptographic methods, including ZKP, FHE, and off-chain notarization, into a single modular runtime, Paladin allows enterprises to orchestrate atomic transactions that bridge multiple privacy models.</p>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Integration Requirements</h4>
+                <ul style="margin-left: 1.25rem; color: var(--text-secondary);">
+                  <li><strong>Deployment:</strong> each participant hosts a Paladin Node that runs as a sidecar to any standard EVM client.</li>
+                  <li><strong>Privacy Domain:</strong> admins defines and deploys specific "Domains", such as Zeto, Noto or Pente, which dictate the cryptographic rules and verifier contracts on the base ledger.</li>
+                  <li><strong>Identity & Key Management:</strong> integration with enterprise-grade KMS or HSM is built-in.</li>
+                  <li><strong>Peer-to-Peer Connectivity:</strong> nodes communicate via a secure connection layer, typically via mTLS, for off-chain data exchange and multi-party signature gathering.</li>
+                  <li><strong>Off-chain State Store:</strong> each node uses a dedicated database for the private states.</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Case Studies</h4>
+                <ul style="margin-left: 1.25rem; color: var(--text-secondary);">
+                  <li><strong>Central Bank of Brazil, Drex Project:</strong> Mastercard, Banco BV phase 2 use cases</li>
+                  <li><strong>Bank Indonesia, Digital Rupiah:</strong> Cash Ledger</li>
+                  <li><strong>Hong Kong Monetary Authority, eHKD Phase 2:</strong> Zeto was tested as a Private Enhancing Technology</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Solution Characteristics (as stated by provider)</h4>
+                <ul style="margin-left: 1.25rem; color: var(--text-secondary);">
+                  <li>Programmable Privacy & Atomic Interoperability</li>
+                  <li>High-Performance UTXO-based out-of-box privacy tokens</li>
+                  <li>Pluggable Cryptography</li>
+                  <li><strong>Maturity:</strong> adopted by many influential projects in the financial industry</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">GitHub Libraries & Developer Documentation</h4>
+                <p><a href="https://github.com/LFDT-Paladin/paladin" target="_blank" rel="noopener">Source code</a> | <a href="https://lfdt-paladin.github.io/paladin" target="_blank" rel="noopener">Documentation</a></p>
               </div>
             </div>
           </div>
@@ -2165,6 +2217,7 @@
             <div class="solution-header">
               <div class="solution-header-left">
                 <div class="solution-number">5</div>
+                <img src="logos/zksync.png" alt="ZKsync" style="height: 40px; margin-right: 1rem;">
                 <div class="solution-header-info">
                   <h4>Prividium</h4>
                   <div class="solution-header-meta">
@@ -2178,39 +2231,51 @@
             </div>
             <div class="solution-content">
               <div class="solution-content-inner">
-                <div class="solution-details">
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Organization</span>
-                    <span class="solution-detail-value">ZKsync Foundation / Matter Labs</span>
-                  </div>
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Technology</span>
-                    <span class="solution-detail-value">Zero-Knowledge Proofs</span>
-                  </div>
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Trust Model</span>
-                    <span class="solution-detail-value">Cryptographic</span>
-                  </div>
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Status</span>
-                    <span class="solution-detail-value">Development / pilot</span>
-                  </div>
-                </div>
-                <div class="solution-feature">
-                  <div class="solution-feature-label">Key Feature</div>
-                  <p>Enterprise privacy layer on ZKsync with confidential transactions.</p>
-                </div>
+                <h4 style="margin-top: 0; margin-bottom: 1rem;">Summary</h4>
+                <p>Enterprise-grade private, permissioned Layer 2 infrastructure that combines institutional privacy controls with native Ethereum connectivity and Prividium-to-Prividium interoperability. Transactions execute privately within enterprise-controlled environments while ZK proofs anchor integrity to Ethereum—enabling compliant tokenization with access to public liquidity when needed. Prividiums can be deployed as multiple networks that remain private and isolated but with native interoperability to enable multi parties to transact with each other privately while maintaining full control of their own environment.</p>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Privacy Approach</h4>
+                <p>Permissioned ZKsync Layer 2 architecture with zero-knowledge proofs. Transaction data executes off-chain within operator-controlled infrastructure. Only ZK validity proofs and state root commitments post to Ethereum. No transaction details, amounts, or counterparty information ever reach outside the Prividium. Role-based access controls define granular permissions at the smart contract function level. Selective disclosure enables audit access via Merkle proofs without exposing data to unauthorized parties.</p>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Integration Requirements</h4>
+                <ul style="margin-left: 1.25rem; color: var(--text-secondary);">
+                  <li>Full EVM equivalence; existing Solidity contracts deploy without modification with standard tooling supported (Hardhat, Truffle, Foundry)</li>
+                  <li>Deployment options: Matter Labs managed services, customer cloud, or fully on-premises</li>
+                  <li>Enterprise SSO integration (Okta, Azure AD, etc)</li>
+                  <li>Assets bridge to Prividium environment with native interoperability to other ZKsync chains and Ethereum. Assets can remain on Ethereum L1 where they can be interacted with through ZKsync's Layer 1 Interop</li>
+                  <li>Commercial agreement with Matter Labs required</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Case Studies</h4>
+                <ul style="margin-left: 1.25rem; color: var(--text-secondary);">
+                  <li><strong>Cari Network:</strong> Tokenized deposits network for regional and community banks in the US. Currently on testnet</li>
+                  <li><strong>Memento Blockchain with Deutsche Bank Project DAMA 2:</strong> Tokenized fund infrastructure currently in production</li>
+                  <li><strong>35+ Global Financial Institutions:</strong> Joined interoperable Prividium pilot</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Solution Characteristics (as stated by provider)</h4>
+                <ul style="margin-left: 1.25rem; color: var(--text-secondary);">
+                  <li><strong>Cost:</strong> Sub-$0.001 per transaction for entire system including Layer 1 settlement fees with proving costs of $0.00013 per transaction</li>
+                  <li><strong>Performance:</strong> 15,000+ transactions per second supported per Prividium. ZK proof generation time is sub-1 second. 200ms blocktimes with 100ms achievable</li>
+                  <li><strong>Ecosystem:</strong> Cross-chain privacy limited to ZKsync ecosystem with direct Layer 1 interoperability</li>
+                  <li><strong>Licensing:</strong> Commercial relationship with Matter Labs required</li>
+                  <li><strong>Maturity:</strong> In early production state with multiple co-design partners</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">GitHub Libraries & Developer Documentation</h4>
+                <p><a href="https://www.npmjs.com/package/@zksync-sdk/prividium" target="_blank" rel="noopener">Prividium NPM package</a> | <a href="https://github.com/zkSync-Community-Hub/local-prividium" target="_blank" rel="noopener">Local-prividium GitHub repo</a> | <a href="https://docs.zksync.io/zk-stack/running-a-prividium" target="_blank" rel="noopener">Public docs</a> | <a href="https://zksync.io/prividium" target="_blank" rel="noopener">Public product page</a></p>
               </div>
             </div>
           </div>
 
-          <!-- Solution 6: Agglayer CDK -->
+          <!-- Solution 6: Polygon CDK -->
           <div class="solution-card" data-solution="6">
             <div class="solution-header">
               <div class="solution-header-left">
                 <div class="solution-number">6</div>
+                <img src="logos/polygon.png" alt="Polygon" style="height: 40px; margin-right: 1rem;">
                 <div class="solution-header-info">
-                  <h4>Agglayer CDK Enterprise</h4>
+                  <h4>Polygon CDK</h4>
                   <div class="solution-header-meta">
                     <span>&#127970; Polygon</span>
                     <span>&#128272; Zero-Knowledge Proofs</span>
@@ -2222,28 +2287,45 @@
             </div>
             <div class="solution-content">
               <div class="solution-content-inner">
-                <div class="solution-details">
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Organization</span>
-                    <span class="solution-detail-value">Polygon</span>
-                  </div>
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Technology</span>
-                    <span class="solution-detail-value">Zero-Knowledge Proofs</span>
-                  </div>
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Trust Model</span>
-                    <span class="solution-detail-value">Cryptographic</span>
-                  </div>
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Status</span>
-                    <span class="solution-detail-value">Active development</span>
-                  </div>
-                </div>
-                <div class="solution-feature">
-                  <div class="solution-feature-label">Key Feature</div>
-                  <p>Customizable enterprise chains with privacy features via CDK.</p>
-                </div>
+                <h4 style="margin-top: 0; margin-bottom: 1rem;">Summary</h4>
+                <p>A modular, open-source multistack toolkit by Polygon Labs for launching sovereign, ZK-secured EVM chains with configurable, financial-grade privacy, enterprise-grade controls, and native connectivity to Agglayer for access to Ethereum liquidity.</p>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Privacy Approach</h4>
+                <p>Privacy with Polygon CDK is a configurable spectrum, rather than a binary on/off switch. Institutions design the right combination of controls for a specific regulatory environment, counterparty structure, and use case. Available privacy configurations include:</p>
+                <ul style="margin-left: 1.25rem; color: var(--text-secondary);">
+                  <li><strong>Private data availability (Validium mode):</strong> Transaction data is stored off-chain in operator-controlled infrastructure, rather than posted to Ethereum L1. This ensures the underlying data layer is not exposed beyond authorized parties, while ZK validity proofs still guarantee correctness on-chain.</li>
+                  <li><strong>Private RPC, mempool, and block explorers (via Gateway):</strong> Granular privacy controls with IAM permissions geared to each user. Users only see transactions relevant to them, not the full chain state.</li>
+                  <li><strong>ZK Validity proofs:</strong> Only cryptographic commitments are submitted to the chain, not raw transaction data. Counterparties and regulators can verify correctness without seeing underlying transaction details.</li>
+                  <li><strong>Access control lists (ACLs):</strong> Role-based permissions define what each participant can do. For sensitive transactions, amounts and counterparties can be hidden from node operators while remaining selectively revealable for an audit.</li>
+                  <li><strong>Identity and compliance tooling:</strong> KYC out-of-the-box via Billions identity; integrations with Microsoft Entra and AWS IAM for enterprise SSO.</li>
+                  <li><strong>Fully homomorphic encryption (FHE) via Zama:</strong> For use cases requiring computation on encrypted data without ever decrypting it. Currently in implementation.</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Integration Requirements</h4>
+                <ul style="margin-left: 1.25rem; color: var(--text-secondary);">
+                  <li>Full EVM compatibility; existing smart contracts deploy without modification</li>
+                  <li>Direct upgrade path from Hyperledger Besu for institutions with existing permissioned networks</li>
+                  <li>Multiclient options, including Erigon client (stress-tested, audited), CDK op-geth (fork of OP Stack), CDK op-geth Validium (forthcoming with Succinct and Conduit), and CDK op-reth (forthcoming)</li>
+                  <li>Options: zkRollup, Validium, or Sovereign modes</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Case Studies</h4>
+                <ul style="margin-left: 1.25rem; color: var(--text-secondary);">
+                  <li>Polygon CDK launched an enterprise-focused, privacy-first rollup in Q3 2025, per Messari</li>
+                  <li>Polygon PoS network: $2.4T stablecoin volume, $1.2B locked, 164M+ unique addresses, 6.7B+ transactions processed per vendor</li>
+                  <li>CDK adopters include: Katana, OKX, Immutable, Silicon, Lumia, and others, per vendor</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Solution Characteristics (as stated by provider)</h4>
+                <ul style="margin-left: 1.25rem; color: var(--text-secondary);">
+                  <li><strong>Privacy model:</strong> Configurable spectrum, including Validium (off-chain data storage with ZK proofs to Ethereum), private block explorers, private RPC/mempool, ACL-based role permissions, FHE for computation of encrypted data, and selective disclosure for regulators/auditors</li>
+                  <li><strong>Migration:</strong> Vendor describes direct upgrade path from Hyperledger Besu, with two proven paths (fast snapshot, full-history)</li>
+                  <li><strong>Roadmap:</strong> Performance is currently up to 60+ MGas/s burst throughput, with increased capacity and diversity of clients in upcoming versions</li>
+                  <li><strong>Maturity:</strong> Vendor describes CDK Erigon as production ready (Q3 2025 launch); CDK op-geth Validium in production and forthcoming public release; CDK op-reth forthcoming</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">GitHub Libraries & Developer Documentation</h4>
+                <p><a href="https://docs.agglayer.dev/cdk/get-started/overview/" target="_blank" rel="noopener">Polygon CDK documentation</a> | <a href="https://github.com/0xPolygon/cdk-erigon" target="_blank" rel="noopener">GitHub</a></p>
               </div>
             </div>
           </div>
@@ -2253,6 +2335,7 @@
             <div class="solution-header">
               <div class="solution-header-left">
                 <div class="solution-number">7</div>
+                <img src="logos/appliedblockchain.png" alt="Applied Blockchain" style="height: 40px; margin-right: 1rem;">
                 <div class="solution-header-info">
                   <h4>Silent Data</h4>
                   <div class="solution-header-meta">
@@ -2266,28 +2349,39 @@
             </div>
             <div class="solution-content">
               <div class="solution-content-inner">
-                <div class="solution-details">
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Organization</span>
-                    <span class="solution-detail-value">Applied Blockchain</span>
-                  </div>
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Technology</span>
-                    <span class="solution-detail-value">Trusted Execution Environments (TEE)</span>
-                  </div>
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Trust Model</span>
-                    <span class="solution-detail-value">Hardware-Anchored</span>
-                  </div>
-                  <div class="solution-detail">
-                    <span class="solution-detail-label">Status</span>
-                    <span class="solution-detail-value">Production</span>
-                  </div>
-                </div>
-                <div class="solution-feature">
-                  <div class="solution-feature-label">Key Feature</div>
-                  <p>Off-chain data verification with on-chain attestation; bridges real-world data privately.</p>
-                </div>
+                <h4 style="margin-top: 0; margin-bottom: 1rem;">Summary</h4>
+                <p>Silent Data is an Ethereum Layer 2 developed by Applied Blockchain that provides full Turing-complete programmable privacy for smart contract execution and transaction data. Privacy is enforced at the execution layer using trusted execution environments (TEEs), enabling regulated and enterprise applications to control what information is publicly disclosed while maintaining standard EVM execution and connectivity to Ethereum. As well as having a public Layer 2, Silent Data can be deployed as a dedicated stack for organizations that want their own privacy enabled L2 with connection to the Ethereum ecosystem.</p>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Privacy Approach</h4>
+                <p>Uses Trusted Execution Environments (TEEs)—specialized chips that process data in encrypted form. Infrastructure operators cannot observe processing. Privacy guarantees derive from hardware properties. The result is a Turing-complete, high performance EVM privacy solution. Privacy controls are applied at the execution layer, allowing transaction inputs, intermediate state, and smart contract logic to execute confidentially. No custom cryptography. No changes to Solidity or standard blockchain code. Everything just works as-is, and everything in Solidity can be made private.</p>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Integration Requirements</h4>
+                <ul style="margin-left: 1.25rem; color: var(--text-secondary);">
+                  <li>Existing smart contracts deploy directly (standard EVM, no custom extensions, no bespoke cryptography, no modification to open source blockchain software)</li>
+                  <li>First L2 deployed using OP Stack, part of Ethereum Superchain ecosystem</li>
+                  <li>Assets bridge to Silent Data Ethereum L2 network (similar to Base, Unichain etc, same stack)</li>
+                  <li>Works with standard Ethereum / EVM tooling (wallets, development frameworks, dapps).</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Case Studies</h4>
+                <ul style="margin-left: 1.25rem; color: var(--text-secondary);">
+                  <li><strong>Archax:</strong> FCA-regulated digital securities exchange deployed Aberdeen money market fund (MMF) live in production.</li>
+                  <li><strong>DHL Health Logistics – CRYOPDP:</strong> Award-winning industry supply chain logistics platform. Operates in production, supporting privacy-preserving data sharing across regulated healthcare and life sciences logistics workflows.</li>
+                  <li><strong>Shell:</strong> Energy trading applications with privacy.</li>
+                  <li><strong>Blueprints:</strong> Pre-built, privacy-enabled application templates, including supply chain data sharing, asset tokenization, and decentralized exchange (DEX) use cases.</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Solution Characteristics (as stated by provider)</h4>
+                <ul style="margin-left: 1.25rem; color: var(--text-secondary);">
+                  <li><strong>Performance:</strong> Up to 4,000 transactions per second (uniquely blockchain performance not impacted by addition of privacy protocol)</li>
+                  <li><strong>Trust model:</strong> Privacy guarantees depend on hardware manufacturer attestation (Intel)</li>
+                  <li><strong>Network:</strong> Standard Ethereum L2, assets can be bridged</li>
+                  <li><strong>Maturity:</strong> Silent Data L2 is live on OP L2 Superchain (verified by OP and L2Beat)</li>
+                  <li><strong>Business logic:</strong> Designed to support complex enterprise workflows, including regulated trading, asset issuance, settlement, and supply-chain data sharing</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem;">GitHub Libraries & Developer Documentation</h4>
+                <p><a href="https://docs.silentdata.com" target="_blank" rel="noopener">Documentation</a> | <a href="https://github.com/appliedblockchain/silentdata-defi-enclave" target="_blank" rel="noopener">GitHub</a></p>
               </div>
             </div>
           </div>
@@ -2378,6 +2472,126 @@
           <div class="outlook-question">How will regulatory frameworks evolve to address on-chain privacy?</div>
           <div class="outlook-question">What role will the EF Privacy Roadmap play in standardizing base-layer privacy?</div>
         </div>
+
+        <h3 style="margin-top: 3rem;">Joint Statement</h3>
+        <p>The members of this working group, in collaboration with the wider Ethereum community and the Ethereum Foundation (EF), remain committed to the development of "Compliant Privacy." We believe that the future of the enterprise web is not just decentralized, but inherently confidential.</p>
+      </section>
+
+      <!-- Additional Privacy Solutions -->
+      <section id="additional-solutions">
+        <span class="section-label">Broader Ecosystem</span>
+        <h2>Additional Privacy Solutions</h2>
+
+        <p>Solutions profiled were contributed by EEA member organizations participating in the Privacy Working Group. Inclusion requires EEA membership and active working group participation.</p>
+        <p>Other privacy solutions exist in the Ethereum ecosystem. These are listed below based on publicly available information. Organizations interested in contributing detailed profiles may contact the EEA about membership.</p>
+
+        <div class="matrix-container" style="margin-top: 2rem;">
+          <table class="coverage-matrix" style="min-width: 600px;">
+            <thead>
+              <tr>
+                <th style="width: 30%;">Company</th>
+                <th style="width: 70%;">Solution</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight: 600;">RAILGUN DAO</td>
+                <td>Privacy system enabling private transfers and DeFi interactions on Ethereum mainnet using ZK proofs</td>
+              </tr>
+              <tr>
+                <td style="font-weight: 600;">Aztec Labs</td>
+                <td>ZK rollup with native private smart contracts and encrypted state on Ethereum</td>
+              </tr>
+              <tr>
+                <td style="font-weight: 600;">Zama</td>
+                <td>Encrypted smart contracts using fully homomorphic encryption on EVM chains</td>
+              </tr>
+              <tr>
+                <td style="font-weight: 600;">Fhenix</td>
+                <td>FHE-powered L2 enabling computation on encrypted data</td>
+              </tr>
+              <tr>
+                <td style="font-weight: 600;">Panther</td>
+                <td>Privacy pools for compliant private transactions with selective disclosure</td>
+              </tr>
+              <tr>
+                <td style="font-weight: 600;">ScopeLift / Umbra</td>
+                <td>Stealth address protocol for private payments on Ethereum</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact">
+        <span class="section-label">Get In Touch</span>
+        <h2>Contact</h2>
+
+        <p>To join the Enterprise Ethereum Alliance contact <a href="mailto:membership@entethalliance.org">membership@entethalliance.org</a></p>
+
+        <div class="matrix-container" style="margin-top: 2rem;">
+          <table class="coverage-matrix" style="min-width: 800px;">
+            <thead>
+              <tr>
+                <th style="width: 20%;">Organization</th>
+                <th style="width: 20%;">Solution</th>
+                <th style="width: 35%;">Representatives / Role</th>
+                <th style="width: 25%;">Contact</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight: 600;">Applied Blockchain</td>
+                <td>Silent Data</td>
+                <td>Andrew Campbell, Adi Ben-Ari</td>
+                <td><a href="mailto:privacy-wg@entethalliance.org">privacy-wg@entethalliance.org</a></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 600;">Consensys</td>
+                <td>Linea Enterprise</td>
+                <td>Florian Huc, Arthur Remy</td>
+                <td><a href="mailto:privacy-wg@entethalliance.org">privacy-wg@entethalliance.org</a></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 600;">COTI</td>
+                <td>COTI V2</td>
+                <td>Joshua Maddox</td>
+                <td><a href="mailto:privacy-wg@entethalliance.org">privacy-wg@entethalliance.org</a></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 600;">EY</td>
+                <td>Nightfall</td>
+                <td>Kahina Khacef</td>
+                <td><a href="mailto:privacy-wg@entethalliance.org">privacy-wg@entethalliance.org</a></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 600;">Kaleido</td>
+                <td>Paladin</td>
+                <td>Sophia Lopez, Josh Mercer-Deadman</td>
+                <td><a href="mailto:privacy-wg@entethalliance.org">privacy-wg@entethalliance.org</a></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 600;">Polygon</td>
+                <td>CDK</td>
+                <td>Aishwary Gupta, Serena Leung</td>
+                <td><a href="mailto:privacy-wg@entethalliance.org">privacy-wg@entethalliance.org</a></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 600;">ZKsync / Matter Labs</td>
+                <td>Prividium</td>
+                <td>Omar Azhar</td>
+                <td><a href="mailto:privacy-wg@entethalliance.org">privacy-wg@entethalliance.org</a></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 600;">Ethereum Foundation</td>
+                <td>Privacy</td>
+                <td>Andy Guzman</td>
+                <td><a href="mailto:privacy@ethereum.org">privacy@ethereum.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <!-- Footer -->
@@ -2393,6 +2607,8 @@
             <a href="https://entethalliance.org" target="_blank" rel="noopener">entethalliance.org</a>
             <a href="#coverage-matrix">Readiness Matrix with Evidence</a>
             <a href="#solutions">Solution Profiles</a>
+            <a href="#additional-solutions">Additional Solutions</a>
+            <a href="#contact">Contact</a>
           </div>
           <div class="footer-section">
             <h4>Working Group</h4>
