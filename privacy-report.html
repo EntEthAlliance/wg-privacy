@@ -1,0 +1,2625 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>State of Privacy on Ethereum for Enterprise | EEA Privacy Working Group</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'DM Sans', system-ui, sans-serif;
+
+      /* Dark theme (default) */
+      --bg-primary: #0a0b0d;
+      --bg-secondary: #12141a;
+      --bg-tertiary: #1a1d26;
+      --bg-card: #16181f;
+      --bg-card-hover: #1e212a;
+      --border-color: #2a2d38;
+      --border-accent: #3d4155;
+
+      --text-primary: #f0f2f5;
+      --text-secondary: #a8adb8;
+      --text-muted: #6b7180;
+
+      --accent-primary: #7c5cff;
+      --accent-secondary: #5ce1e6;
+      --accent-tertiary: #ff6b9d;
+      --accent-gold: #d4af37;
+      --accent-success: #4ade80;
+      --accent-warning: #fbbf24;
+      --accent-danger: #f87171;
+
+      --gradient-hero: linear-gradient(135deg, #0a0b0d 0%, #1a1d26 50%, #12141a 100%);
+      --gradient-accent: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+      --gradient-card: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-tertiary) 100%);
+
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 20px rgba(0,0,0,0.4);
+      --shadow-lg: 0 8px 40px rgba(0,0,0,0.5);
+      --shadow-glow: 0 0 40px rgba(124, 92, 255, 0.15);
+
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+
+      --transition-fast: 0.15s ease;
+      --transition-normal: 0.3s ease;
+      --transition-slow: 0.5s ease;
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #fafbfc;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #f3f4f6;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f9fafb;
+      --border-color: #e5e7eb;
+      --border-accent: #d1d5db;
+
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+      --text-muted: #9ca3af;
+
+      --accent-primary: #6d4aff;
+      --accent-secondary: #0891b2;
+
+      --gradient-hero: linear-gradient(135deg, #fafbfc 0%, #f3f4f6 50%, #ffffff 100%);
+      --gradient-card: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-tertiary) 100%);
+
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 20px rgba(0,0,0,0.1);
+      --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
+      --shadow-glow: 0 0 40px rgba(109, 74, 255, 0.1);
+    }
+
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-serif);
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
+    h2 { font-size: clamp(1.8rem, 3vw, 2.8rem); margin-bottom: 1.5rem; }
+    h3 { font-size: clamp(1.3rem, 2vw, 1.8rem); margin-bottom: 1rem; }
+    h4 { font-size: 1.25rem; margin-bottom: 0.75rem; }
+
+    p {
+      margin-bottom: 1.25rem;
+      color: var(--text-secondary);
+    }
+
+    a {
+      color: var(--accent-primary);
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+
+    a:hover {
+      color: var(--accent-secondary);
+    }
+
+    strong {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* ===== LAYOUT ===== */
+    .main-wrapper {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .content-area {
+      flex: 1;
+      margin-left: 280px;
+      min-width: 0;
+    }
+
+    section {
+      padding: 6rem 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-label {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent-primary);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    /* ===== NAVIGATION SIDEBAR ===== */
+    .nav-sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 280px;
+      height: 100vh;
+      background: var(--bg-secondary);
+      border-right: 1px solid var(--border-color);
+      padding: 2rem 1.5rem;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .nav-subtitle {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .nav-links {
+      list-style: none;
+      flex: 1;
+    }
+
+    .nav-links li {
+      margin-bottom: 0.25rem;
+    }
+
+    .nav-links a {
+      display: flex;
+      align-items: center;
+      padding: 0.6rem 0.9rem;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      font-weight: 400;
+      border-radius: var(--radius-sm);
+      transition: all var(--transition-fast);
+      border-left: 2px solid transparent;
+    }
+
+    .nav-links a:hover {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+    }
+
+    .nav-links a.active {
+      background: rgba(124, 92, 255, 0.1);
+      color: var(--accent-primary);
+      border-left-color: var(--accent-primary);
+      font-weight: 500;
+    }
+
+    .nav-links a span {
+      margin-right: 0.75rem;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    .nav-footer {
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-color);
+      margin-top: auto;
+    }
+
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      width: 100%;
+      transition: all var(--transition-fast);
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--accent-primary);
+      color: var(--text-primary);
+    }
+
+    .theme-toggle-icon {
+      font-size: 1rem;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--gradient-hero);
+      position: relative;
+      overflow: hidden;
+      padding: 4rem;
+      max-width: none;
+      opacity: 1;
+      transform: none;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 200%;
+      background: radial-gradient(ellipse at center, rgba(124, 92, 255, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 60%;
+      height: 100%;
+      background: radial-gradient(ellipse at center, rgba(92, 225, 230, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(124, 92, 255, 0.15);
+      border: 1px solid rgba(124, 92, 255, 0.3);
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-primary);
+      margin-bottom: 2rem;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .hero-title {
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+    }
+
+    .hero-title .accent {
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-serif);
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text-secondary);
+      margin-bottom: 3rem;
+      max-width: 700px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .hero-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .hero-meta-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+    }
+
+    .hero-meta-value {
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .hero-contributors {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .contributor-tag {
+      padding: 0.4rem 0.8rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      transition: all var(--transition-fast);
+    }
+
+    .contributor-tag:hover {
+      border-color: var(--accent-primary);
+      color: var(--text-primary);
+    }
+
+    .hero-scroll-indicator {
+      position: absolute;
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(10px); }
+    }
+
+    /* ===== OPENING STATEMENT ===== */
+    .opening-statement {
+      background: var(--bg-secondary);
+      border-left: 4px solid var(--accent-primary);
+      padding: 2.5rem;
+      margin: 2rem 0;
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    }
+
+    .opening-statement p {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .opening-statement p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ===== STAT CARDS ===== */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin: 3rem 0;
+    }
+
+    .stat-card {
+      background: var(--gradient-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      text-align: center;
+      transition: all var(--transition-normal);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient-accent);
+      opacity: 0;
+      transition: opacity var(--transition-normal);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-glow);
+      border-color: var(--accent-primary);
+    }
+
+    .stat-card:hover::before {
+      opacity: 1;
+    }
+
+    .stat-value {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== PROBLEM CARDS ===== */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .problem-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      transition: all var(--transition-normal);
+    }
+
+    .problem-card:hover {
+      border-color: var(--accent-tertiary);
+      box-shadow: var(--shadow-md);
+    }
+
+    .problem-icon {
+      width: 56px;
+      height: 56px;
+      background: rgba(255, 107, 157, 0.1);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      font-size: 1.5rem;
+    }
+
+    .problem-card h4 {
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-weight: 600;
+    }
+
+    .problem-card p {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+    }
+
+    /* ===== TAXONOMY CARDS ===== */
+    .taxonomy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .taxonomy-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      transition: all var(--transition-normal);
+    }
+
+    .taxonomy-card:hover {
+      border-color: var(--accent-secondary);
+      transform: translateY(-2px);
+    }
+
+    .taxonomy-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .taxonomy-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(92, 225, 230, 0.1);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .taxonomy-title {
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--text-primary);
+      margin-bottom: 0;
+    }
+
+    .taxonomy-abbr {
+      font-size: 0.7rem;
+      color: var(--accent-secondary);
+      font-weight: 500;
+    }
+
+    .taxonomy-card p {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+
+    /* ===== ERC STANDARDS ASIDE ===== */
+    .erc-aside {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+
+    .erc-aside h4 {
+      color: var(--accent-gold);
+      margin-bottom: 1.5rem;
+      font-family: var(--font-sans);
+    }
+
+    .erc-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .erc-item {
+      padding-left: 1.5rem;
+      border-left: 2px solid var(--border-accent);
+    }
+
+    .erc-item strong {
+      color: var(--accent-primary);
+      font-weight: 600;
+    }
+
+    .erc-item p {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+    }
+
+    /* ===== ROADMAP SECTION ===== */
+    .roadmap-tracks {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .roadmap-track {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .roadmap-track::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+    }
+
+    .roadmap-track.track-1::before { background: var(--accent-primary); }
+    .roadmap-track.track-2::before { background: var(--accent-secondary); }
+    .roadmap-track.track-3::before { background: var(--accent-tertiary); }
+
+    .track-number {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .roadmap-track h4 {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .track-layer {
+      font-size: 0.75rem;
+      color: var(--accent-secondary);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .roadmap-track p {
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .track-projects {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .track-project {
+      padding: 0.3rem 0.6rem;
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-sm);
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+    }
+
+    /* ===== TRUST MODELS ===== */
+    .trust-models-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .trust-model-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .trust-model-card h4 {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .trust-techs {
+      font-size: 0.8rem;
+      color: var(--accent-secondary);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .trust-description {
+      font-size: 0.9rem;
+      flex: 1;
+    }
+
+    .trust-failure {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .trust-failure-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-danger);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .trust-failure-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .trust-failure-list li {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .trust-failure-list li::before {
+      content: '!';
+      position: absolute;
+      left: 0;
+      color: var(--accent-danger);
+      font-weight: 700;
+    }
+
+    /* ===== COVERAGE MATRIX ===== */
+    .matrix-container {
+      overflow-x: auto;
+      margin: 2rem 0;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+    }
+
+    .coverage-matrix {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    .coverage-matrix thead {
+      background: var(--bg-tertiary);
+      position: sticky;
+      top: 0;
+    }
+
+    .coverage-matrix th {
+      padding: 1rem 0.75rem;
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-primary);
+      border-bottom: 2px solid var(--border-color);
+      cursor: pointer;
+      transition: background var(--transition-fast);
+      white-space: nowrap;
+    }
+
+    .coverage-matrix th:hover {
+      background: var(--bg-card-hover);
+    }
+
+    .coverage-matrix th:first-child {
+      padding-left: 1.5rem;
+    }
+
+    .coverage-matrix td {
+      padding: 1rem 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+      transition: background var(--transition-fast);
+    }
+
+    .coverage-matrix td:first-child {
+      padding-left: 1.5rem;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .coverage-matrix tbody tr {
+      transition: background var(--transition-fast);
+    }
+
+    .coverage-matrix tbody tr:hover {
+      background: var(--bg-card-hover);
+    }
+
+    .coverage-matrix tbody tr.highlight {
+      background: rgba(124, 92, 255, 0.1);
+    }
+
+    .matrix-check {
+      color: var(--accent-success);
+      font-weight: 700;
+    }
+
+    .matrix-cross {
+      color: var(--accent-danger);
+      font-weight: 700;
+    }
+
+    .matrix-tech {
+      color: var(--accent-secondary);
+      font-size: 0.8rem;
+    }
+
+    .matrix-trust {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--radius-sm);
+      white-space: nowrap;
+    }
+
+    .matrix-trust.crypto {
+      background: rgba(124, 92, 255, 0.15);
+      color: var(--accent-primary);
+    }
+
+    .matrix-trust.hardware {
+      background: rgba(92, 225, 230, 0.15);
+      color: var(--accent-secondary);
+    }
+
+    .matrix-trust.org {
+      background: rgba(212, 175, 55, 0.15);
+      color: var(--accent-gold);
+    }
+
+    .matrix-trust.hybrid {
+      background: rgba(255, 107, 157, 0.15);
+      color: var(--accent-tertiary);
+    }
+
+    .matrix-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .matrix-filter-btn {
+      padding: 0.5rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .matrix-filter-btn:hover,
+    .matrix-filter-btn.active {
+      background: var(--accent-primary);
+      border-color: var(--accent-primary);
+      color: white;
+    }
+
+    /* ===== SOLUTION PROFILES ===== */
+    .solutions-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .solution-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: all var(--transition-normal);
+    }
+
+    .solution-card:hover {
+      border-color: var(--accent-primary);
+    }
+
+    .solution-header {
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: background var(--transition-fast);
+    }
+
+    .solution-header:hover {
+      background: var(--bg-card-hover);
+    }
+
+    .solution-header-left {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .solution-number {
+      width: 40px;
+      height: 40px;
+      background: var(--gradient-accent);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-serif);
+      font-weight: 700;
+      color: white;
+      font-size: 1.1rem;
+    }
+
+    .solution-header-info h4 {
+      font-family: var(--font-sans);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .solution-header-meta {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .solution-header-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .solution-expand-icon {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      transition: transform var(--transition-normal);
+    }
+
+    .solution-card.expanded .solution-expand-icon {
+      transform: rotate(180deg);
+    }
+
+    .solution-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .solution-card.expanded .solution-content {
+      max-height: 500px;
+    }
+
+    .solution-content-inner {
+      padding: 0 2rem 2rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .solution-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      padding-top: 1.5rem;
+    }
+
+    .solution-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .solution-detail-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+    }
+
+    .solution-detail-value {
+      font-size: 0.9rem;
+      color: var(--text-primary);
+    }
+
+    .solution-feature {
+      margin-top: 1.5rem;
+      padding: 1.25rem;
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-sm);
+    }
+
+    .solution-feature-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .solution-feature p {
+      margin-bottom: 0;
+      font-size: 0.9rem;
+    }
+
+    /* ===== DECISION FRAMEWORK ===== */
+    .decision-framework {
+      margin: 2rem 0;
+    }
+
+    .decision-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .decision-node {
+      display: flex;
+      gap: 1.5rem;
+      position: relative;
+    }
+
+    .decision-connector {
+      width: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .decision-number {
+      width: 48px;
+      height: 48px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-serif);
+      font-weight: 700;
+      color: white;
+      font-size: 1.2rem;
+      z-index: 1;
+    }
+
+    .decision-line {
+      width: 2px;
+      flex: 1;
+      background: var(--border-accent);
+      min-height: 40px;
+    }
+
+    .decision-node:last-child .decision-line {
+      display: none;
+    }
+
+    .decision-card {
+      flex: 1;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.5rem 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .decision-card h4 {
+      font-family: var(--font-sans);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .decision-card p {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+    }
+
+    .decision-conclusion {
+      background: var(--bg-secondary);
+      border: 2px solid var(--accent-primary);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .decision-conclusion p {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--text-primary);
+      margin-bottom: 0;
+    }
+
+    /* ===== FUTURE OUTLOOK ===== */
+    .outlook-questions {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .outlook-question {
+      padding: 1.25rem 1.5rem;
+      background: var(--bg-card);
+      border-left: 3px solid var(--accent-secondary);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 1rem;
+      color: var(--text-secondary);
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+      padding: 4rem;
+      margin-top: 4rem;
+      max-width: none;
+      opacity: 1;
+      transform: none;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+    }
+
+    .footer-section h4 {
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .footer-section p,
+    .footer-section a {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-disclaimer {
+      padding-top: 3rem;
+      margin-top: 3rem;
+      border-top: 1px solid var(--border-color);
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .footer-disclaimer p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    /* ===== BACK TO TOP ===== */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 48px;
+      height: 48px;
+      background: var(--accent-primary);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-size: 1.25rem;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--transition-normal);
+      z-index: 999;
+      box-shadow: var(--shadow-md);
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* ===== MOBILE RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .nav-sidebar {
+        transform: translateX(-100%);
+        transition: transform var(--transition-normal);
+      }
+
+      .nav-sidebar.open {
+        transform: translateX(0);
+      }
+
+      .content-area {
+        margin-left: 0;
+      }
+
+      .mobile-nav-toggle {
+        display: flex;
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        z-index: 1001;
+        width: 44px;
+        height: 44px;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-sm);
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 1.25rem;
+        color: var(--text-primary);
+      }
+
+      section {
+        padding: 4rem 1.5rem;
+      }
+
+      .hero {
+        padding: 2rem 1.5rem;
+      }
+
+      .footer {
+        padding: 3rem 1.5rem;
+      }
+    }
+
+    @media (min-width: 1025px) {
+      .mobile-nav-toggle {
+        display: none;
+      }
+
+      .mobile-nav-overlay {
+        display: none;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .mobile-nav-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.5);
+        opacity: 0;
+        visibility: hidden;
+        z-index: 999;
+        transition: all var(--transition-normal);
+      }
+
+      .mobile-nav-overlay.open {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .stat-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero-meta {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .solution-header-meta {
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+
+      .coverage-matrix {
+        font-size: 0.75rem;
+      }
+
+      .coverage-matrix th,
+      .coverage-matrix td {
+        padding: 0.75rem 0.5rem;
+      }
+    }
+
+    /* ===== PRINT STYLES ===== */
+    @media print {
+      :root {
+        --bg-primary: #ffffff;
+        --bg-secondary: #f8f9fa;
+        --bg-tertiary: #f1f3f4;
+        --bg-card: #ffffff;
+        --text-primary: #111827;
+        --text-secondary: #374151;
+        --text-muted: #6b7280;
+        --border-color: #d1d5db;
+        --accent-primary: #4f46e5;
+      }
+
+      body {
+        background: white;
+        color: black;
+        font-size: 11pt;
+        line-height: 1.5;
+      }
+
+      .nav-sidebar,
+      .mobile-nav-toggle,
+      .mobile-nav-overlay,
+      .back-to-top,
+      .theme-toggle,
+      .hero-scroll-indicator {
+        display: none !important;
+      }
+
+      .content-area {
+        margin-left: 0;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 2rem;
+        page-break-after: always;
+      }
+
+      section {
+        opacity: 1;
+        transform: none;
+        padding: 1.5rem 0;
+        page-break-inside: avoid;
+      }
+
+      h2 {
+        page-break-after: avoid;
+      }
+
+      .stat-grid,
+      .problem-grid,
+      .taxonomy-grid,
+      .roadmap-tracks,
+      .trust-models-grid {
+        page-break-inside: avoid;
+      }
+
+      .solution-card {
+        page-break-inside: avoid;
+      }
+
+      .solution-content {
+        max-height: none !important;
+        overflow: visible !important;
+      }
+
+      .solution-expand-icon {
+        display: none;
+      }
+
+      .coverage-matrix {
+        font-size: 9pt;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: underline;
+      }
+
+      .gradient-accent,
+      .hero-title .accent {
+        background: none;
+        -webkit-text-fill-color: var(--accent-primary);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Mobile Navigation Toggle -->
+  <button class="mobile-nav-toggle" aria-label="Toggle navigation">
+    <span>&#9776;</span>
+  </button>
+  <div class="mobile-nav-overlay"></div>
+
+  <div class="main-wrapper">
+    <!-- Navigation Sidebar -->
+    <nav class="nav-sidebar">
+      <div class="nav-logo">Enterprise Ethereum Alliance</div>
+      <div class="nav-subtitle">Privacy Working Group</div>
+
+      <ul class="nav-links">
+        <li><a href="#hero"><span>01</span> Overview</a></li>
+        <li><a href="#executive-summary"><span>02</span> Executive Summary</a></li>
+        <li><a href="#methodology"><span>03</span> Methodology</a></li>
+        <li><a href="#privacy-problem"><span>04</span> Privacy Problem</a></li>
+        <li><a href="#addressable-market"><span>05</span> Addressable Market</a></li>
+        <li><a href="#taxonomy"><span>06</span> Taxonomy</a></li>
+        <li><a href="#ef-roadmap"><span>07</span> EF Roadmap</a></li>
+        <li><a href="#trust-models"><span>08</span> Trust Models</a></li>
+        <li><a href="#coverage-matrix"><span>09</span> Coverage Matrix</a></li>
+        <li><a href="#solutions"><span>10</span> Solution Profiles</a></li>
+        <li><a href="#decision-framework"><span>11</span> Decision Framework</a></li>
+        <li><a href="#future-outlook"><span>12</span> Future Outlook</a></li>
+      </ul>
+
+      <div class="nav-footer">
+        <button class="theme-toggle" id="theme-toggle">
+          <span class="theme-toggle-icon">&#9789;</span>
+          <span>Toggle theme</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="content-area">
+      <!-- Hero Section -->
+      <section class="hero" id="hero">
+        <div class="hero-content">
+          <div class="hero-badge">
+            Privacy Working Group
+          </div>
+          <h1 class="hero-title">
+            State of <span class="accent">Privacy</span> on Ethereum for Enterprise
+          </h1>
+          <p class="hero-subtitle">
+            Mapping Financial Institution Requirements to Ethereum Solutions
+          </p>
+
+          <div class="hero-meta">
+            <div class="hero-meta-item">
+              <span class="hero-meta-label">Organization</span>
+              <span class="hero-meta-value">Enterprise Ethereum Alliance</span>
+            </div>
+            <div class="hero-meta-item">
+              <span class="hero-meta-label">Date</span>
+              <span class="hero-meta-value">March 2026</span>
+            </div>
+            <div class="hero-meta-item">
+              <span class="hero-meta-label">Status</span>
+              <span class="hero-meta-value">DRAFT — For Working Group Only</span>
+            </div>
+          </div>
+
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Contributing Organizations</span>
+            <div class="hero-contributors">
+              <span class="contributor-tag">Applied Blockchain</span>
+              <span class="contributor-tag">Consensys</span>
+              <span class="contributor-tag">COTI</span>
+              <span class="contributor-tag">EY</span>
+              <span class="contributor-tag">Kaleido</span>
+              <span class="contributor-tag">Polygon</span>
+              <span class="contributor-tag">ZKsync</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-scroll-indicator">
+          <span>Scroll to explore</span>
+          <span>&#8595;</span>
+        </div>
+      </section>
+
+      <!-- Opening Statement -->
+      <section id="opening-statement">
+        <span class="section-label">The Principle of Collaborative Neutrality</span>
+        <h2>Opening Statement</h2>
+
+        <div class="opening-statement">
+          <p>This report represents a collective effort by the Enterprise Ethereum Alliance (EEA) Privacy Working Group to map the current landscape of privacy within the Ethereum ecosystem. From its inception, this report has been guided by neutrality as a core design principle. Our aim is to provide an objective, technical, and strategic framework for understanding how privacy is being integrated into enterprise-grade blockchain solutions.</p>
+
+          <p>The scope of this report is intentionally focused on the privacy solutions developed and maintained by EEA member organizations. By concentrating on the innovations within our ecosystem, we can ensure that solution characteristics are supported by live pilots, peer-reviewed empirical papers or enterprise deployments.</p>
+
+          <p>While we recognize the broader ecosystem of privacy research, deep-dives into non-member solutions fall outside the primary scope of this mandate. However, in the interest of authenticity and inclusivity, a comprehensive taxonomy of non-member solutions and academic primitives can be found in the 'Additional Privacy Solutions' section at the conclusion of this paper.</p>
+        </div>
+      </section>
+
+      <!-- Executive Summary -->
+      <section id="executive-summary">
+        <span class="section-label">Key Findings</span>
+        <h2>Executive Summary</h2>
+
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-value">7</div>
+            <div class="stat-label">Solutions Evaluated</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">$100T+</div>
+            <div class="stat-label">Bond Market</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">$600T</div>
+            <div class="stat-label">Derivatives Market</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">3</div>
+            <div class="stat-label">Trust Models</div>
+          </div>
+        </div>
+
+        <p>Financial institutions are increasingly deploying tokenized assets on Ethereum. However, on public blockchains, all transaction data is visible by default. Transaction amounts, counterparty identities, and business relationships are exposed on infrastructure that anyone can monitor.</p>
+
+        <p><strong>Privacy and confidentiality are the missing pieces for enterprise adoption.</strong></p>
+
+        <p>To address this, the Enterprise Ethereum Alliance, the member-driven organization connecting Fortune 500 companies, financial institutions, and technology providers with the Ethereum ecosystem, convened this Privacy Working Group to map the current landscape.</p>
+
+        <p>Seven EEA member organizations contributed their solutions, creating the first comprehensive enterprise-focused view of privacy capabilities on Ethereum.</p>
+
+        <p>This paper is a practical guide for enterprises to evaluate privacy solutions in order to utilize them for their own application of tokenized assets. It is designed for CIOs, compliance officers, and digital asset leads who need to evaluate options and ask the right questions.</p>
+
+        <p>Privacy has various applications and implementations. Different solutions protect different aspects of operations. No single solution covers all requirements. This paper provides the framework to understand what exists, how each approach works, and what implementation requires, so institutions can make informed decisions for their specific needs.</p>
+      </section>
+
+      <!-- Research Methodology -->
+      <section id="methodology">
+        <span class="section-label">Our Approach</span>
+        <h2>Research Methodology</h2>
+
+        <p>The findings within this paper were developed within the EEA Privacy Working Group over a dedicated three-month intensive study period. The methodology relied on a synthesis of technical documentation, stress-testing results, and deployment post-mortems from the world's leading financial and cryptographic institutions.</p>
+
+        <p>The working group was led by a steering committee comprising:</p>
+
+        <div class="hero-contributors" style="margin: 1.5rem 0;">
+          <span class="contributor-tag">Applied Blockchain / Silent Data</span>
+          <span class="contributor-tag">Consensys / Linea</span>
+          <span class="contributor-tag">COTI</span>
+          <span class="contributor-tag">EY / Nightfall</span>
+          <span class="contributor-tag">Kaleido</span>
+          <span class="contributor-tag">Polygon</span>
+          <span class="contributor-tag">ZKsync / Matter Labs</span>
+        </div>
+
+        <p>Our process involved cross-review of privacy primitives, and the consolidation of proprietary enterprise requirements into a unified set of standards for Ethereum-based privacy.</p>
+      </section>
+
+      <!-- Enterprise Privacy Problem -->
+      <section id="privacy-problem">
+        <span class="section-label">The Challenge</span>
+        <h2>Enterprise Privacy Problem: The Barriers to Public Blockchain</h2>
+
+        <p>For enterprises, the transparency that defines public blockchains is a "double-edged sword." While it provides immutable trust, it simultaneously creates a critical confidentiality deficit. The primary issues include:</p>
+
+        <div class="problem-grid">
+          <div class="problem-card">
+            <div class="problem-icon">&#128274;</div>
+            <h4>Exposure of Business Logic</h4>
+            <p>On a public ledger, smart contract interactions can reveal sensitive business logic, trade secrets, and proprietary algorithms to competitors.</p>
+          </div>
+          <div class="problem-card">
+            <div class="problem-icon">&#128176;</div>
+            <h4>Lack of Financial Discretion</h4>
+            <p>Publicly visible transaction amounts and wallet balances are incompatible with corporate treasury requirements and high-stakes financial maneuvers.</p>
+          </div>
+          <div class="problem-card">
+            <div class="problem-icon">&#9878;</div>
+            <h4>Regulatory Non-Compliance</h4>
+            <p>Regulations such as GDPR and MiCA require strict controls over data access and the "right to be forgotten," which are fundamentally at odds with a permanent, public, transparent ledger.</p>
+          </div>
+          <div class="problem-card">
+            <div class="problem-icon">&#9888;</div>
+            <h4>Impact on Financial Strategy</h4>
+            <p>Visibility into transaction flows allows for front-running and "MEV" (Maximal Extractable Value) exploitation, which erodes the profitability of institutional trading strategies and introduces unacceptable threat actors.</p>
+          </div>
+        </div>
+
+        <h3 style="margin-top: 3rem;">Institutional Trust Requirements</h3>
+        <p>Institutions require an infallible level of trust in their financial products and instruments. The option for confidentiality is a requisite to preserve this trust in the process of tokenized assets. Without robust privacy, the public blockchain remains a "read-only" experiment for the world's largest enterprises.</p>
+      </section>
+
+      <!-- Privacy Addressable Market -->
+      <section id="addressable-market">
+        <span class="section-label">Market Opportunity</span>
+        <h2>Privacy Addressable Market</h2>
+
+        <p>The transition of institutional assets to the blockchain represents a multi-trillion-dollar opportunity. Privacy is not just a feature, it is the key that unlocks these sectors:</p>
+
+        <div class="problem-grid">
+          <div class="problem-card">
+            <div class="problem-icon">&#127975;</div>
+            <h4>Global Finance (TradFi)</h4>
+            <p>The total addressable market for private decentralized finance (DeFi) includes the $100T+ global bond market and the $600T derivatives market, both of which require strict transaction privacy.</p>
+          </div>
+          <div class="problem-card">
+            <div class="problem-icon">&#128666;</div>
+            <h4>Supply Chain &amp; Logistics</h4>
+            <p>Protecting the identity of suppliers and the pricing of raw materials is essential for maintaining competitive advantages in global trade.</p>
+          </div>
+          <div class="problem-card">
+            <div class="problem-icon">&#127973;</div>
+            <h4>Healthcare &amp; Data Sovereignty</h4>
+            <p>The secure, private exchange of patient records and genomic data requires a "Privacy-First" architecture to meet global compliance standards.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Taxonomy -->
+      <section id="taxonomy">
+        <span class="section-label">Technical Foundations</span>
+        <h2>Taxonomy of Privacy Approaches in the Ethereum Ecosystem</h2>
+
+        <h3>The Technical Primitives</h3>
+
+        <div class="taxonomy-grid">
+          <div class="taxonomy-card">
+            <div class="taxonomy-header">
+              <div class="taxonomy-icon">&#128272;</div>
+              <div>
+                <div class="taxonomy-title">Fully Homomorphic Encryption</div>
+                <div class="taxonomy-abbr">FHE</div>
+              </div>
+            </div>
+            <p>An emerging field that allows data to remain encrypted even while it is being processed, ensuring that sensitive information is never "unlocked" during computation.</p>
+          </div>
+
+          <div class="taxonomy-card">
+            <div class="taxonomy-header">
+              <div class="taxonomy-icon">&#128260;</div>
+              <div>
+                <div class="taxonomy-title">Garbled Circuits</div>
+                <div class="taxonomy-abbr">GC</div>
+              </div>
+            </div>
+            <p>Distributes computation across decentralized software, enabling any one individual or multiple parties to collectively compute over data while it remains encrypted; this ensures that sensitive information is never "decrypted".</p>
+          </div>
+
+          <div class="taxonomy-card">
+            <div class="taxonomy-header">
+              <div class="taxonomy-icon">&#128101;</div>
+              <div>
+                <div class="taxonomy-title">Multi-Party Computation</div>
+                <div class="taxonomy-abbr">MPC</div>
+              </div>
+            </div>
+            <p>Distributes a computation across multiple parties such that no single party can see the entire data set, preventing any single point of failure or data leak.</p>
+          </div>
+
+          <div class="taxonomy-card">
+            <div class="taxonomy-header">
+              <div class="taxonomy-icon">&#128187;</div>
+              <div>
+                <div class="taxonomy-title">Trusted Execution Environments</div>
+                <div class="taxonomy-abbr">TEE</div>
+              </div>
+            </div>
+            <p>Uses a hardware-secured "enclave" within a processor to run computations in complete isolation, ensuring that sensitive data cannot be accessed or tampered with — even by the host system or platform operator.</p>
+          </div>
+
+          <div class="taxonomy-card">
+            <div class="taxonomy-header">
+              <div class="taxonomy-icon">&#10003;</div>
+              <div>
+                <div class="taxonomy-title">Zero-Knowledge Proofs</div>
+                <div class="taxonomy-abbr">ZKP</div>
+              </div>
+            </div>
+            <p>A way for one party to prove to another that a statement is true without revealing any information beyond the validity of the statement itself (e.g., "I have enough funds," without showing the balance).</p>
+          </div>
+
+          <div class="taxonomy-card">
+            <div class="taxonomy-header">
+              <div class="taxonomy-icon">&#128279;</div>
+              <div>
+                <div class="taxonomy-title">Privacy Groups</div>
+                <div class="taxonomy-abbr">PG</div>
+              </div>
+            </div>
+            <p>A closed group of participants executing a shared business logic and maintaining a privately replicated ledger, while maintaining a state transition history on the public ledger with commitments to enforce consistency among the private ledgers.</p>
+          </div>
+        </div>
+
+        <div class="erc-aside">
+          <h4>Privacy-Related Ethereum Standards</h4>
+          <div class="erc-list">
+            <div class="erc-item">
+              <p><strong>ERC-5564 (Stealth Addresses):</strong> Enables senders to generate private addresses for recipients without prior interaction. Recipients use viewing keys to identify incoming transfers without revealing their identity to observers.</p>
+            </div>
+            <div class="erc-item">
+              <p><strong>ERC-6538 (Stealth Meta-Address Registry):</strong> Provides a registry for stealth meta-addresses, enabling senders to discover recipients and generate stealth addresses without prior direct interaction. Complements ERC-5564.</p>
+            </div>
+            <div class="erc-item">
+              <p><strong>ERC-7984 (Confidential Fungible Token) [Draft]:</strong> Defines an interface for tokens with confidential balances and transfer amounts. Technology-agnostic, supporting FHE, ZK proofs, TEEs, or other privacy mechanisms.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EF Privacy Roadmap -->
+      <section id="ef-roadmap">
+        <span class="section-label">Foundation Initiatives</span>
+        <h2>The Ethereum Foundation's Privacy Roadmap</h2>
+
+        <p>The Ethereum Foundation has outlined a comprehensive privacy roadmap across three distinct tracks:</p>
+
+        <div class="roadmap-tracks">
+          <div class="roadmap-track track-1">
+            <div class="track-number">Track 1</div>
+            <h4>Private Proving</h4>
+            <div class="track-layer">Application Layer</div>
+            <p>Enabling users to prove facts about themselves without revealing underlying data.</p>
+            <div class="track-projects">
+              <span class="track-project">Semaphore</span>
+              <span class="track-project">MACI</span>
+              <span class="track-project">zkPDF</span>
+              <span class="track-project">zkEmail</span>
+            </div>
+          </div>
+
+          <div class="roadmap-track track-2">
+            <div class="track-number">Track 2</div>
+            <h4>Private Writes</h4>
+            <div class="track-layer">Transaction Layer</div>
+            <p>Enabling confidential actions on Ethereum mainnet. Developing infrastructure for private transfers, precompiles, reference implementations, tooling on SDK integrations for privacy-first wallets including private account recovery.</p>
+            <div class="track-projects">
+              <span class="track-project">Private Transfers</span>
+              <span class="track-project">Precompiles</span>
+              <span class="track-project">SDK Integrations</span>
+            </div>
+          </div>
+
+          <div class="roadmap-track track-3">
+            <div class="track-number">Track 3</div>
+            <h4>Private Reads</h4>
+            <div class="track-layer">Network Layer</div>
+            <p>Tackles metadata leakage from reading state. Developing Private Information Retrieval (PIR). Target: major RPC providers, wallets, and block explorers offer privacy alternatives within 12 months.</p>
+            <div class="track-projects">
+              <span class="track-project">PIR</span>
+              <span class="track-project">RPC Privacy</span>
+              <span class="track-project">Block Explorers</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Trust Models -->
+      <section id="trust-models">
+        <span class="section-label">Security Foundations</span>
+        <h2>Trust Models of Enterprise Privacy Solutions</h2>
+
+        <div class="trust-models-grid">
+          <div class="trust-model-card">
+            <h4>Cryptographic Trust</h4>
+            <div class="trust-techs">ZK, MPC, Garbled Circuits</div>
+            <p class="trust-description">Trust placed in publicly verifiable cryptography, not any single operator. ZK proofs are mathematically verifiable by anyone. MPC &amp; GC rely on protocol design and cryptographic primitives.</p>
+            <div class="trust-failure">
+              <div class="trust-failure-label">Failure Modes</div>
+              <ul class="trust-failure-list">
+                <li>Circuit bugs</li>
+                <li>Missing constraints</li>
+                <li>Malicious inputs</li>
+                <li>Incremental leakage</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="trust-model-card">
+            <h4>Hardware-Anchored Trust</h4>
+            <div class="trust-techs">TEE</div>
+            <p class="trust-description">Trust placed in hardware security guarantees by manufacturers. Relies on secure enclaves and remote attestation to verify execution environment integrity.</p>
+            <div class="trust-failure">
+              <div class="trust-failure-label">Failure Modes</div>
+              <ul class="trust-failure-list">
+                <li>Attestation compromise</li>
+                <li>Leaked encryption keys</li>
+                <li>Side-channel attacks</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="trust-model-card">
+            <h4>Organizational Honesty</h4>
+            <div class="trust-techs">FHE Co-Processors, MPC, Notary</div>
+            <p class="trust-description">Trust placed in honesty of organizations operating core components. FHE requires majority of co-processor operators to be honest. MPC requires at least one honest party.</p>
+            <div class="trust-failure">
+              <div class="trust-failure-label">Failure Modes</div>
+              <ul class="trust-failure-list">
+                <li>Collusion above trust threshold</li>
+                <li>Full data reconstruction if compromised</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Coverage Matrix -->
+      <section id="coverage-matrix">
+        <span class="section-label">Comparative Analysis</span>
+        <h2>Privacy Coverage Matrix</h2>
+
+        <div class="matrix-filters">
+          <button class="matrix-filter-btn active" data-filter="all">All Solutions</button>
+          <button class="matrix-filter-btn" data-filter="crypto">Cryptographic</button>
+          <button class="matrix-filter-btn" data-filter="hardware">Hardware-Anchored</button>
+          <button class="matrix-filter-btn" data-filter="org">Organizational</button>
+        </div>
+
+        <div class="matrix-container">
+          <table class="coverage-matrix" id="coverage-matrix-table">
+            <thead>
+              <tr>
+                <th>Capability</th>
+                <th>COTI</th>
+                <th>Linea Enterprise</th>
+                <th>Nightfall (EY)</th>
+                <th>Paladin (Kaleido)</th>
+                <th>Prividium (ZKsync)</th>
+                <th>Agglayer CDK (Polygon)</th>
+                <th>Silent Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-trust="org">
+                <td>Transaction Privacy</td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+              </tr>
+              <tr data-trust="org">
+                <td>Balance Privacy</td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-cross">&#10007;</span></td>
+              </tr>
+              <tr data-trust="org">
+                <td>Smart Contract Privacy</td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-cross">&#10007;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-cross">&#10007;</span></td>
+              </tr>
+              <tr data-trust="org">
+                <td>Regulatory Compliance</td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+              </tr>
+              <tr data-trust="org">
+                <td>Selective Disclosure</td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+              </tr>
+              <tr data-trust="org">
+                <td>Mainnet Settlement</td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-cross">&#10007;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+                <td><span class="matrix-check">&#10003;</span></td>
+              </tr>
+              <tr data-trust="org">
+                <td>Primary Technology</td>
+                <td><span class="matrix-tech">FHE+GC</span></td>
+                <td><span class="matrix-tech">ZK+TEE</span></td>
+                <td><span class="matrix-tech">ZK</span></td>
+                <td><span class="matrix-tech">Privacy Groups</span></td>
+                <td><span class="matrix-tech">ZK</span></td>
+                <td><span class="matrix-tech">ZK</span></td>
+                <td><span class="matrix-tech">TEE</span></td>
+              </tr>
+              <tr data-trust="org">
+                <td>Trust Model</td>
+                <td><span class="matrix-trust org">Org. Honesty</span></td>
+                <td><span class="matrix-trust hybrid">Crypto+HW</span></td>
+                <td><span class="matrix-trust crypto">Cryptographic</span></td>
+                <td><span class="matrix-trust org">Organizational</span></td>
+                <td><span class="matrix-trust crypto">Cryptographic</span></td>
+                <td><span class="matrix-trust crypto">Cryptographic</span></td>
+                <td><span class="matrix-trust hardware">HW-Anchored</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Solution Profiles -->
+      <section id="solutions">
+        <span class="section-label">Detailed Analysis</span>
+        <h2>Solution Profiles</h2>
+
+        <p>Click on each solution to expand and view detailed information.</p>
+
+        <div class="solutions-grid">
+          <!-- Solution 1: COTI -->
+          <div class="solution-card" data-solution="1">
+            <div class="solution-header">
+              <div class="solution-header-left">
+                <div class="solution-number">1</div>
+                <div class="solution-header-info">
+                  <h4>COTI</h4>
+                  <div class="solution-header-meta">
+                    <span>&#127970; COTI Group</span>
+                    <span>&#128272; FHE + Garbled Circuits</span>
+                    <span class="matrix-trust org">Organizational Honesty</span>
+                  </div>
+                </div>
+              </div>
+              <span class="solution-expand-icon">&#9660;</span>
+            </div>
+            <div class="solution-content">
+              <div class="solution-content-inner">
+                <div class="solution-details">
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Organization</span>
+                    <span class="solution-detail-value">COTI Group</span>
+                  </div>
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Technology</span>
+                    <span class="solution-detail-value">FHE + Garbled Circuits</span>
+                  </div>
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Trust Model</span>
+                    <span class="solution-detail-value">Organizational Honesty (majority of co-processor operators)</span>
+                  </div>
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Status</span>
+                    <span class="solution-detail-value">Devnet with enterprise pilots</span>
+                  </div>
+                </div>
+                <div class="solution-feature">
+                  <div class="solution-feature-label">Key Feature</div>
+                  <p>Data remains encrypted during computation; supports confidential smart contracts on Ethereum mainnet.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Solution 2: Linea Enterprise -->
+          <div class="solution-card" data-solution="2">
+            <div class="solution-header">
+              <div class="solution-header-left">
+                <div class="solution-number">2</div>
+                <div class="solution-header-info">
+                  <h4>Linea Enterprise</h4>
+                  <div class="solution-header-meta">
+                    <span>&#127970; Consensys</span>
+                    <span>&#128272; ZK-Proofs + TEE</span>
+                    <span class="matrix-trust hybrid">Crypto + HW</span>
+                  </div>
+                </div>
+              </div>
+              <span class="solution-expand-icon">&#9660;</span>
+            </div>
+            <div class="solution-content">
+              <div class="solution-content-inner">
+                <div class="solution-details">
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Organization</span>
+                    <span class="solution-detail-value">Consensys</span>
+                  </div>
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Technology</span>
+                    <span class="solution-detail-value">ZK-Proofs + TEE hybrid</span>
+                  </div>
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Trust Model</span>
+                    <span class="solution-detail-value">Cryptographic + Hardware-Anchored</span>
+                  </div>
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Status</span>
+                    <span class="solution-detail-value">Enterprise pilot program active</span>
+                  </div>
+                </div>
+                <div class="solution-feature">
+                  <div class="solution-feature-label">Key Feature</div>
+                  <p>Enterprise-grade privacy on Ethereum L2 with regulatory compliance built in.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Solution 3: Nightfall -->
+          <div class="solution-card" data-solution="3">
+            <div class="solution-header">
+              <div class="solution-header-left">
+                <div class="solution-number">3</div>
+                <div class="solution-header-info">
+                  <h4>Nightfall</h4>
+                  <div class="solution-header-meta">
+                    <span>&#127970; Ernst &amp; Young</span>
+                    <span>&#128272; Zero-Knowledge Proofs</span>
+                    <span class="matrix-trust crypto">Cryptographic</span>
+                  </div>
+                </div>
+              </div>
+              <span class="solution-expand-icon">&#9660;</span>
+            </div>
+            <div class="solution-content">
+              <div class="solution-content-inner">
+                <div class="solution-details">
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Organization</span>
+                    <span class="solution-detail-value">Ernst &amp; Young</span>
+                  </div>
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Technology</span>
+                    <span class="solution-detail-value">Zero-Knowledge Proofs (Optimistic ZK-Rollup)</span>
+                  </div>
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Trust Model</span>
+                    <span class="solution-detail-value">Cryptographic</span>
+                  </div>
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Status</span>
+                    <span class="solution-detail-value">Production-ready, deployed with enterprise clients</span>
+                  </div>
+                </div>
+                <div class="solution-feature">
+                  <div class="solution-feature-label">Key Feature</div>
+                  <p>Privacy-first token transfers with regulatory compliance; EY's flagship blockchain privacy solution.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Solution 4: Paladin -->
+          <div class="solution-card" data-solution="4">
+            <div class="solution-header">
+              <div class="solution-header-left">
+                <div class="solution-number">4</div>
+                <div class="solution-header-info">
+                  <h4>Paladin</h4>
+                  <div class="solution-header-meta">
+                    <span>&#127970; Kaleido / LFDT</span>
+                    <span>&#128272; Privacy Groups</span>
+                    <span class="matrix-trust org">Organizational</span>
+                  </div>
+                </div>
+              </div>
+              <span class="solution-expand-icon">&#9660;</span>
+            </div>
+            <div class="solution-content">
+              <div class="solution-content-inner">
+                <div class="solution-details">
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Organization</span>
+                    <span class="solution-detail-value">Kaleido / LFDT Hyperledger</span>
+                  </div>
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Technology</span>
+                    <span class="solution-detail-value">Privacy Groups (notary-based)</span>
+                  </div>
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Trust Model</span>
+                    <span class="solution-detail-value">Organizational Honesty</span>
+                  </div>
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Status</span>
+                    <span class="solution-detail-value">Production deployments</span>
+                  </div>
+                </div>
+                <div class="solution-feature">
+                  <div class="solution-feature-label">Key Feature</div>
+                  <p>Private business logic execution with shared state commitments on public ledger.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Solution 5: Prividium -->
+          <div class="solution-card" data-solution="5">
+            <div class="solution-header">
+              <div class="solution-header-left">
+                <div class="solution-number">5</div>
+                <div class="solution-header-info">
+                  <h4>Prividium</h4>
+                  <div class="solution-header-meta">
+                    <span>&#127970; ZKsync / Matter Labs</span>
+                    <span>&#128272; Zero-Knowledge Proofs</span>
+                    <span class="matrix-trust crypto">Cryptographic</span>
+                  </div>
+                </div>
+              </div>
+              <span class="solution-expand-icon">&#9660;</span>
+            </div>
+            <div class="solution-content">
+              <div class="solution-content-inner">
+                <div class="solution-details">
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Organization</span>
+                    <span class="solution-detail-value">ZKsync Foundation / Matter Labs</span>
+                  </div>
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Technology</span>
+                    <span class="solution-detail-value">Zero-Knowledge Proofs</span>
+                  </div>
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Trust Model</span>
+                    <span class="solution-detail-value">Cryptographic</span>
+                  </div>
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Status</span>
+                    <span class="solution-detail-value">Development / pilot</span>
+                  </div>
+                </div>
+                <div class="solution-feature">
+                  <div class="solution-feature-label">Key Feature</div>
+                  <p>Enterprise privacy layer on ZKsync with confidential transactions.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Solution 6: Agglayer CDK -->
+          <div class="solution-card" data-solution="6">
+            <div class="solution-header">
+              <div class="solution-header-left">
+                <div class="solution-number">6</div>
+                <div class="solution-header-info">
+                  <h4>Agglayer CDK Enterprise</h4>
+                  <div class="solution-header-meta">
+                    <span>&#127970; Polygon</span>
+                    <span>&#128272; Zero-Knowledge Proofs</span>
+                    <span class="matrix-trust crypto">Cryptographic</span>
+                  </div>
+                </div>
+              </div>
+              <span class="solution-expand-icon">&#9660;</span>
+            </div>
+            <div class="solution-content">
+              <div class="solution-content-inner">
+                <div class="solution-details">
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Organization</span>
+                    <span class="solution-detail-value">Polygon</span>
+                  </div>
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Technology</span>
+                    <span class="solution-detail-value">Zero-Knowledge Proofs</span>
+                  </div>
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Trust Model</span>
+                    <span class="solution-detail-value">Cryptographic</span>
+                  </div>
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Status</span>
+                    <span class="solution-detail-value">Active development</span>
+                  </div>
+                </div>
+                <div class="solution-feature">
+                  <div class="solution-feature-label">Key Feature</div>
+                  <p>Customizable enterprise chains with privacy features via CDK.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Solution 7: Silent Data -->
+          <div class="solution-card" data-solution="7">
+            <div class="solution-header">
+              <div class="solution-header-left">
+                <div class="solution-number">7</div>
+                <div class="solution-header-info">
+                  <h4>Silent Data</h4>
+                  <div class="solution-header-meta">
+                    <span>&#127970; Applied Blockchain</span>
+                    <span>&#128272; TEE</span>
+                    <span class="matrix-trust hardware">HW-Anchored</span>
+                  </div>
+                </div>
+              </div>
+              <span class="solution-expand-icon">&#9660;</span>
+            </div>
+            <div class="solution-content">
+              <div class="solution-content-inner">
+                <div class="solution-details">
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Organization</span>
+                    <span class="solution-detail-value">Applied Blockchain</span>
+                  </div>
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Technology</span>
+                    <span class="solution-detail-value">Trusted Execution Environments (TEE)</span>
+                  </div>
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Trust Model</span>
+                    <span class="solution-detail-value">Hardware-Anchored</span>
+                  </div>
+                  <div class="solution-detail">
+                    <span class="solution-detail-label">Status</span>
+                    <span class="solution-detail-value">Production</span>
+                  </div>
+                </div>
+                <div class="solution-feature">
+                  <div class="solution-feature-label">Key Feature</div>
+                  <p>Off-chain data verification with on-chain attestation; bridges real-world data privately.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Decision Framework -->
+      <section id="decision-framework">
+        <span class="section-label">Evaluation Guide</span>
+        <h2>Decision Framework</h2>
+
+        <p>When evaluating privacy solutions, enterprises should systematically consider the following questions:</p>
+
+        <div class="decision-framework">
+          <div class="decision-flow">
+            <div class="decision-node">
+              <div class="decision-connector">
+                <div class="decision-number">1</div>
+                <div class="decision-line"></div>
+              </div>
+              <div class="decision-card">
+                <h4>What needs to be private?</h4>
+                <p>Transaction amounts, counterparty identities, business logic, or all three? Different solutions excel at protecting different data types.</p>
+              </div>
+            </div>
+
+            <div class="decision-node">
+              <div class="decision-connector">
+                <div class="decision-number">2</div>
+                <div class="decision-line"></div>
+              </div>
+              <div class="decision-card">
+                <h4>What trust model is acceptable?</h4>
+                <p>Pure cryptographic guarantees, hardware-dependent security, or organizational trust? Your risk tolerance and regulatory requirements will guide this choice.</p>
+              </div>
+            </div>
+
+            <div class="decision-node">
+              <div class="decision-connector">
+                <div class="decision-number">3</div>
+                <div class="decision-line"></div>
+              </div>
+              <div class="decision-card">
+                <h4>What is the regulatory environment?</h4>
+                <p>GDPR, MiCA, or sector-specific requirements? Ensure the solution supports necessary compliance mechanisms like selective disclosure.</p>
+              </div>
+            </div>
+
+            <div class="decision-node">
+              <div class="decision-connector">
+                <div class="decision-number">4</div>
+                <div class="decision-line"></div>
+              </div>
+              <div class="decision-card">
+                <h4>What is the deployment timeline?</h4>
+                <p>Production-ready solutions vs. emerging technology? Balance innovation with operational readiness based on your timeline.</p>
+              </div>
+            </div>
+
+            <div class="decision-node">
+              <div class="decision-connector">
+                <div class="decision-number">5</div>
+                <div class="decision-line"></div>
+              </div>
+              <div class="decision-card">
+                <h4>What is the integration complexity?</h4>
+                <p>Mainnet settlement vs. separate chain? Consider the technical resources required and existing infrastructure compatibility.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="decision-conclusion">
+            <p>No single solution addresses all enterprise privacy requirements. The optimal approach often involves combining solutions or selecting based on the specific use case.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Future Outlook -->
+      <section id="future-outlook">
+        <span class="section-label">Looking Ahead</span>
+        <h2>Future Outlook &amp; Open Questions</h2>
+
+        <p>As the privacy landscape on Ethereum continues to evolve, several critical questions remain open for the enterprise community:</p>
+
+        <div class="outlook-questions">
+          <div class="outlook-question">How will privacy solutions interact with each other across L1 and L2?</div>
+          <div class="outlook-question">What standards are needed for cross-solution interoperability?</div>
+          <div class="outlook-question">How will regulatory frameworks evolve to address on-chain privacy?</div>
+          <div class="outlook-question">What role will the EF Privacy Roadmap play in standardizing base-layer privacy?</div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h4>Contact</h4>
+            <p>Enterprise Ethereum Alliance</p>
+            <a href="mailto:press@entethalliance.org">press@entethalliance.org</a>
+          </div>
+          <div class="footer-section">
+            <h4>Resources</h4>
+            <a href="https://entethalliance.org" target="_blank" rel="noopener">entethalliance.org</a>
+            <a href="#coverage-matrix">Privacy Coverage Matrix</a>
+            <a href="#solutions">Solution Profiles</a>
+          </div>
+          <div class="footer-section">
+            <h4>Working Group</h4>
+            <p>Privacy Working Group</p>
+            <p>March 2026</p>
+          </div>
+        </div>
+        <div class="footer-disclaimer">
+          <p><strong>Disclaimer:</strong> This report is provided for informational purposes only and represents the collective findings of the EEA Privacy Working Group. The information contained herein should not be construed as legal, financial, or technical advice. Organizations should conduct their own due diligence before implementing any privacy solutions. The EEA and contributing organizations make no warranties regarding the accuracy, completeness, or suitability of the information presented.</p>
+          <p style="margin-top: 1rem;">&copy; 2026 Enterprise Ethereum Alliance. All rights reserved.</p>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top">&#8593;</button>
+
+  <script>
+    // Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateThemeIcon(newTheme);
+    });
+
+    function updateThemeIcon(theme) {
+      const icon = themeToggle.querySelector('.theme-toggle-icon');
+      icon.innerHTML = theme === 'dark' ? '&#9789;' : '&#9788;';
+    }
+
+    // Mobile Navigation
+    const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+    const navSidebar = document.querySelector('.nav-sidebar');
+    const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
+
+    mobileNavToggle.addEventListener('click', () => {
+      navSidebar.classList.toggle('open');
+      mobileNavOverlay.classList.toggle('open');
+    });
+
+    mobileNavOverlay.addEventListener('click', () => {
+      navSidebar.classList.remove('open');
+      mobileNavOverlay.classList.remove('open');
+    });
+
+    // Close mobile nav when clicking a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navSidebar.classList.remove('open');
+        mobileNavOverlay.classList.remove('open');
+      });
+    });
+
+    // Scroll-triggered section animations
+    const sections = document.querySelectorAll('section');
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-10% 0px -10% 0px',
+      threshold: 0.1
+    };
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(section => {
+      sectionObserver.observe(section);
+    });
+
+    // Active navigation highlighting
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    const navObserverOptions = {
+      root: null,
+      rootMargin: '-20% 0px -70% 0px',
+      threshold: 0
+    };
+
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${id}`) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }, navObserverOptions);
+
+    sections.forEach(section => {
+      navObserver.observe(section);
+    });
+
+    // Back to Top Button
+    const backToTop = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    });
+
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Solution Card Expand/Collapse
+    document.querySelectorAll('.solution-card').forEach(card => {
+      const header = card.querySelector('.solution-header');
+      header.addEventListener('click', () => {
+        // Close other cards
+        document.querySelectorAll('.solution-card').forEach(otherCard => {
+          if (otherCard !== card) {
+            otherCard.classList.remove('expanded');
+          }
+        });
+        // Toggle current card
+        card.classList.toggle('expanded');
+      });
+    });
+
+    // Coverage Matrix Filtering
+    const filterButtons = document.querySelectorAll('.matrix-filter-btn');
+    const matrixRows = document.querySelectorAll('.coverage-matrix tbody tr');
+
+    // Define which columns belong to which trust model
+    const trustModelColumns = {
+      'org': [1, 4],      // COTI (index 1), Paladin (index 4)
+      'crypto': [3, 5, 6], // Nightfall (3), Prividium (5), Agglayer (6)
+      'hardware': [7],     // Silent Data (7)
+      'hybrid': [2]        // Linea (2) - Crypto+HW
+    };
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.dataset.filter;
+        const table = document.getElementById('coverage-matrix-table');
+        const headerCells = table.querySelectorAll('thead th');
+        const bodyRows = table.querySelectorAll('tbody tr');
+
+        // Reset all visibility
+        headerCells.forEach(cell => cell.style.display = '');
+        bodyRows.forEach(row => {
+          row.querySelectorAll('td').forEach(cell => cell.style.display = '');
+        });
+
+        if (filter === 'all') return;
+
+        // Get columns to show based on filter
+        let columnsToShow = [0]; // Always show capability column
+
+        if (filter === 'crypto') {
+          columnsToShow = columnsToShow.concat(trustModelColumns.crypto);
+        } else if (filter === 'hardware') {
+          columnsToShow = columnsToShow.concat(trustModelColumns.hardware);
+        } else if (filter === 'org') {
+          columnsToShow = columnsToShow.concat(trustModelColumns.org);
+        }
+
+        // Hide columns not in the filter
+        headerCells.forEach((cell, index) => {
+          if (!columnsToShow.includes(index)) {
+            cell.style.display = 'none';
+          }
+        });
+
+        bodyRows.forEach(row => {
+          row.querySelectorAll('td').forEach((cell, index) => {
+            if (!columnsToShow.includes(index)) {
+              cell.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+
+    // Matrix Row Hover Highlighting
+    document.querySelectorAll('.coverage-matrix tbody tr').forEach(row => {
+      row.addEventListener('mouseenter', () => {
+        row.classList.add('highlight');
+      });
+      row.addEventListener('mouseleave', () => {
+        row.classList.remove('highlight');
+      });
+    });
+
+    // Column Sorting for Matrix
+    const matrixTable = document.getElementById('coverage-matrix-table');
+    const headers = matrixTable.querySelectorAll('thead th');
+    let sortDirection = {};
+
+    headers.forEach((header, index) => {
+      if (index === 0) return; // Skip capability column
+
+      header.addEventListener('click', () => {
+        const tbody = matrixTable.querySelector('tbody');
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+
+        sortDirection[index] = !sortDirection[index];
+
+        rows.sort((a, b) => {
+          const aCell = a.querySelectorAll('td')[index];
+          const bCell = b.querySelectorAll('td')[index];
+          const aVal = aCell.textContent.includes('✓') ? 1 : 0;
+          const bVal = bCell.textContent.includes('✓') ? 1 : 0;
+
+          return sortDirection[index] ? bVal - aVal : aVal - bVal;
+        });
+
+        rows.forEach(row => tbody.appendChild(row));
+      });
+    });
+
+    // Initialize hero section as visible
+    document.querySelector('.hero').classList.add('visible');
+  </script>
+</body>
+</html>
