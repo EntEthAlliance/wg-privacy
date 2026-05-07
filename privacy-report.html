@@ -31,7 +31,7 @@
     --active:#eceeff;
     --card-soft:#f9f9ff;
     --hero-pill:rgba(75,75,89,.02);
-    --post-taxonomy-shift:380px;
+    --post-taxonomy-shift:680px;
     --after-roadmap-shift:320px;
   }
 
@@ -843,11 +843,36 @@
 
   /* ERC standards grid — same visual language as taxonomy grid */
   .erc-grid{
-    left:calc(50% - 528.5px);top:8020px;width:1057px;
+    left:calc(50% - 528.5px);top:8320px;width:1057px;
     display:flex;flex-direction:column;
   }
   .erc-grid .row{display:flex;width:100%}
   .erc-grid .tax-cell{padding:28px 24px 40px;gap:24px}
+
+  .sec06b-anchor{
+    left:48px;top:7960px;width:927px;padding-left:82px;
+  }
+  .sec06b-anchor .railway-intro{
+    font-family:'Manrope',sans-serif;font-weight:500;font-size:16px;line-height:1.65;opacity:.85;color:var(--ink);margin:0 0 1rem;
+  }
+  .sec06b-anchor .railway-item{
+    padding:.75rem 1rem .75rem 1.25rem;
+    border-left:2px solid rgba(124,144,233,.35);
+    margin-bottom:.75rem;
+  }
+  .sec06b-anchor .railway-item p{
+    font-family:'Manrope',sans-serif;font-weight:500;font-size:15px;line-height:1.6;opacity:.8;color:var(--ink);margin:0;
+  }
+  .erc-grid .erc-links{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .erc-grid .erc-link{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:12px;letter-spacing:.3px;
+    padding:6px 12px;border-radius:20px;
+    background:#fff;border:1px solid rgba(74,74,86,.15);
+    color:#7C90E9;text-decoration:none;
+    transition:background .15s ease;
+  }
+  .erc-grid .erc-link:hover{background:#ECF2FF}
 
   /* Draft tag — small amber pill next to ERC code */
   .draft-tag{
@@ -1275,12 +1300,28 @@
   }
   .rm-card .rm-link:hover{background:#ECF2FF}
 
+  .rm-card .rm-disclosure{margin-top:.75rem;padding:.75rem 1rem;background:rgba(124,144,233,.05);border:1px solid rgba(124,144,233,.15);border-radius:8px}
+  .rm-card .rm-disclosure-label{font-family:'Outfit',sans-serif;font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;opacity:.5;color:var(--ink);margin:0 0 .5rem}
+  .rm-card .rm-d-grid{display:grid;grid-template-columns:1fr 1fr;gap:.3rem .75rem}
+  .rm-card .rm-d-row{display:flex;flex-direction:column;gap:2px}
+  .rm-card .rm-d-k{font-family:'Outfit',sans-serif;font-weight:600;font-size:10.5px;letter-spacing:.02em;text-transform:uppercase;opacity:.45;color:var(--ink)}
+  .rm-card .rm-d-v{font-family:'Manrope',sans-serif;font-weight:500;font-size:12.5px;color:var(--ink);opacity:.8;line-height:1.4}
+
   .sec09-method{
     left:48px;top:calc(11440px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:1057px;padding-left:82px;
     font-family:'Manrope',sans-serif;font-weight:500;
     font-size:14px;line-height:1.7;color:var(--ink);opacity:.7;font-style:italic;
   }
   .sec09-method strong{font-weight:700;font-style:normal;opacity:1}
+
+  .sec09-disqualify{
+    left:48px;top:calc(11340px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:1057px;padding-left:82px;
+    font-family:'Manrope',sans-serif;font-size:14px;line-height:1.7;color:var(--ink);
+  }
+  .sec09-disqualify-label{font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.5;margin:0 0 .25rem}
+  .sec09-disqualify-intro{opacity:.7;margin:0 0 .5rem}
+  .sec09-disqualify-list{margin:0;padding-left:1.25rem;opacity:.7}
+  .sec09-disqualify-list li{margin-bottom:.25rem}
 
   /* ============================================================
      Flow layout from Section 09 onward
@@ -2492,6 +2533,20 @@
       <p>Beyond cryptographic primitives, the Ethereum ecosystem has standardized interoperable interfaces for privacy-preserving transactions. These standards define building blocks upon which enterprise privacy solutions are constructed — they do not provide end-to-end privacy on their own.</p>
     </div>
 
+    <!-- Anchor passage: deployment readiness context for ERC standards -->
+    <div class="abs sec06b-anchor">
+      <p class="railway-intro">Standards in this section sit at different levels of deployment readiness — think of them as a railway.</p>
+      <div class="railway-item">
+        <p><strong>ERC-5564</strong> and <strong>ERC-6538</strong> are rails. They are laid on Ethereum mainnet, but not on ZKsync, Polygon CDK, COTI, Linea, Silent Data, or Prividium — those chains' documentation does not reference them. Adding them on EVM-equivalent L2s is light work. Even on mainnet, the rails are only half the system: a usable stealth-address experience also needs wallet and SDK software on top — that's the train, and it's a separate, larger build.</p>
+      </div>
+      <div class="railway-item">
+        <p><strong>ERC-7984</strong> is a train design. It only runs if the chain has installed the right engine — today, Zama's fhEVM — which is currently configured for Ethereum mainnet and must be ported chain by chain.</p>
+      </div>
+      <div class="railway-item">
+        <p><strong>EIP-8105</strong> is not rails or a train. It changes the railway itself — Ethereum's underlying transaction layer. It is a draft, not live anywhere, including mainnet.</p>
+      </div>
+    </div>
+
     <!-- ERC standards grid: 4 cells, taxonomy style -->
     <div class="abs erc-grid">
       <div class="row">
@@ -2504,6 +2559,10 @@
             <p class="h">Stealth Addresses</p>
             <p class="d">Generates one-time addresses for private transfers. Enables recipient privacy without prior interaction.</p>
           </div>
+          <div class="erc-links">
+            <a class="erc-link" href="https://eips.ethereum.org/EIPS/eip-5564" target="_blank" rel="noopener">Spec</a>
+            <a class="erc-link" href="https://github.com/ScopeLift/stealth-address-erc-contracts" target="_blank" rel="noopener">Implementation</a>
+          </div>
         </div>
         <div class="tax-cell br">
           <div class="top">
@@ -2513,6 +2572,10 @@
           <div class="bot">
             <p class="h">Stealth Meta-Address Registry</p>
             <p class="d">Provides a registry to discover stealth recipients. Enables senders to generate private addresses without direct contact.</p>
+          </div>
+          <div class="erc-links">
+            <a class="erc-link" href="https://eips.ethereum.org/EIPS/eip-6538" target="_blank" rel="noopener">Spec</a>
+            <a class="erc-link" href="https://github.com/ScopeLift/stealth-address-erc-contracts" target="_blank" rel="noopener">Implementation</a>
           </div>
         </div>
         <div class="tax-cell br">
@@ -2524,6 +2587,11 @@
             <p class="h">Confidential Fungible Token</p>
             <p class="d">Supports confidential balances and transfer amounts. Enables privacy-preserving tokens using FHE, ZK, or TEEs.</p>
           </div>
+          <div class="erc-links">
+            <a class="erc-link" href="https://eips.ethereum.org/EIPS/eip-7984" target="_blank" rel="noopener">Spec</a>
+            <a class="erc-link" href="https://github.com/OpenZeppelin/openzeppelin-confidential-contracts" target="_blank" rel="noopener">Reference Implementation</a>
+            <a class="erc-link" href="https://ethereum-magicians.org/t/erc-7984-confidential-fungible-token-interface/24735" target="_blank" rel="noopener">Discussion</a>
+          </div>
         </div>
         <div class="tax-cell">
           <div class="top">
@@ -2533,6 +2601,11 @@
           <div class="bot">
             <p class="h">Encrypted Mempools</p>
             <p class="d">Encrypts transactions before inclusion to reduce front-running and MEV exposure. Particularly relevant for institutional execution.</p>
+          </div>
+          <div class="erc-links">
+            <a class="erc-link" href="https://eips.ethereum.org/EIPS/eip-8105" target="_blank" rel="noopener">Spec</a>
+            <a class="erc-link" href="https://ethereum-magicians.org/t/hegota-headliner-proposal-eip-8105-universal-enshrined-encrypted-mempool-eem/27448" target="_blank" rel="noopener">Hegotá Proposal</a>
+            <a class="erc-link" href="https://blog.shutter.network/introducing-the-universal-enshrined-encrypted-mempool-eip/" target="_blank" rel="noopener">Announcement</a>
           </div>
         </div>
       </div>
@@ -2675,13 +2748,13 @@
     </div>
 
     <div class="abs sec09-intro">
-      <p>With the foundational concepts established, this matrix provides a practical comparison of each solution's production readiness. The following assessment is evidence-based: only solutions with publicly verifiable deployments are classified as "In Production."</p>
+      <p>With the foundational concepts established, this matrix provides a practical comparison of each solution's production readiness. The following assessment is evidence-based: classifications use three stages — Pilot, Early Production, and General Availability — each defined by independently verifiable criteria.</p>
     </div>
 
     <div class="abs sec09-legend">
-      <div class="legend-pill"><span class="legend-dot prod"></span>In Production — Live deployment with named customers</div>
-      <div class="legend-pill"><span class="legend-dot early"></span>Early Access — Available, no public production verified</div>
-      <div class="legend-pill"><span class="legend-dot pilot"></span>Pilot — In development or testing phase</div>
+      <div class="legend-pill"><span class="legend-dot pilot"></span>Pilot — Demonstrable system; named participant or partnership; no live regulated traffic required</div>
+      <div class="legend-pill"><span class="legend-dot early"></span>Early Production — ≥1 named customer live in production; ≥3 months continuous operation; ≥1 third-party security audit (last 18 months); handles real-money or regulated traffic</div>
+      <div class="legend-pill"><span class="legend-dot prod"></span>General Availability — ≥3 named customers across ≥2 institution categories; ≥12 months continuous operation; ≥2 third-party audits (last 24 months); public volume/TVL or transaction count; documented incident-response and SLA framework</div>
     </div>
 
     <div class="abs sec09-cards">
@@ -2690,10 +2763,24 @@
         <div class="rm-head">
           <p class="rm-name">COTI</p>
           <p class="rm-tech">Garbled Circuits</p>
-          <span class="rm-status prod"><span class="dot"></span>In Production</span>
+          <span class="rm-status pilot"><span class="dot"></span>Pilot</span>
         </div>
         <div class="rm-body">
           <p class="rm-evidence">Private RWAs on Testnet with Zonqix, Privex live on mainnet (June 2025); StaTwig VaccineLedger deployed in Bangladesh.</p>
+          <div class="rm-disclosure">
+            <p class="rm-disclosure-label">Mandatory Disclosures</p>
+            <div class="rm-d-grid">
+              <div class="rm-d-row"><span class="rm-d-k">Named customers + tier</span><span class="rm-d-v">Privex (own platform); StaTwig (supply chain SME)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Months in production</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Last audit firm + date</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Regulatory engagement</span><span class="rm-d-v">None disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Public volume / TVL</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Open-source (core)</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Governance / operator</span><span class="rm-d-v">COTI Group (centralized)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Incidents (last 12 mo.)</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">SLA tier</span><span class="rm-d-v">Not disclosed.</span></div>
+            </div>
+          </div>
           <div class="rm-links">
             <a class="rm-link" href="https://mainnet.cotiscan.io" target="_blank" rel="noopener">Mainnet Explorer</a>
             <a class="rm-link" href="https://docs.coti.io" target="_blank" rel="noopener">Docs</a>
@@ -2708,10 +2795,24 @@
         <div class="rm-head">
           <p class="rm-name">Prividium (ZKsync)</p>
           <p class="rm-tech">Zero-Knowledge Proofs</p>
-          <span class="rm-status prod"><span class="dot"></span>In Production</span>
+          <span class="rm-status pilot"><span class="dot"></span>Pilot</span>
         </div>
         <div class="rm-body">
           <p class="rm-evidence">Deutsche Bank Project Dama 2 — live institutional L2 for asset tokenization (MAS Singapore).</p>
+          <div class="rm-disclosure">
+            <p class="rm-disclosure-label">Mandatory Disclosures</p>
+            <div class="rm-d-grid">
+              <div class="rm-d-row"><span class="rm-d-k">Named customers + tier</span><span class="rm-d-v">Deutsche Bank (Tier 1 bank — Project Dama 2)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Months in production</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Last audit firm + date</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Regulatory engagement</span><span class="rm-d-v">MAS Singapore (pilot mentioned)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Public volume / TVL</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Open-source (core)</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Governance / operator</span><span class="rm-d-v">ZKsync / Matter Labs + Deutsche Bank</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Incidents (last 12 mo.)</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">SLA tier</span><span class="rm-d-v">Not disclosed.</span></div>
+            </div>
+          </div>
           <div class="rm-links">
             <a class="rm-link" href="https://zksync.io/prividium" target="_blank" rel="noopener">Product Page</a>
             <a class="rm-link" href="https://www.db.com/news/detail/20250618-dama-2-litepaper-institutional-blueprint-for-asset-tokenisation-and-servicing-on-ethereum-layer-2" target="_blank" rel="noopener">Deutsche Bank Litepaper</a>
@@ -2724,10 +2825,24 @@
         <div class="rm-head">
           <p class="rm-name">Silent Data (Applied Blockchain)</p>
           <p class="rm-tech">TEE</p>
-          <span class="rm-status prod"><span class="dot"></span>In Production</span>
+          <span class="rm-status early"><span class="dot"></span>Early Production</span>
         </div>
         <div class="rm-body">
           <p class="rm-evidence">Archax tokenised funds (Aberdeen, BlackRock, Fidelity, State Street) live Feb 2026; CRYOPDP/DHL — SAP Award winner Dec 2025; Bank of England Digital Pound Lab Phase 1.</p>
+          <div class="rm-disclosure">
+            <p class="rm-disclosure-label">Mandatory Disclosures</p>
+            <div class="rm-d-grid">
+              <div class="rm-d-row"><span class="rm-d-k">Named customers + tier</span><span class="rm-d-v">Archax (fund custodian); CRYOPDP/DHL (logistics enterprise)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Months in production</span><span class="rm-d-v">~3 months (live Feb 2026)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Last audit firm + date</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Regulatory engagement</span><span class="rm-d-v">Bank of England Digital Pound Lab (Phase 1)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Public volume / TVL</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Open-source (core)</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Governance / operator</span><span class="rm-d-v">Applied Blockchain Ltd (centralized)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Incidents (last 12 mo.)</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">SLA tier</span><span class="rm-d-v">Not disclosed.</span></div>
+            </div>
+          </div>
           <div class="rm-links">
             <a class="rm-link" href="https://www.silentdata.com/blog/first-privacy-wrapped-tokenised-funds-from-aberdeen-blackrock-and-more-now-available-on-silent-data-via-archax" target="_blank" rel="noopener">Archax Funds</a>
             <a class="rm-link" href="https://www.silentdata.com/case-study/cryopdp" target="_blank" rel="noopener">CRYOPDP Case Study</a>
@@ -2742,10 +2857,24 @@
         <div class="rm-head">
           <p class="rm-name">Paladin (Kaleido / LFDT)</p>
           <p class="rm-tech">Privacy Groups (ZK/Notary)</p>
-          <span class="rm-status prod"><span class="dot"></span>In Production</span>
+          <span class="rm-status pilot"><span class="dot"></span>Pilot</span>
         </div>
         <div class="rm-body">
           <p class="rm-evidence">Bank of Indonesia Digital Rupiah (Project Garuda) — PoC report published by central bank. HKMA eHKD &amp; Bank of Brazil Drex — references available on request.</p>
+          <div class="rm-disclosure">
+            <p class="rm-disclosure-label">Mandatory Disclosures</p>
+            <div class="rm-d-grid">
+              <div class="rm-d-row"><span class="rm-d-k">Named customers + tier</span><span class="rm-d-v">Bank of Indonesia (central bank — PoC)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Months in production</span><span class="rm-d-v">Not applicable (PoC, not live production)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Last audit firm + date</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Regulatory engagement</span><span class="rm-d-v">Bank of Indonesia (Project Garuda)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Public volume / TVL</span><span class="rm-d-v">Not applicable (PoC)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Open-source (core)</span><span class="rm-d-v">Yes — Apache 2.0 (Kaleido / LF Decentralized Trust)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Governance / operator</span><span class="rm-d-v">Kaleido / LF Decentralized Trust</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Incidents (last 12 mo.)</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">SLA tier</span><span class="rm-d-v">Not disclosed.</span></div>
+            </div>
+          </div>
           <div class="rm-links">
             <a class="rm-link" href="https://www.kaleido.io/blockchain-blog/project-garuda-bank-indonesias-cbdc-infrastructure" target="_blank" rel="noopener">Kaleido Blog</a>
             <a class="rm-link" href="https://www.bi.go.id/en/rupiah/digital-rupiah/Documents/Laporan_POC_Proyek_Garuda_EN.pdf" target="_blank" rel="noopener">BI Official Report (PDF)</a>
@@ -2758,10 +2887,24 @@
         <div class="rm-head">
           <p class="rm-name">Nightfall</p>
           <p class="rm-tech">Zero-Knowledge Proofs</p>
-          <span class="rm-status early"><span class="dot"></span>Early Access</span>
+          <span class="rm-status pilot"><span class="dot"></span>Pilot</span>
         </div>
         <div class="rm-body">
-        <p class="rm-evidence">Nightfall_4 released April 2025; open source on GitHub; integrated into EY OpsChain.</p>
+          <p class="rm-evidence">Nightfall_4 released April 2025; open source on GitHub; integrated into EY OpsChain.</p>
+          <div class="rm-disclosure">
+            <p class="rm-disclosure-label">Mandatory Disclosures</p>
+            <div class="rm-d-grid">
+              <div class="rm-d-row"><span class="rm-d-k">Named customers + tier</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Months in production</span><span class="rm-d-v">Not applicable (no named production customer)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Last audit firm + date</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Regulatory engagement</span><span class="rm-d-v">None disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Public volume / TVL</span><span class="rm-d-v">Not applicable.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Open-source (core)</span><span class="rm-d-v">Yes — Nightfall_4_CE (GitHub)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Governance / operator</span><span class="rm-d-v">EY / LF Decentralized Trust</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Incidents (last 12 mo.)</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">SLA tier</span><span class="rm-d-v">Not disclosed.</span></div>
+            </div>
+          </div>
           <div class="rm-links">
             <a class="rm-link" href="https://github.com/EYBlockchain/nightfall_4_CE" target="_blank" rel="noopener">GitHub</a>
             <a class="rm-link" href="https://blockchain.ey.com" target="_blank" rel="noopener">EY Blockchain</a>
@@ -2775,10 +2918,24 @@
         <div class="rm-head">
           <p class="rm-name">Polygon CDK</p>
           <p class="rm-tech">Zero-Knowledge Proofs</p>
-          <span class="rm-status early"><span class="dot"></span>Available (Infra)</span>
+          <span class="rm-status pilot"><span class="dot"></span>Pilot</span>
         </div>
         <div class="rm-body">
           <p class="rm-evidence">CDK toolkit available for building privacy-enabled L2 chains. No named enterprise privacy deployment publicly linked.</p>
+          <div class="rm-disclosure">
+            <p class="rm-disclosure-label">Mandatory Disclosures</p>
+            <div class="rm-d-grid">
+              <div class="rm-d-row"><span class="rm-d-k">Named customers + tier</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Months in production</span><span class="rm-d-v">Not applicable.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Last audit firm + date</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Regulatory engagement</span><span class="rm-d-v">None disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Public volume / TVL</span><span class="rm-d-v">Not applicable.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Open-source (core)</span><span class="rm-d-v">Yes — CDK is open-source (Polygon Labs)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Governance / operator</span><span class="rm-d-v">Polygon Labs / AggLayer</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Incidents (last 12 mo.)</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">SLA tier</span><span class="rm-d-v">Not disclosed.</span></div>
+            </div>
+          </div>
           <div class="rm-links">
             <a class="rm-link" href="https://docs.agglayer.dev/cdk/" target="_blank" rel="noopener">CDK Docs</a>
           </div>
@@ -2794,11 +2951,37 @@
         </div>
         <div class="rm-body">
           <p class="rm-evidence">Enterprise pilot program; SWIFT collaboration on private testnet.</p>
+          <div class="rm-disclosure">
+            <p class="rm-disclosure-label">Mandatory Disclosures</p>
+            <div class="rm-d-grid">
+              <div class="rm-d-row"><span class="rm-d-k">Named customers + tier</span><span class="rm-d-v">SWIFT (financial infrastructure — private testnet)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Months in production</span><span class="rm-d-v">Not applicable (pilot phase)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Last audit firm + date</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Regulatory engagement</span><span class="rm-d-v">None disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Public volume / TVL</span><span class="rm-d-v">Not applicable.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Open-source (core)</span><span class="rm-d-v">Partially (Linea stack open-source; enterprise features not disclosed)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Governance / operator</span><span class="rm-d-v">Consensys</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Incidents (last 12 mo.)</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">SLA tier</span><span class="rm-d-v">Not disclosed.</span></div>
+            </div>
+          </div>
           <div class="rm-links">
             <a class="rm-link" href="https://consensys.io" target="_blank" rel="noopener">Consensys</a>
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="abs sec09-disqualify">
+      <p class="sec09-disqualify-label">Disqualifying Conditions</p>
+      <p class="sec09-disqualify-intro">A solution cannot claim a higher stage if any of these are true:</p>
+      <ul class="sec09-disqualify-list">
+        <li>The customer's own published documentation labels the deployment a PoC, sandbox, or pilot.</li>
+        <li>The deployment is testnet-only.</li>
+        <li>The reference is a partnership or letter-of-intent without live traffic.</li>
+        <li>The "customer" is the vendor itself running its own application on its own chain.</li>
+        <li>The last third-party security audit is older than 24 months.</li>
+      </ul>
     </div>
 
     <p class="abs sec09-method"><strong>Methodology:</strong> Status classifications follow the principle: "No public evidence, no production claim." Solutions without verifiable public deployment references are classified accordingly. Private references verified by the EEA are noted where applicable.</p>
