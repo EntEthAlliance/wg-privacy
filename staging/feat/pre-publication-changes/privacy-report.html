@@ -873,10 +873,8 @@
     transition:background .15s ease;
   }
   .erc-grid .erc-link:hover{background:#ECF2FF}
-  .erc-group{display:flex;flex-direction:column}
-  .erc-group-hdr{font-family:'Outfit',sans-serif;font-weight:700;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.45;color:var(--ink);margin:0 0 .5rem .25rem}
-  .erc-group-roadmap{margin-top:1rem;border-top:1px solid rgba(74,74,86,.13);padding-top:1rem}
-  .erc-group-roadmap .row .tax-cell{max-width:25%}
+  .erc-protocol-cell{border-left:2px solid rgba(124,144,233,.35);background:rgba(124,144,233,.04)}
+  .erc-protocol-label{font-family:'Outfit',sans-serif;font-weight:700;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#5468C4;opacity:.7;margin-bottom:.5rem}
 
   /* Draft tag — small amber pill next to ERC code */
   .draft-tag{
@@ -2553,73 +2551,66 @@
       </div>
     </div>
 
-    <!-- ERC standards grid: grouped by railway analogy -->
+    <!-- ERC standards grid: 4 cells — first 3 are rails, last is protocol roadmap -->
     <div class="abs erc-grid">
-      <div class="erc-group">
-        <p class="erc-group-hdr">Rails — deployable today (per chain)</p>
-        <div class="row">
-          <div class="tax-cell br">
-            <div class="top">
-              <div class="num-pill"><p>01</p></div>
-              <p class="code">ERC-5564</p>
-            </div>
-            <div class="bot">
-              <p class="h">Stealth Addresses</p>
-              <p class="d">Generates one-time addresses for private transfers. Enables recipient privacy without prior interaction.</p>
-            </div>
-            <div class="erc-links">
-              <a class="erc-link" href="https://eips.ethereum.org/EIPS/eip-5564" target="_blank" rel="noopener">Spec</a>
-              <a class="erc-link" href="https://github.com/ScopeLift/stealth-address-erc-contracts" target="_blank" rel="noopener">Implementation</a>
-            </div>
+      <div class="row">
+        <div class="tax-cell br">
+          <div class="top">
+            <div class="num-pill"><p>01</p></div>
+            <p class="code">ERC-5564</p>
           </div>
-          <div class="tax-cell br">
-            <div class="top">
-              <div class="num-pill"><p>02</p></div>
-              <p class="code">ERC-6538</p>
-            </div>
-            <div class="bot">
-              <p class="h">Stealth Meta-Address Registry</p>
-              <p class="d">Provides a registry to discover stealth recipients. Enables senders to generate private addresses without direct contact.</p>
-            </div>
-            <div class="erc-links">
-              <a class="erc-link" href="https://eips.ethereum.org/EIPS/eip-6538" target="_blank" rel="noopener">Spec</a>
-              <a class="erc-link" href="https://github.com/ScopeLift/stealth-address-erc-contracts" target="_blank" rel="noopener">Implementation</a>
-            </div>
+          <div class="bot">
+            <p class="h">Stealth Addresses</p>
+            <p class="d">Generates one-time addresses for private transfers. Enables recipient privacy without prior interaction.</p>
           </div>
-          <div class="tax-cell">
-            <div class="top">
-              <div class="num-pill"><p>03</p></div>
-              <p class="code">ERC-7984 <span class="draft-tag">Draft</span></p>
-            </div>
-            <div class="bot">
-              <p class="h">Confidential Fungible Token</p>
-              <p class="d">Supports confidential balances and transfer amounts. Enables privacy-preserving tokens using FHE, ZK, or TEEs.</p>
-            </div>
-            <div class="erc-links">
-              <a class="erc-link" href="https://eips.ethereum.org/EIPS/eip-7984" target="_blank" rel="noopener">Spec</a>
-              <a class="erc-link" href="https://github.com/OpenZeppelin/openzeppelin-confidential-contracts" target="_blank" rel="noopener">Reference Implementation</a>
-              <a class="erc-link" href="https://ethereum-magicians.org/t/erc-7984-confidential-fungible-token-interface/24735" target="_blank" rel="noopener">Discussion</a>
-            </div>
+          <div class="erc-links">
+            <a class="erc-link" href="https://eips.ethereum.org/EIPS/eip-5564" target="_blank" rel="noopener">Spec</a>
+            <a class="erc-link" href="https://github.com/ScopeLift/stealth-address-erc-contracts" target="_blank" rel="noopener">Implementation</a>
           </div>
         </div>
-      </div>
-      <div class="erc-group erc-group-roadmap">
-        <p class="erc-group-hdr">Railway-level — Ethereum protocol roadmap</p>
-        <div class="row">
-          <div class="tax-cell">
-            <div class="top">
-              <div class="num-pill"><p>04</p></div>
-              <p class="code">EIP-8105 <span class="draft-tag">Draft</span></p>
-            </div>
-            <div class="bot">
-              <p class="h">Encrypted Mempools</p>
-              <p class="d">Encrypts transactions before inclusion to reduce front-running and MEV exposure. Particularly relevant for institutional execution.</p>
-            </div>
-            <div class="erc-links">
-              <a class="erc-link" href="https://eips.ethereum.org/EIPS/eip-8105" target="_blank" rel="noopener">Spec</a>
-              <a class="erc-link" href="https://ethereum-magicians.org/t/hegota-headliner-proposal-eip-8105-universal-enshrined-encrypted-mempool-eem/27448" target="_blank" rel="noopener">Hegotá Proposal</a>
-              <a class="erc-link" href="https://blog.shutter.network/introducing-the-universal-enshrined-encrypted-mempool-eip/" target="_blank" rel="noopener">Announcement</a>
-            </div>
+        <div class="tax-cell br">
+          <div class="top">
+            <div class="num-pill"><p>02</p></div>
+            <p class="code">ERC-6538</p>
+          </div>
+          <div class="bot">
+            <p class="h">Stealth Meta-Address Registry</p>
+            <p class="d">Provides a registry to discover stealth recipients. Enables senders to generate private addresses without direct contact.</p>
+          </div>
+          <div class="erc-links">
+            <a class="erc-link" href="https://eips.ethereum.org/EIPS/eip-6538" target="_blank" rel="noopener">Spec</a>
+            <a class="erc-link" href="https://github.com/ScopeLift/stealth-address-erc-contracts" target="_blank" rel="noopener">Implementation</a>
+          </div>
+        </div>
+        <div class="tax-cell br">
+          <div class="top">
+            <div class="num-pill"><p>03</p></div>
+            <p class="code">ERC-7984 <span class="draft-tag">Draft</span></p>
+          </div>
+          <div class="bot">
+            <p class="h">Confidential Fungible Token</p>
+            <p class="d">Supports confidential balances and transfer amounts. Enables privacy-preserving tokens using FHE, ZK, or TEEs.</p>
+          </div>
+          <div class="erc-links">
+            <a class="erc-link" href="https://eips.ethereum.org/EIPS/eip-7984" target="_blank" rel="noopener">Spec</a>
+            <a class="erc-link" href="https://github.com/OpenZeppelin/openzeppelin-confidential-contracts" target="_blank" rel="noopener">Reference Implementation</a>
+            <a class="erc-link" href="https://ethereum-magicians.org/t/erc-7984-confidential-fungible-token-interface/24735" target="_blank" rel="noopener">Discussion</a>
+          </div>
+        </div>
+        <div class="tax-cell erc-protocol-cell">
+          <div class="erc-protocol-label">Protocol roadmap</div>
+          <div class="top">
+            <div class="num-pill"><p>04</p></div>
+            <p class="code">EIP-8105 <span class="draft-tag">Draft</span></p>
+          </div>
+          <div class="bot">
+            <p class="h">Encrypted Mempools</p>
+            <p class="d">Encrypts transactions before inclusion to reduce front-running and MEV exposure. Particularly relevant for institutional execution.</p>
+          </div>
+          <div class="erc-links">
+            <a class="erc-link" href="https://eips.ethereum.org/EIPS/eip-8105" target="_blank" rel="noopener">Spec</a>
+            <a class="erc-link" href="https://ethereum-magicians.org/t/hegota-headliner-proposal-eip-8105-universal-enshrined-encrypted-mempool-eem/27448" target="_blank" rel="noopener">Hegotá Proposal</a>
+            <a class="erc-link" href="https://blog.shutter.network/introducing-the-universal-enshrined-encrypted-mempool-eip/" target="_blank" rel="noopener">Announcement</a>
           </div>
         </div>
       </div>
