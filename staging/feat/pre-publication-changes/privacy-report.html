@@ -983,7 +983,13 @@
     background:transparent;
     border:1px solid rgba(74,74,86,.2);
     color:var(--ink);opacity:.8;line-height:1;
+    text-decoration:none;
   }
+  a.track-card .tag,
+  .track-card a.tag{cursor:pointer;transition:background .15s ease,border-color .15s ease,opacity .15s ease}
+  .track-card a.tag:hover{background:rgba(124,144,233,.1);border-color:rgba(124,144,233,.4);opacity:1}
+  a.sec07-heading{color:inherit;text-decoration:none}
+  a.sec07-heading:hover{opacity:.7}
   /* IPTF block within section 07 */
   .sec07-iptf{
     width:999px;
@@ -2633,8 +2639,10 @@
         <div class="lhs" style="align-items:flex-start">
           <div class="pill-outline">07</div>
           <div class="tt">
-            <p>The Ethereum Foundation's</p>
-            <p>Privacy Roadmap</p>
+            <a class="sec07-heading" href="https://pse.dev/blog/pse-roadmap-2025" target="_blank" rel="noopener">
+              <p>The Ethereum Foundation's</p>
+              <p>Privacy Roadmap</p>
+            </a>
           </div>
         </div>
         <div class="rhs">
@@ -2657,10 +2665,10 @@
           <span class="layer-badge">Application Layer</span>
           <p class="track-desc">Enabling users to prove facts about themselves without revealing underlying data.</p>
           <div class="tag-list">
-            <span class="tag">Semaphore</span>
-            <span class="tag">MACI</span>
-            <span class="tag">zkPDF</span>
-            <span class="tag">zkEmail</span>
+            <a class="tag" href="https://semaphore.pse.dev/" target="_blank" rel="noopener">Semaphore</a>
+            <a class="tag" href="https://maci.pse.dev/" target="_blank" rel="noopener">MACI</a>
+            <a class="tag" href="https://pse.dev/blog/zkpdf-unlocking-verifiable-data" target="_blank" rel="noopener">zkPDF</a>
+            <a class="tag" href="https://prove.email/" target="_blank" rel="noopener">zkEmail</a>
           </div>
         </div>
         <div class="track-card">
@@ -2669,9 +2677,9 @@
           <span class="layer-badge">Transaction Layer</span>
           <p class="track-desc">Enabling confidential actions on Ethereum mainnet. Developing infrastructure for private transfers, precompiles, and SDK integrations for privacy-first wallets.</p>
           <div class="tag-list">
-            <span class="tag">Private Transfers</span>
-            <span class="tag">Precompiles</span>
-            <span class="tag">SDK Integrations</span>
+            <a class="tag" href="https://pse.dev/blog/pse-roadmap-2025" target="_blank" rel="noopener">Private Transfers</a>
+            <a class="tag" href="https://pse.dev/blog/pse-roadmap-2025" target="_blank" rel="noopener">Precompiles</a>
+            <a class="tag" href="https://pse.dev/blog/pse-roadmap-2025" target="_blank" rel="noopener">SDK Integrations</a>
           </div>
         </div>
         <div class="track-card">
@@ -2680,9 +2688,9 @@
           <span class="layer-badge">Network Layer</span>
           <p class="track-desc">Tackles metadata leakage from reading state. Developing Private Information Retrieval (PIR). Target: privacy alternatives across major RPC providers within 12 months.</p>
           <div class="tag-list">
-            <span class="tag">PIR</span>
-            <span class="tag">RPC Privacy</span>
-            <span class="tag">Block Explorers</span>
+            <a class="tag" href="https://pse.dev/blog/pse-roadmap-2025" target="_blank" rel="noopener">PIR</a>
+            <a class="tag" href="https://pse.dev/blog/pse-roadmap-2025" target="_blank" rel="noopener">RPC Privacy</a>
+            <a class="tag" href="https://pse.dev/blog/pse-roadmap-2025" target="_blank" rel="noopener">Block Explorers</a>
           </div>
         </div>
       </div>
