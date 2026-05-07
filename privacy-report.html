@@ -873,6 +873,10 @@
     transition:background .15s ease;
   }
   .erc-grid .erc-link:hover{background:#ECF2FF}
+  .erc-group{display:flex;flex-direction:column}
+  .erc-group-hdr{font-family:'Outfit',sans-serif;font-weight:700;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.45;color:var(--ink);margin:0 0 .5rem .25rem}
+  .erc-group-roadmap{margin-top:1rem;border-top:1px solid rgba(74,74,86,.13);padding-top:1rem}
+  .erc-group-roadmap .row .tax-cell{max-width:25%}
 
   /* Draft tag — small amber pill next to ERC code */
   .draft-tag{
@@ -1302,10 +1306,12 @@
 
   .rm-card .rm-disclosure{margin-top:.75rem;padding:.75rem 1rem;background:rgba(124,144,233,.05);border:1px solid rgba(124,144,233,.15);border-radius:8px}
   .rm-card .rm-disclosure-label{font-family:'Outfit',sans-serif;font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;opacity:.5;color:var(--ink);margin:0 0 .5rem}
-  .rm-card .rm-d-grid{display:grid;grid-template-columns:1fr 1fr;gap:.3rem .75rem}
-  .rm-card .rm-d-row{display:flex;flex-direction:column;gap:2px}
+  .rm-card .rm-d-grid{display:grid;grid-template-columns:1fr;gap:0}
+  .rm-card .rm-d-row{display:grid;grid-template-columns:30% 70%;gap:.5rem;padding:.3rem .35rem;border-radius:4px;align-items:baseline}
+  .rm-card .rm-d-row:nth-child(even){background:rgba(124,144,233,.06)}
   .rm-card .rm-d-k{font-family:'Outfit',sans-serif;font-weight:600;font-size:10.5px;letter-spacing:.02em;text-transform:uppercase;opacity:.45;color:var(--ink)}
   .rm-card .rm-d-v{font-family:'Manrope',sans-serif;font-weight:500;font-size:12.5px;color:var(--ink);opacity:.8;line-height:1.4}
+  .rm-card .rm-d-v.nd{font-style:italic;opacity:.45}
 
   .sec09-method{
     left:48px;top:calc(11440px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:1057px;padding-left:82px;
@@ -2164,8 +2170,8 @@
       <div class="stat-card metrics">
         <div class="inner">
           <div class="stat-block with-big">
-            <p class="stat-label">solutions in production</p>
-            <p class="stat-big">4 of 7</p>
+            <p class="stat-label">solutions reviewed</p>
+            <p class="stat-big">7</p>
           </div>
           <div class="stat-block with-big">
             <p class="stat-label">addressable market</p>
@@ -2281,7 +2287,7 @@
         <p class="label">Bottom Line</p>
         <p class="text">
           <span class="b">The enterprise privacy landscape on Ethereum is maturing rapidly</span>
-          <span class="r">, with production deployments already supporting central bank digital currencies, tokenized funds, and private trading platforms. This report maps the territory so institutions can navigate from experimentation to implementation.</span>
+          <span class="r">, with live deployments and pilots already covering tokenized funds, central bank programs, and private trading platforms. This report maps the territory so institutions can navigate from experimentation to implementation.</span>
         </p>
       </div>
     </div>
@@ -2547,65 +2553,73 @@
       </div>
     </div>
 
-    <!-- ERC standards grid: 4 cells, taxonomy style -->
+    <!-- ERC standards grid: grouped by railway analogy -->
     <div class="abs erc-grid">
-      <div class="row">
-        <div class="tax-cell br">
-          <div class="top">
-            <div class="num-pill"><p>01</p></div>
-            <p class="code">ERC-5564</p>
+      <div class="erc-group">
+        <p class="erc-group-hdr">Rails — deployable today (per chain)</p>
+        <div class="row">
+          <div class="tax-cell br">
+            <div class="top">
+              <div class="num-pill"><p>01</p></div>
+              <p class="code">ERC-5564</p>
+            </div>
+            <div class="bot">
+              <p class="h">Stealth Addresses</p>
+              <p class="d">Generates one-time addresses for private transfers. Enables recipient privacy without prior interaction.</p>
+            </div>
+            <div class="erc-links">
+              <a class="erc-link" href="https://eips.ethereum.org/EIPS/eip-5564" target="_blank" rel="noopener">Spec</a>
+              <a class="erc-link" href="https://github.com/ScopeLift/stealth-address-erc-contracts" target="_blank" rel="noopener">Implementation</a>
+            </div>
           </div>
-          <div class="bot">
-            <p class="h">Stealth Addresses</p>
-            <p class="d">Generates one-time addresses for private transfers. Enables recipient privacy without prior interaction.</p>
+          <div class="tax-cell br">
+            <div class="top">
+              <div class="num-pill"><p>02</p></div>
+              <p class="code">ERC-6538</p>
+            </div>
+            <div class="bot">
+              <p class="h">Stealth Meta-Address Registry</p>
+              <p class="d">Provides a registry to discover stealth recipients. Enables senders to generate private addresses without direct contact.</p>
+            </div>
+            <div class="erc-links">
+              <a class="erc-link" href="https://eips.ethereum.org/EIPS/eip-6538" target="_blank" rel="noopener">Spec</a>
+              <a class="erc-link" href="https://github.com/ScopeLift/stealth-address-erc-contracts" target="_blank" rel="noopener">Implementation</a>
+            </div>
           </div>
-          <div class="erc-links">
-            <a class="erc-link" href="https://eips.ethereum.org/EIPS/eip-5564" target="_blank" rel="noopener">Spec</a>
-            <a class="erc-link" href="https://github.com/ScopeLift/stealth-address-erc-contracts" target="_blank" rel="noopener">Implementation</a>
+          <div class="tax-cell">
+            <div class="top">
+              <div class="num-pill"><p>03</p></div>
+              <p class="code">ERC-7984 <span class="draft-tag">Draft</span></p>
+            </div>
+            <div class="bot">
+              <p class="h">Confidential Fungible Token</p>
+              <p class="d">Supports confidential balances and transfer amounts. Enables privacy-preserving tokens using FHE, ZK, or TEEs.</p>
+            </div>
+            <div class="erc-links">
+              <a class="erc-link" href="https://eips.ethereum.org/EIPS/eip-7984" target="_blank" rel="noopener">Spec</a>
+              <a class="erc-link" href="https://github.com/OpenZeppelin/openzeppelin-confidential-contracts" target="_blank" rel="noopener">Reference Implementation</a>
+              <a class="erc-link" href="https://ethereum-magicians.org/t/erc-7984-confidential-fungible-token-interface/24735" target="_blank" rel="noopener">Discussion</a>
+            </div>
           </div>
         </div>
-        <div class="tax-cell br">
-          <div class="top">
-            <div class="num-pill"><p>02</p></div>
-            <p class="code">ERC-6538</p>
-          </div>
-          <div class="bot">
-            <p class="h">Stealth Meta-Address Registry</p>
-            <p class="d">Provides a registry to discover stealth recipients. Enables senders to generate private addresses without direct contact.</p>
-          </div>
-          <div class="erc-links">
-            <a class="erc-link" href="https://eips.ethereum.org/EIPS/eip-6538" target="_blank" rel="noopener">Spec</a>
-            <a class="erc-link" href="https://github.com/ScopeLift/stealth-address-erc-contracts" target="_blank" rel="noopener">Implementation</a>
-          </div>
-        </div>
-        <div class="tax-cell br">
-          <div class="top">
-            <div class="num-pill"><p>03</p></div>
-            <p class="code">ERC-7984 <span class="draft-tag">Draft</span></p>
-          </div>
-          <div class="bot">
-            <p class="h">Confidential Fungible Token</p>
-            <p class="d">Supports confidential balances and transfer amounts. Enables privacy-preserving tokens using FHE, ZK, or TEEs.</p>
-          </div>
-          <div class="erc-links">
-            <a class="erc-link" href="https://eips.ethereum.org/EIPS/eip-7984" target="_blank" rel="noopener">Spec</a>
-            <a class="erc-link" href="https://github.com/OpenZeppelin/openzeppelin-confidential-contracts" target="_blank" rel="noopener">Reference Implementation</a>
-            <a class="erc-link" href="https://ethereum-magicians.org/t/erc-7984-confidential-fungible-token-interface/24735" target="_blank" rel="noopener">Discussion</a>
-          </div>
-        </div>
-        <div class="tax-cell">
-          <div class="top">
-            <div class="num-pill"><p>04</p></div>
-            <p class="code">EIP-8105 <span class="draft-tag">Draft</span></p>
-          </div>
-          <div class="bot">
-            <p class="h">Encrypted Mempools</p>
-            <p class="d">Encrypts transactions before inclusion to reduce front-running and MEV exposure. Particularly relevant for institutional execution.</p>
-          </div>
-          <div class="erc-links">
-            <a class="erc-link" href="https://eips.ethereum.org/EIPS/eip-8105" target="_blank" rel="noopener">Spec</a>
-            <a class="erc-link" href="https://ethereum-magicians.org/t/hegota-headliner-proposal-eip-8105-universal-enshrined-encrypted-mempool-eem/27448" target="_blank" rel="noopener">Hegotá Proposal</a>
-            <a class="erc-link" href="https://blog.shutter.network/introducing-the-universal-enshrined-encrypted-mempool-eip/" target="_blank" rel="noopener">Announcement</a>
+      </div>
+      <div class="erc-group erc-group-roadmap">
+        <p class="erc-group-hdr">Railway-level — Ethereum protocol roadmap</p>
+        <div class="row">
+          <div class="tax-cell">
+            <div class="top">
+              <div class="num-pill"><p>04</p></div>
+              <p class="code">EIP-8105 <span class="draft-tag">Draft</span></p>
+            </div>
+            <div class="bot">
+              <p class="h">Encrypted Mempools</p>
+              <p class="d">Encrypts transactions before inclusion to reduce front-running and MEV exposure. Particularly relevant for institutional execution.</p>
+            </div>
+            <div class="erc-links">
+              <a class="erc-link" href="https://eips.ethereum.org/EIPS/eip-8105" target="_blank" rel="noopener">Spec</a>
+              <a class="erc-link" href="https://ethereum-magicians.org/t/hegota-headliner-proposal-eip-8105-universal-enshrined-encrypted-mempool-eem/27448" target="_blank" rel="noopener">Hegotá Proposal</a>
+              <a class="erc-link" href="https://blog.shutter.network/introducing-the-universal-enshrined-encrypted-mempool-eip/" target="_blank" rel="noopener">Announcement</a>
+            </div>
           </div>
         </div>
       </div>
@@ -2754,7 +2768,7 @@
     <div class="abs sec09-legend">
       <div class="legend-pill"><span class="legend-dot pilot"></span>Pilot — Demonstrable system; named participant or partnership; no live regulated traffic required</div>
       <div class="legend-pill"><span class="legend-dot early"></span>Early Production — ≥1 named customer live in production; ≥3 months continuous operation; ≥1 third-party security audit (last 18 months); handles real-money or regulated traffic</div>
-      <div class="legend-pill"><span class="legend-dot prod"></span>General Availability — ≥3 named customers across ≥2 institution categories; ≥12 months continuous operation; ≥2 third-party audits (last 24 months); public volume/TVL or transaction count; documented incident-response and SLA framework</div>
+      <div class="legend-pill"><span class="legend-dot prod"></span>General Availability — ≥3 named customers across ≥2 institution categories; ≥12 months continuous operation; ≥2 third-party audits within last 24 months; public volume/TVL or transaction count.</div>
     </div>
 
     <div class="abs sec09-cards">
@@ -3042,7 +3056,6 @@
                 <li>Real-time, scalable, confidential computations; private transactions at $0.0000007</li>
                 <li>1000× faster &amp; 250× lighter than alternative privacy solutions (FHE)</li>
                 <li><strong>Roadmap:</strong> Multichain expansion to 70+ chains (planned 2026)</li>
-                <li><strong>Maturity:</strong> Production ready</li>
               </ul>
             </div>
             <div>
@@ -3104,7 +3117,6 @@
                 <li><strong>Throughput:</strong> ~1000 TPS for simple transfers, roadmap to 30,000+ TPS</li>
                 <li><strong>Finality:</strong> Instant/single-slot finality on L2</li>
                 <li><strong>Cost:</strong> Sub-$0.01 per transaction</li>
-                <li><strong>Maturity:</strong> Production ready, running mainnet since July 2023</li>
               </ul>
             </div>
             <div>
@@ -3168,7 +3180,6 @@
                 <li><strong>Cost:</strong> 3.5× cost reduction vs. public ERC-20 transfers</li>
                 <li><strong>Development history:</strong> Since 2019</li>
                 <li><strong>Open source:</strong> Fully public domain, no commercial licensing</li>
-                <li><strong>Maturity:</strong> Early access; ecosystem integrations announced across Plume, Celo, and Starknet</li>
               </ul>
             </div>
             <div>
@@ -3235,7 +3246,6 @@
                 <li>Programmable Privacy &amp; Atomic Interoperability</li>
                 <li>High-Performance UTXO-based privacy tokens</li>
                 <li>Pluggable Cryptography</li>
-                <li><strong>Maturity:</strong> Adopted by major financial industry projects</li>
               </ul>
             </div>
             <div>
@@ -3298,7 +3308,6 @@
                 <li><strong>Cost:</strong> Sub-$0.001 per transaction including L1 settlement</li>
                 <li><strong>Performance:</strong> 15,000+ TPS per Prividium; sub-1 second ZK proof generation</li>
                 <li><strong>Ecosystem:</strong> Cross-chain privacy within ZKsync ecosystem + direct L1 interop</li>
-                <li><strong>Maturity:</strong> Early production with multiple co-design partners</li>
               </ul>
             </div>
             <div>
@@ -3370,7 +3379,6 @@
                 <li><strong>Privacy model:</strong> Configurable spectrum including Validium, private explorers, ACLs, FHE</li>
                 <li><strong>Migration:</strong> Direct upgrade path from Hyperledger Besu</li>
                 <li><strong>Performance:</strong> 60+ MGas/s burst throughput currently</li>
-                <li><strong>Maturity:</strong> CDK Erigon production ready (Q3 2025 launch)</li>
               </ul>
             </div>
             <div>
@@ -3433,7 +3441,6 @@
                 <li><strong>Performance:</strong> Up to 4,000 TPS (performance not impacted by privacy protocol)</li>
                 <li><strong>Trust model:</strong> Depends on hardware manufacturer attestation (Intel)</li>
                 <li><strong>Network:</strong> Standard Ethereum L2, assets can be bridged</li>
-                <li><strong>Maturity:</strong> Live on OP L2 Superchain (verified by OP and L2Beat)</li>
               </ul>
             </div>
             <div>
@@ -3973,6 +3980,14 @@
 
     window.addEventListener('hashchange', syncFromHash);
     syncFromHash();
+
+    // Mute "Not disclosed" / "Not applicable" disclosure values
+    document.querySelectorAll('.rm-d-v').forEach(function(el){
+      var t = el.textContent.trim();
+      if(t.startsWith('Not disclosed') || t.startsWith('Not applicable')){
+        el.classList.add('nd');
+      }
+    });
   })();
 </script>
 </body>
