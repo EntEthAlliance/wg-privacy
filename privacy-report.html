@@ -1617,7 +1617,7 @@
     overflow:hidden;
     transition:max-height .4s ease;
   }
-  .profile.open .profile-body{max-height:4000px}
+  .profile.open .profile-body{max-height:5600px}
   .profile-body-inner{
     padding:8px 32px 36px;
     border-top:1px solid rgba(74,74,86,.08);
@@ -2787,27 +2787,29 @@
         <div class="rm-head">
           <p class="rm-name">COTI</p>
           <p class="rm-tech">Garbled Circuits</p>
-          <span class="rm-status pilot"><span class="dot"></span>Pilot</span>
+          <span class="rm-status prod"><span class="dot"></span>General Availability</span>
         </div>
         <div class="rm-body">
-          <p class="rm-evidence">Private RWAs on Testnet with Zonqix, Privex live on mainnet (June 2025); StaTwig VaccineLedger deployed in Bangladesh.</p>
+          <p class="rm-evidence">COTI mainnet in production since Mar 2025 (genesis block 0). May 2026 ecosystem: DeFi, RWA tokenization (Zoniqx testnet), healthcare at national scale (StaTwig), cross-chain bridges, enterprise (EY / COTI Nightfall), custody, Garbled Circuits protocol integrations (e.g. Bancor Carbon / Arb Fast Lane) — representative names in mandatory disclosures.</p>
           <div class="rm-disclosure">
             <p class="rm-disclosure-label">Mandatory Disclosures</p>
             <div class="rm-d-grid">
-              <div class="rm-d-row"><span class="rm-d-k">Named customers + tier</span><span class="rm-d-v">Privex (COTI-native DEX, $25bn aggregate volume); StaTwig with UNICEF + Bangladesh Government (national-scale supply chain, 10M private computations); ECB (central bank — Digital Euro Pioneer Partner, partnership stage)</span></div>
-              <div class="rm-d-row"><span class="rm-d-k">Months in production</span><span class="rm-d-v">~11 months (Privex live June 2025)</span></div>
-              <div class="rm-d-row"><span class="rm-d-k">Last audit firm + date</span><span class="rm-d-v">Not disclosed.</span></div>
-              <div class="rm-d-row"><span class="rm-d-k">Regulatory engagement</span><span class="rm-d-v">ECB Digital Euro (Pioneer Partner, partnership stage)</span></div>
-              <div class="rm-d-row"><span class="rm-d-k">Public volume / TVL</span><span class="rm-d-v">$25bn aggregate volume on Privex</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Named customers + tier</span><span class="rm-d-v">Institutional: EY (Big Four — COTI Nightfall, Ethereum ZK roll-up); CEFFU (institutional custody for COTI V2); StaTwig + UNICEF / Bangladesh Government (national-scale supply chain, 10M+ private on-chain txs). DeFi: Privex (perpetual DEX, &gt;$20bn trading volume); Bancor / Carbon DeFi (~60k daily encrypted-input txs). RWA: Zoniqx (first privacy-enabled RWA on testnet, Garbled Circuits). Cross-chain: ChainPort, Hyperlane, Midnight.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Months in production</span><span class="rm-d-v">~14 months COTI mainnet (since Mar 2025 — <a href="https://mainnet.cotiscan.io/block/0" target="_blank" rel="noopener">block 0</a>); Privex DEX live June 2025</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Last audit firm + date</span><span class="rm-d-v">Sayfer — Mar 2026 (Private ERC-20; MetaMask Snap); prior: Sayfer Nov 2025 (Redeemer), Aug 2025 Hacken (Go-Ethereum), Apr 2025 Sayfer (Account Onboard, gCOTI), Mar 2025 Hacken (MPC). <a href="https://docs.coti.io/coti-documentation/security/audit-reports" target="_blank" rel="noopener">Published audit index</a></span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Regulatory engagement</span><span class="rm-d-v">ECB Digital Euro (Pioneer Partner — partnership stage). Industry working groups separately: Enterprise Ethereum Alliance (Privacy WG, inaugural member), Tokenized Asset Coalition, DeCC Alliance, Saudi Arabia AI and Blockchain Centre (founding member).</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Public volume / TVL</span><span class="rm-d-v">&gt;$20bn total trading volume on Privex (provider-stated, May 2026)</span></div>
               <div class="rm-d-row"><span class="rm-d-k">License</span><span class="rm-d-v">Apache 2.0 (coti-contracts, coti-sdk-typescript, coti-full-node, coti-snap)</span></div>
               <div class="rm-d-row"><span class="rm-d-k">Commercial model</span><span class="rm-d-v">Open-source SDK and contracts; use of COTI L2 network required</span></div>
             </div>
           </div>
           <div class="rm-links">
             <a class="rm-link" href="https://mainnet.cotiscan.io" target="_blank" rel="noopener">Mainnet Explorer</a>
+            <a class="rm-link" href="https://mainnet.cotiscan.io/block/0" target="_blank" rel="noopener">Genesis (block 0)</a>
             <a class="rm-link" href="https://docs.coti.io" target="_blank" rel="noopener">Docs</a>
             <a class="rm-link" href="https://cotinetwork.medium.com/a-new-era-of-defi-privex-is-now-live-on-coti-mainnet-0213ecf32e25" target="_blank" rel="noopener">Privex Announcement</a>
             <a class="rm-link" href="https://cotinetwork.medium.com/statwig-partners-with-coti-for-medical-supply-chain-tracking-3625b83522c7" target="_blank" rel="noopener">StaTwig Partnership</a>
+            <a class="rm-link" href="https://docs.coti.io/coti-documentation/security/audit-reports" target="_blank" rel="noopener">Audit reports</a>
           </div>
         </div>
       </div>
@@ -3044,9 +3046,29 @@
             <div>
               <h4>Case Studies</h4>
               <ul>
-                <li><strong>Central Bank of Europe — Digital Euro:</strong> Pioneer Partner with the ECB to establish confidential consumer applications on top of a Euro CBDC settlement layer.</li>
-                <li><strong>Privex:</strong> A COTI native privacy-preserving perpetual exchange processing over $25bn in aggregate volume.</li>
-                <li><strong>Unicef, Bangladesh Government, StaTwig:</strong> National-scale rollout completing 10 million private computations on encrypted IoT-enabled vaccine data for approximately $7.00 in total gas fees (computation cost).</li>
+                <li><strong>Privex:</strong> Intent-based perpetual DEX on COTI — provider-stated &gt;$20bn total trading volume (May 2026).</li>
+                <li><strong>StaTwig (VaccineLedger):</strong> UN-recognized cold-chain platform; Garbled Circuits for privacy-first monitoring — 10M+ private on-chain transactions on real vaccine sensor data in Bangladesh’s national immunization program.</li>
+                <li><strong>Zoniqx:</strong> Institutional RWA infrastructure; first privacy-enabled RWA on COTI testnet (Garbled Circuits).</li>
+                <li><strong>EY:</strong> Partnership to deploy COTI Nightfall — Ethereum ZK roll-up for enterprise compliance and institutional workflows (Nightfall originated at EY and was contributed to the public domain).</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Ecosystem (May 2026)</h4>
+              <p>The following is a provider-supplied snapshot of customers, partners, and integrations on the COTI L2 network. Industry alliances are listed separately from commercial integrations.</p>
+              <ul>
+                <li><strong>DeFi:</strong> Privex; Bancor (Carbon DeFi / Arb Fast Lane — Garbled Circuits for encrypted arbitrage inputs, ~60k daily on-chain monitoring transactions); Accumulated Finance (Minter flash loans); VeilDEX; Houdini Swap (COTI V2 + COTI ERC-20); LetsExchange.</li>
+                <li><strong>RWA tokenization:</strong> Zoniqx (privacy-enabled RWA on testnet).</li>
+                <li><strong>Healthcare / supply chain:</strong> StaTwig (VaccineLedger).</li>
+                <li><strong>Hardware wallets:</strong> United Network (Wallet-Infrastructure-as-a-Service; first hardware wallet integration for COTI’s privacy layer).</li>
+                <li><strong>Cross-chain:</strong> ChainPort (28th supported chain; ADA, USDT from 9+ major chains); Hyperlane (Nexus — USDC, wETH, wBTC); Midnight Network (NIGHT — privacy chain from Input Output / Cardano ecosystem, bridged via ChainPort).</li>
+                <li><strong>Enterprise / co-development:</strong> EY (COTI Nightfall); Soda Labs (gcEVM co-developer).</li>
+                <li><strong>Digital rights:</strong> Xctuality (privacy-first DRM for digital textbooks, NFT-based ownership).</li>
+                <li><strong>Stablecoins:</strong> Artifi Labs (DJED / Private DJED roadmap).</li>
+                <li><strong>Security / audit:</strong> Sayfer (long-term security advisor; audits including Private ERC-20, Privacy Portal, MetaMask Snap); Hacken (network audit).</li>
+                <li><strong>On-chain identity:</strong> ZNS (Zettablock Name Service — .coti domains, integrated with COTI Earn Season 3).</li>
+                <li><strong>Community tools:</strong> CipherTrade (private tokens and encrypted messaging alongside MetaMask Snap).</li>
+                <li><strong>Institutional custody:</strong> CEFFU (COTI V2 entity-level custody).</li>
+                <li><strong>Industry alliances (not customers):</strong> EEA Privacy Working Group (inaugural member); Tokenized Asset Coalition; DeCC Alliance; Saudi Arabia AI and Blockchain Centre (founding member).</li>
               </ul>
             </div>
             <div>
@@ -3062,6 +3084,7 @@
               <h4>Documentation</h4>
               <div class="links">
                 <a href="https://docs.coti.io" target="_blank" rel="noopener">Documentation</a>
+                <a href="https://docs.coti.io/coti-documentation/security/audit-reports" target="_blank" rel="noopener">Audit reports</a>
                 <a href="https://github.com/coti-io" target="_blank" rel="noopener">GitHub</a>
               </div>
             </div>
