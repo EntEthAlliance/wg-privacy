@@ -1,0 +1,3998 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Cache-Control" content="no-store, max-age=0" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<title>State of Privacy on Ethereum for Enterprise — EEA Privacy Working Group</title>
+<meta name="description" content="State of Privacy on Ethereum for Enterprise: a cross-institutional EEA Privacy Working Group report mapping enterprise privacy requirements to Ethereum privacy solutions." />
+<meta name="theme-color" content="#f5f6ff" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Outfit:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet" />
+<style>
+  /* ============================================================
+     Assets
+     ============================================================ */
+  :root{
+    --img-frame98:  url('./Hero_Blue.png');
+    --img-frame99:  url('./Hero_Red.png');
+    --img-frame100: url('./Hero_white.png');
+    --img-frame41:  url('./summary.png');
+    --img-frame81:  url('./Frame 81.png');
+    --img-frame128: url('./Frame 128.png');
+
+    --ink:#4a4a56;
+    --ink-soft:rgba(74,74,86,.6);
+    --ink-softer:rgba(74,74,86,.2);
+    --page:#f5f6ff;
+    --active:#eceeff;
+    --card-soft:#f9f9ff;
+    --hero-pill:rgba(75,75,89,.02);
+    --post-taxonomy-shift:760px;
+    --after-roadmap-shift:320px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{
+    background:#F5F6FF;color:var(--ink);
+    font-family:'Manrope',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    height:100vh;overflow:hidden;
+    transition:background-color .2s linear;
+  }
+  img{display:block;max-width:none}
+
+  /* ============================================================
+     Page shell
+     ============================================================ */
+  .page{
+    width:100%;
+    margin:0;
+    position:relative;
+    height:100vh;
+  }
+
+  /* ============================================================
+     Sidebar — 200px wide, sticky, always open
+     ============================================================ */
+  .sidebar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:260px;
+    max-height:100vh;
+    padding:20px 4px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:24px;
+    z-index:10;
+    overflow-y:auto;
+  }
+  .sidebar::-webkit-scrollbar{width:0}
+  .sidebar .logo{
+    width:148px;
+    height:56px;
+    background-image:url('./EEA logo.png');
+    background-size:contain;background-repeat:no-repeat;background-position:center;
+    flex-shrink:0;
+  }
+  .nav{
+    width:100%;
+    display:flex;flex-direction:column;gap:4px;
+    color:var(--ink);
+    font-family:'Outfit',sans-serif;
+    font-size:14px;line-height:1.2;letter-spacing:.14px;
+  }
+  .nav a{
+    display:flex;gap:12px;align-items:center;
+    padding:12px 16px;
+    border-radius:40px;
+    color:var(--ink);
+    text-decoration:none;
+    font-weight:300;
+    border-left:2px solid transparent;
+    cursor:pointer;
+    transition:background .15s ease;
+  }
+  .nav a .n{width:20px;flex-shrink:0;text-transform:uppercase}
+  .nav a:hover{
+    background:var(--active);
+  }
+  .nav a.active{
+    background:var(--active);
+    border-left:2px solid rgba(0,38,255,.35);
+    font-weight:600;
+  }
+  .mobile-nav-toggle,
+  .mobile-nav-backdrop{
+    display:none;
+  }
+  .mobile-nav-toggle{
+    position:fixed;
+    top:16px;
+    left:16px;
+    width:48px;
+    height:48px;
+    border:0;
+    border-radius:16px;
+    background:#fff;
+    box-shadow:0 10px 30px rgba(74,74,86,.12);
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    gap:5px;
+    z-index:30;
+    cursor:pointer;
+  }
+  .mobile-nav-toggle span{
+    width:18px;
+    height:2px;
+    border-radius:999px;
+    background:var(--ink);
+    transition:transform .2s ease, opacity .2s ease;
+  }
+  .nav-open .mobile-nav-toggle span:nth-child(1){
+    transform:translateY(7px) rotate(45deg);
+  }
+  .nav-open .mobile-nav-toggle span:nth-child(2){
+    opacity:0;
+  }
+  .nav-open .mobile-nav-toggle span:nth-child(3){
+    transform:translateY(-7px) rotate(-45deg);
+  }
+  .mobile-nav-backdrop{
+    position:fixed;
+    inset:0;
+    background:rgba(74,74,86,.18);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s ease;
+    z-index:20;
+  }
+  .nav-open .mobile-nav-backdrop{
+    opacity:1;
+    pointer-events:auto;
+  }
+
+  /* ============================================================
+     Main white card
+     ============================================================ */
+  .card{
+    position:absolute;
+    left:271px;
+    right:16px;
+    top:16px;
+    bottom:16px;
+    background:#fff;
+    border-radius:48px;
+    overflow-y:auto;
+    overflow-x:hidden;
+    box-shadow:0 18px 48px rgba(74,74,86,.08);
+  }
+  .card::-webkit-scrollbar{width:0;background:transparent}
+  .card-stage{
+    position:relative;
+    width:100%;
+    min-height:100%;
+  }
+  .card-inner{
+    position:absolute;
+    left:0;
+    top:0;
+    width:1153px;
+    height:20056px;
+    transform-origin:top left;
+  }
+  @media (max-width: 900px){
+    .mobile-nav-toggle,
+    .mobile-nav-backdrop{
+      display:flex;
+    }
+    .sidebar{
+      top:12px;
+      left:12px;
+      width:min(320px, calc(100vw - 24px));
+      max-height:calc(100vh - 24px);
+      padding:20px 12px;
+      background:#fff;
+      border-radius:28px;
+      box-shadow:0 20px 50px rgba(74,74,86,.18);
+      transform:translateX(calc(-100% - 24px));
+      opacity:0;
+      transition:transform .25s ease, opacity .25s ease;
+      z-index:25;
+    }
+    .nav-open .sidebar{
+      transform:translateX(0);
+      opacity:1;
+    }
+    .card{
+      left:12px;
+      right:12px;
+      top:12px;
+      bottom:12px;
+      border-radius:32px;
+    }
+  }
+
+  /* ----- primitives reused across the card ----- */
+  .abs{position:absolute}
+  .row{display:flex}
+  .col{display:flex;flex-direction:column}
+  .pill-outline{
+    border:1px solid var(--ink-soft);
+    border-radius:28px;
+    width:62px;
+    padding:14px 24px;
+    opacity:.64;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Outfit',sans-serif;font-weight:700;
+    font-size:15px;letter-spacing:1.65px;text-transform:uppercase;
+    color:var(--ink);white-space:nowrap;
+  }
+  .subtitle{
+    font-family:'Outfit',sans-serif;font-weight:700;
+    font-size:13px;letter-spacing:1.43px;text-transform:uppercase;
+    opacity:.5;color:var(--ink);line-height:normal;
+  }
+  .h-section{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:34px;letter-spacing:-1px;line-height:1.2;
+    color:var(--ink);white-space:nowrap;
+  }
+  .h-sub{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:32px;line-height:1.2;color:var(--ink);
+  }
+  .h-small{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:28px;letter-spacing:-1px;line-height:1.2;color:var(--ink);
+  }
+  .body-text{
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:17px;line-height:1.7;opacity:.9;color:var(--ink);
+  }
+  .body-text p + p{margin-top:24px}
+
+  /* section header pattern: pill + title + subtitle */
+  .section-hdr{display:flex;gap:40px;align-items:center}
+  .section-hdr .lhs{display:flex;gap:20px;align-items:center}
+  .section-hdr .rhs{padding-top:8px}
+
+  /* ============================================================
+     Hero (top 116)
+     ============================================================ */
+  .hero{left:56px;top:116px;display:flex;gap:71px;align-items:flex-start}
+  .hero-title{display:flex;flex-direction:column;gap:4px}
+  .hero-title p{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:46px;line-height:1.2;letter-spacing:-1px;
+    color:var(--ink);white-space:nowrap;
+  }
+  .hero-title .line2{display:flex;gap:16px;align-items:flex-end}
+  .hero-pill{
+    position:relative;
+    background:rgba(75,75,89,.02);
+    backdrop-filter:blur(12px) saturate(130%);
+    -webkit-backdrop-filter:blur(12px) saturate(130%);
+    border-radius:28px;
+    padding:15px 24px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    box-shadow:
+      inset 0 1px 2px rgba(255,255,255,.9),
+      inset 0 -1px 3px rgba(74,74,86,.12),
+      inset 0 0 0 1px rgba(255,255,255,.5),
+      0 1px 2px rgba(74,74,86,.04),
+      0 4px 12px rgba(74,74,86,.04);
+  }
+  .hero-pill::before{
+    content:'';
+    position:absolute;inset:0;
+    padding:1px;
+    border-radius:28px;
+    background:linear-gradient(135deg,
+      rgba(255,255,255,.95) 0%,
+      rgba(255,255,255,.35) 45%,
+      rgba(74,74,86,.08) 100%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+            mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;
+            mask-composite:exclude;
+    pointer-events:none;
+  }
+  .hero-pill p{
+    position:relative;z-index:1;
+    font-family:'Outfit',sans-serif;font-weight:700;
+    font-size:11px;letter-spacing:1.4px;text-transform:uppercase;
+    color:var(--ink);white-space:nowrap;line-height:normal;
+  }
+  .hero-blurb{
+    display:flex;align-items:center;justify-content:center;
+    padding:12px 0;
+  }
+  .hero-blurb p{
+    width:336px;
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:15px;line-height:1.6;opacity:.9;
+    color:var(--ink);
+  }
+
+  /* ============================================================
+     Stats row (top 334) — 3 cards, total w = 334 + 8 + 266 + 8 + 489 = 1105
+     ============================================================ */
+  .stats-row{
+    left:24px;top:334px;
+    display:flex;gap:8px;align-items:center;
+  }
+  .stat-card{
+    height:300px;
+    border-radius:40px;
+    overflow:hidden;
+    position:relative;
+    flex-shrink:0;
+  }
+  .stat-card::before{
+    content:'';position:absolute;inset:0;
+    background-size:cover;background-position:center;
+    background-repeat:no-repeat;
+    border-radius:40px;
+    pointer-events:none;
+    transform:scale(1.05);
+  }
+  .stat-card .inner{position:absolute;left:40px;top:56px;display:flex;flex-direction:column;color:#fff}
+  .stat-card.org{width:334px}
+  .stat-card.org::before{background-image:var(--img-frame98);opacity:1}
+  .stat-card.org .inner{width:260px;gap:28px}
+  .stat-card.metrics{width:266px}
+  .stat-card.metrics::before{background-image:var(--img-frame99);opacity:1}
+  .stat-card.metrics .inner{width:187px;gap:32px}
+  .stat-card.orgs{width:489px}
+  .stat-card.orgs::before{background-image:var(--img-frame100);opacity:.6}
+  .stat-card.orgs .inner{color:var(--ink);gap:16px}
+
+  .stat-label{
+    font-family:'Outfit',sans-serif;font-weight:600;
+    font-size:12px;letter-spacing:.96px;text-transform:uppercase;
+    opacity:.8;line-height:1.2;white-space:nowrap;
+  }
+  /* Hero meta-pill: light glass on blue background with visible gradient border */
+  .stat-val-pill{
+    position:relative;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(20px) saturate(140%);
+    -webkit-backdrop-filter:blur(20px) saturate(140%);
+    border-radius:64px;
+    padding:16px 24px;
+    display:flex;align-items:center;
+  }
+  /* Gradient border via ::before pseudo — diagonal highlight */
+  .stat-val-pill::before{
+    content:'';
+    position:absolute;inset:0;
+    padding:1.5px;
+    border-radius:64px;
+    background:linear-gradient(135deg,
+      rgba(255,255,255,.95) 0%,
+      rgba(255,255,255,.1) 40%,
+      rgba(255,255,255,0) 55%,
+      rgba(255,255,255,.2) 75%,
+      rgba(255,255,255,.85) 100%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+            mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;
+            mask-composite:exclude;
+    pointer-events:none;
+  }
+  .stat-val-pill p{
+    font-family:'Manrope',sans-serif;font-weight:600;
+    font-size:15px;line-height:1.4;letter-spacing:.15px;
+    color:#fff;white-space:nowrap;
+  }
+  .stat-big{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:44px;line-height:1.2;letter-spacing:-1px;
+    color:#fff;white-space:nowrap;
+  }
+  .stat-block{display:flex;flex-direction:column;gap:10px;width:100%}
+  .stat-block.with-big{gap:6px}
+
+  .stat-card.orgs .stat-label{
+    color:var(--ink);opacity:.6;font-weight:500;letter-spacing:.96px;line-height:normal;
+  }
+  .orgs-grid{display:flex;flex-wrap:wrap;gap:10px 12px;width:100%}
+  /* Light glass org-pill (hero Contributing Orgs + methodology chips) */
+  .org-chip{
+    background:rgba(255,255,255,.55);
+    backdrop-filter:blur(20px) saturate(140%);
+    -webkit-backdrop-filter:blur(20px) saturate(140%);
+    border:1px solid transparent;
+    background-image:
+      linear-gradient(rgba(255,255,255,.55),rgba(255,255,255,.55)),
+      linear-gradient(135deg,rgba(255,255,255,1) 0%,rgba(255,255,255,.4) 35%,rgba(255,255,255,.3) 65%,rgba(255,255,255,.85) 100%);
+    background-origin:border-box;
+    background-clip:padding-box,border-box;
+    border-radius:64px;
+    box-shadow:
+      0 1px 2px rgba(74,74,86,.03),
+      0 6px 20px rgba(74,74,86,.05),
+      inset 0 1px 0 rgba(255,255,255,.9),
+      inset 0 -2px 4px rgba(74,74,86,.02);
+    display:flex;gap:16px;align-items:center;
+    padding:4px 24px 4px 4px;
+  }
+  .org-chip .avatar{
+    width:40px;height:40px;flex-shrink:0;border-radius:40px;
+    background-size:cover;background-position:center;
+  }
+  .org-chip p{
+    font-family:'Manrope',sans-serif;font-weight:600;
+    font-size:15px;line-height:1.4;letter-spacing:.15px;
+    color:var(--ink);white-space:nowrap;
+  }
+
+  /* avatars */
+  .av-consensys{background-image:url('https://entethalliance.github.io/wg-privacy/logos/consensys.png')}
+  .av-coti{background-image:url('https://entethalliance.github.io/wg-privacy/logos/coti.png');border-radius:64px}
+  .av-kaleido{background-image:url('./Kaleido.jpg')}
+  .av-ey { background-image: url('./EY.png'); background-size: 100%; background-position: center; background-repeat: no-repeat; border-radius: 0;}
+  .av-polygon{background-image:url('https://entethalliance.github.io/wg-privacy/logos/polygon.png');border-radius:0}
+  .av-zksync{background-image:url('https://entethalliance.github.io/wg-privacy/logos/zksync.png')}
+  .av-applied{background-image:url('./Applied blockchain.jpg')}
+
+  /* ============================================================
+     Section 01 — Opening Statement (top 730)
+     ============================================================ */
+  .sec01{left:48px;top:730px;width:962px;display:flex;flex-direction:column;gap:48px;align-items:flex-start}
+  .sec01-body{padding-left:82px;width:100%;display:flex;justify-content:center}
+  .sec01-body > div{width:880px}
+
+  /* ============================================================
+     Section 02 — Executive Summary (top 1462)
+     ============================================================ */
+  .sec02-hdr{left:48px;top:1462px}
+  .sec02-hdr .rhs p br{display:block}
+
+  .stats-bar-img{
+    left:calc(50% - 552.5px);
+    top:1557px;
+    width:1105px;height:240px;
+    border-radius:40px;
+    object-fit:cover;
+    display:block;
+  }
+  /* Dark glass card — Executive Summary tiles (on frame41 backdrop) */
+  .stats-bar .tile{
+    flex:1 0 0;min-width:0;height:100%;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(40px) saturate(150%);
+    -webkit-backdrop-filter:blur(40px) saturate(150%);
+    border:1px solid transparent;
+    border-radius:24px;
+    background-image:
+      linear-gradient(rgba(255,255,255,.08),rgba(255,255,255,.08)),
+      linear-gradient(135deg,rgba(255,255,255,.4) 0%,rgba(255,255,255,.1) 50%,rgba(255,255,255,.25) 100%);
+    background-origin:border-box;
+    background-clip:padding-box,border-box;
+    box-shadow:
+      0 8px 32px rgba(0,0,0,.12),
+      inset 0 1px 0 rgba(255,255,255,.2);
+    padding:32px;
+    display:flex;flex-direction:column;gap:8px;
+    justify-content:center;
+    color:#fff;
+  }
+  .stats-bar .tile .lbl{
+    font-family:'Outfit',sans-serif;font-weight:600;
+    font-size:13px;letter-spacing:1.04px;text-transform:uppercase;
+    opacity:.8;white-space:nowrap;line-height:normal;
+  }
+  .stats-bar .tile .big{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:42px;letter-spacing:-1px;line-height:1.2;
+    white-space:nowrap;
+  }
+
+  .the-challenge{left:48px;top:1861px;width:962px;padding-left:82px;display:flex;flex-direction:column;gap:32px}
+  .the-challenge .callout{
+    font-family:'Outfit',sans-serif;font-weight:600;
+    font-size:19px;letter-spacing:.19px;line-height:normal;
+    opacity:.9;color:var(--ink);
+  }
+
+  .report-provides{left:48px;top:2192px;width:962px;padding-left:82px;display:flex;flex-direction:column;gap:32px}
+
+  .solutions-grid{
+    left:calc(50% - 504.5px);top:2405px;
+    width:1009px;display:flex;flex-direction:column;gap:8px;
+  }
+  .solutions-grid .row-cells{display:flex;gap:8px;align-items:center;width:100%}
+  .sol-card{
+    flex:1 0 0;min-width:0;
+    background:var(--card-soft);
+    border-radius:24px;padding:22px 24px;
+    display:flex;gap:14px;align-items:flex-start;
+  }
+  .sol-card .num{
+    font-family:'Outfit',sans-serif;font-weight:600;
+    font-size:16px;letter-spacing:1.2px;text-transform:uppercase;
+    opacity:.6;color:var(--ink);line-height:normal;white-space:nowrap;
+  }
+  .sol-card .body{flex:1 0 0;min-width:0;display:flex;flex-direction:column;gap:6px}
+  .sol-card .body .t{
+    font-family:'Outfit',sans-serif;font-weight:600;
+    font-size:18px;letter-spacing:.15px;line-height:1.15;color:var(--ink);
+  }
+  .sol-card .body .s{
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:15px;line-height:1.55;opacity:.88;color:var(--ink);
+  }
+  .sol-card.half{flex:0 0 486px;width:486px}
+
+  .key-findings{left:48px;top:2917px;width:1061px;display:flex;flex-direction:column;gap:40px;color:var(--ink)}
+  .kf-row{display:flex;gap:88px;align-items:flex-start;width:100%}
+  .kf-row > .label{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:28px;letter-spacing:-1px;line-height:1.2;width:276px;flex-shrink:0;
+  }
+  .kf-row > .text{
+    flex:1 0 0;min-width:0;opacity:.9;
+    font-family:'Manrope',sans-serif;font-weight:500;
+  }
+  .kf-row > .text .r{font-size:17px;line-height:1.7}
+  .kf-row > .text .b{
+    font-family:'Manrope',sans-serif;font-weight:800;
+    font-size:18px;line-height:1.6;
+  }
+
+  /* ============================================================
+     Section 03 — Research Methodology (top 3581)
+     ============================================================ */
+  .sec03-hdr{left:48px;top:3581px}
+
+  .quote-1{
+    left:48px;top:3668px;padding-left:82px;
+    display:flex;gap:24px;align-items:flex-end;
+  }
+  .quote-bar-purple{background:rgba(173,146,255,.35);height:83px;border-radius:9px;width:5px;flex-shrink:0}
+  .quote-text{
+    font-family:'Helvetica Neue','Manrope',sans-serif;font-style:italic;font-weight:400;
+    font-size:18px;line-height:1.6;opacity:.9;color:var(--ink);
+    width:880px;
+  }
+
+  .method-intro{
+    left:48px;top:3803px;padding-left:82px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .method-intro > div{width:880px}
+
+  .contrib-orgs{
+    left:122px;top:4072px;width:783px;
+    display:flex;flex-wrap:wrap;gap:10px 12px;align-items:flex-start;
+  }
+
+  .method-cards{
+    left:24px;top:4190px;width:1105px;
+    display:flex;gap:12px;align-items:flex-start;
+  }
+  .method-card{
+    flex:1 0 0;min-width:0;
+    padding:48px 32px;border-radius:40px;
+    display:flex;flex-direction:column;gap:6px;
+    position:relative;overflow:hidden;
+  }
+  .method-card::before{
+    content:'';position:absolute;inset:0;border-radius:40px;
+    background-size:cover;background-position:center;
+    pointer-events:none;
+  }
+  .method-card.mc1::before{background-image:var(--img-frame98);opacity:.3}
+  .method-card.mc2::before{background-image:var(--img-frame99);opacity:.4}
+  .method-card.mc3::before{background-image:var(--img-frame81);opacity:.6}
+  .method-card > *{position:relative}
+  .method-card .step{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:13px;letter-spacing:1px;text-transform:uppercase;
+    opacity:.5;line-height:1.2;color:var(--ink);width:100%;
+  }
+  .method-card .ttl{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:26px;letter-spacing:-.5px;line-height:1.2;color:var(--ink);
+  }
+  .method-card .desc{
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:15px;line-height:1.5;opacity:.9;color:var(--ink);
+  }
+  .method-card .step + .body{display:flex;flex-direction:column;gap:16px;margin-top:10px}
+
+  .scope-approach{
+    left:130px;top:4473px;width:880px;
+    display:flex;flex-direction:column;gap:32px;color:var(--ink);
+  }
+  .scope-approach .t{font-family:'Outfit',sans-serif;font-weight:500;font-size:32px;line-height:1.2;width:100%}
+  .scope-approach .d{font-family:'Manrope',sans-serif;font-weight:500;font-size:17px;line-height:1.7;opacity:.9;width:868px}
+
+  /* ============================================================
+     Section 04 — Enterprise Privacy Problem (top 4755)
+     ============================================================ */
+  .sec04-hdr{left:48px;top:4755px;align-items:flex-end}
+  .sec04-hdr .title-stack p{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:34px;letter-spacing:-1px;line-height:1.2;
+    color:var(--ink);white-space:nowrap;
+  }
+  .sec04-hdr .rhs{padding:8px 0 6px}
+
+  .quote-2{
+    left:130px;top:4887px;width:893px;
+    display:flex;flex-direction:column;gap:32px;
+  }
+  .quote-2 .row{display:flex;gap:24px;align-items:flex-end;width:100%}
+  .quote-bar-blue{background:#b6c5f9;height:83px;border-radius:9px;width:5px;flex-shrink:0}
+  .quote-2 .txt{
+    font-family:'Helvetica Neue','Manrope',sans-serif;font-style:italic;font-weight:400;
+    font-size:18px;line-height:1.6;opacity:.9;color:var(--ink);
+    width:861px;
+  }
+  .quote-2 .after{
+    font-family:'Manrope',sans-serif;font-weight:500;font-size:18px;
+    line-height:1.6;opacity:.9;color:var(--ink);width:100%;
+  }
+
+  .challenge-cards{
+    left:24px;top:5141px;width:1105px;
+    border-radius:48px;padding:40px 48px;
+    display:flex;flex-direction:column;gap:12px;
+    position:relative;overflow:hidden;
+    background-image:var(--img-frame128);
+    background-size:cover;background-position:center;
+  }
+  .challenge-cards > .row{display:flex;gap:12px;align-items:stretch;width:100%;position:relative}
+  /* Light glass challenge cards over Frame 128 backdrop */
+  .ch-card{
+    position:relative;
+    flex:1 0 0;min-width:0;
+    padding:32px 48px;border-radius:40px;
+    display:flex;flex-direction:column;gap:16px;align-items:flex-start;
+    background:rgba(255,255,255,.1);
+    backdrop-filter:blur(8px) saturate(140%);
+    -webkit-backdrop-filter:blur(8px) saturate(140%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.45),
+      0 2px 12px rgba(74,74,86,.03);
+  }
+  /* Gradient border for challenge cards — signature Figma glass blik */
+  .ch-card::before{
+    content:'';
+    position:absolute;inset:0;
+    padding:1.5px;
+    border-radius:40px;
+    background:linear-gradient(135deg,
+      rgba(255,255,255,1) 0%,
+      rgba(255,255,255,.35) 30%,
+      rgba(255,255,255,.15) 55%,
+      rgba(255,255,255,.45) 80%,
+      rgba(255,255,255,.9) 100%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+            mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;
+            mask-composite:exclude;
+    pointer-events:none;
+  }
+  .ch-card > *{position:relative;z-index:1}
+  .ch-card .icn{
+    width:36px;height:36px;
+    background-size:contain;background-repeat:no-repeat;background-position:center;
+  }
+  .ch-card .ttl{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:26px;letter-spacing:-1px;line-height:1.2;color:var(--ink);width:100%;
+  }
+  .ch-card .desc{
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:15px;line-height:1.5;opacity:.9;color:var(--ink);width:100%;
+  }
+  .ic-biz{background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a4a56' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7'/%3E%3Crect x='3' y='7' width='18' height='12' rx='2'/%3E%3Cpath d='M3 11.5h18'/%3E%3C/svg%3E")}
+  .ic-coin{background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a4a56' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8'/%3E%3Cpath d='M12 8v8'/%3E%3Cpath d='M9.5 10.25c0-1 1-1.75 2.5-1.75s2.5.75 2.5 1.75-1 1.5-2.5 1.75-2.5.75-2.5 1.75S10.5 15.5 12 15.5s2.5-.75 2.5-1.75'/%3E%3C/svg%3E");opacity:.9}
+  .ic-shield{background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a4a56' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3l7 3v5c0 4.5-2.9 8.6-7 10-4.1-1.4-7-5.5-7-10V6l7-3z'/%3E%3Cpath d='M9.5 12l1.75 1.75L14.75 10'/%3E%3C/svg%3E")}
+  .ic-health{background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a4a56' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='4' width='16' height='16' rx='4'/%3E%3Cpath d='M12 8v8'/%3E%3Cpath d='M8 12h8'/%3E%3C/svg%3E");opacity:.9}
+
+  .trust-req{
+    left:130px;top:5784px;width:876px;
+    display:flex;flex-direction:column;gap:32px;color:var(--ink);
+  }
+  .trust-req .t{font-family:'Outfit',sans-serif;font-weight:500;font-size:32px;line-height:1.2;width:100%}
+  .trust-req .d{font-family:'Manrope',sans-serif;font-weight:500;font-size:17px;line-height:1.7;opacity:.9;width:100%}
+
+  /* ============================================================
+     Section 05 — Privacy Addressable Market (top 6037)
+     ============================================================ */
+  .sec05{left:48px;top:6037px;width:927px;display:flex;flex-direction:column;gap:32px}
+  .sec05 .hdr .rhs p{line-height:normal}
+  .sec05 .intro{padding-left:82px;display:flex;justify-content:center;width:100%}
+  .sec05 .intro > div{width:845px}
+
+  .market-segments{
+    left:calc(50% - 483px + .5px);top:6352px;width:966px;
+    display:flex;flex-direction:column;gap:56px;align-items:flex-start;
+    color:var(--ink);
+  }
+  .market-segments .seg{display:flex;gap:120px;align-items:flex-start;width:100%}
+  .market-segments .seg .stat{
+    width:148px;text-align:center;
+    display:flex;flex-direction:column;gap:2px;align-items:center;flex-shrink:0;
+  }
+  .market-segments .seg .stat.end{align-items:flex-end}
+  .market-segments .seg .stat .lbl{
+    font-family:'Outfit',sans-serif;font-weight:700;
+    font-size:13px;letter-spacing:1.43px;text-transform:uppercase;
+    opacity:.5;width:100%;line-height:normal;
+  }
+  .market-segments .seg .stat .num{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:44px;letter-spacing:-1px;line-height:1.2;width:100%;
+  }
+  .market-segments .seg .content{width:698px;display:flex;flex-direction:column;gap:16px;flex-shrink:0}
+  .market-segments .seg .content .h{
+    font-family:'Outfit',sans-serif;font-weight:500;font-size:25px;line-height:1.2;width:100%;
+  }
+  .market-segments .seg .content .p{
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:16px;line-height:1.7;opacity:.9;width:100%;
+  }
+
+  /* ============================================================
+     Section 06 — Taxonomy (top 6887)
+     ============================================================ */
+  .sec06-hdr{
+    left:48px;top:6967px;
+    display:flex;gap:40px;align-items:flex-start;
+  }
+  .sec06-hdr .main{
+    display:flex;gap:20px;align-items:flex-start;
+  }
+  .sec06-hdr .tt p{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:34px;letter-spacing:-1px;line-height:1.2;color:var(--ink);white-space:nowrap;
+  }
+  .sec06-sub{
+    padding-top:12px;
+  }
+  .sec06-sub p{line-height:normal}
+
+  .sec06-intro{
+    left:48px;top:7099px;width:927px;padding-left:82px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .sec06-intro p{
+    width:845px;
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:17px;line-height:1.7;opacity:.9;color:var(--ink);
+  }
+
+  .tax-grid{
+    left:calc(50% - 528.5px);top:7212px;width:1057px;
+    display:flex;flex-direction:column;align-items:stretch;
+    gap:0;
+    padding:0;
+    background:transparent;
+  }
+  .tax-grid .row{display:flex;align-items:stretch;width:100%;gap:0}
+  /* Taxonomy cells — clean grid, no card bg, text-only */
+  .tax-cell{
+    flex:1 0 0;min-width:0;
+    background:transparent;
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+    border-radius:0;
+    padding:28px 32px 40px;
+    display:flex;flex-direction:column;gap:24px;
+  }
+  /* Cell dividers */
+  .tax-cell.br{border-right:1px solid rgba(74,74,86,.1275)}
+  .tax-cell.bb{border-bottom:1px solid rgba(74,74,86,.1275)}
+  .tax-cell .top{display:flex;align-items:center;justify-content:space-between;width:100%}
+  .tax-cell .num-pill{
+    border:1px solid rgba(74,74,86,.25);
+    background:transparent;
+    border-radius:28px;width:auto;height:auto;padding:6px 16px;
+    display:flex;align-items:center;justify-content:center;
+    opacity:1;
+  }
+  .tax-cell .num-pill p{
+    font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.43px;
+    text-transform:uppercase;opacity:.7;color:var(--ink);white-space:nowrap;line-height:normal;
+  }
+  .tax-cell .code{
+    font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.43px;
+    text-transform:uppercase;opacity:.5;color:var(--ink);white-space:nowrap;line-height:normal;
+  }
+  .tax-cell .bot{display:flex;flex-direction:column;gap:12px;width:100%;color:var(--ink)}
+  .tax-cell .bot .h{
+    font-family:'Outfit',sans-serif;font-weight:600;font-size:22px;letter-spacing:-.3px;line-height:1.25;
+  }
+  .tax-cell .bot .d{
+    font-family:'Manrope',sans-serif;font-weight:500;font-size:16px;line-height:1.55;opacity:.65;
+  }
+
+  /* Sub-header for ERC standards (06.b) */
+  .sec06b-hdr{
+    left:48px;top:7760px;
+    display:flex;gap:40px;align-items:flex-start;
+  }
+  .sec06b-hdr .main{display:flex;gap:20px;align-items:flex-start}
+  .sec06b-hdr .tt p{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:30px;letter-spacing:-1px;line-height:1.2;
+    color:var(--ink);white-space:nowrap;
+  }
+
+  .sec06b-intro{
+    left:48px;top:7865px;width:927px;padding-left:82px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .sec06b-intro p{
+    width:845px;
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:17px;line-height:1.7;opacity:.9;color:var(--ink);
+  }
+
+  /* ERC standards grid — same visual language as taxonomy grid */
+  .erc-grid{
+    left:calc(50% - 528.5px);top:8320px;width:1057px;
+    display:flex;flex-direction:column;
+  }
+  .erc-grid .row{display:flex;width:100%}
+  .erc-grid .tax-cell{padding:28px 24px 40px;gap:24px}
+
+  .sec06b-anchor{
+    left:48px;top:7960px;width:927px;padding-left:82px;
+  }
+  .sec06b-anchor .railway-intro{
+    font-family:'Manrope',sans-serif;font-weight:500;font-size:16px;line-height:1.65;opacity:.85;color:var(--ink);margin:0 0 1rem;
+  }
+  .sec06b-anchor .railway-item{
+    padding:.75rem 1rem .75rem 1.25rem;
+    border-left:2px solid rgba(124,144,233,.35);
+    margin-bottom:.75rem;
+  }
+  .sec06b-anchor .railway-item p{
+    font-family:'Manrope',sans-serif;font-weight:500;font-size:15px;line-height:1.6;opacity:.8;color:var(--ink);margin:0;
+  }
+  .erc-grid .erc-links{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .erc-grid .erc-link{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:12px;letter-spacing:.3px;
+    padding:6px 12px;border-radius:20px;
+    background:#fff;border:1px solid rgba(74,74,86,.15);
+    color:#7C90E9;text-decoration:none;
+    transition:background .15s ease;
+  }
+  .erc-grid .erc-link:hover{background:#ECF2FF}
+  .erc-protocol-cell{border-left:2px solid rgba(124,144,233,.35);background:rgba(124,144,233,.04)}
+  .erc-protocol-label{font-family:'Outfit',sans-serif;font-weight:700;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#5468C4;opacity:.7;margin-bottom:.5rem}
+
+  /* Draft tag — small amber pill next to ERC code */
+  .draft-tag{
+    display:inline-block;
+    font-family:'Outfit',sans-serif;font-weight:600;
+    font-size:9px;letter-spacing:1px;text-transform:uppercase;
+    color:#B45309;background:rgba(245,158,11,.14);
+    padding:3px 7px;border-radius:10px;margin-left:6px;
+    vertical-align:middle;
+  }
+ 
+
+  /* dark-ink inside cards that sit on tinted bg photos */
+  .method-card .step,.method-card .ttl,.method-card .desc,
+  .ch-card .ttl,.ch-card .desc{position:relative;z-index:1}
+
+  /* ============================================================
+     small helpers
+     ============================================================ */
+  .bold{font-family:'Manrope',sans-serif;font-weight:800;font-size:18px;line-height:1.6}
+  .fat{font-family:'Manrope',sans-serif;font-weight:800;font-size:18px;line-height:1.6}
+
+  /* ============================================================
+     Section 07 — EF Privacy Roadmap (top 8036)
+     ============================================================ */
+  .sec07-block{
+    left:24px;top:calc(8036px + var(--post-taxonomy-shift));width:1105px;
+    display:flex;flex-direction:column;
+  }
+  .sec07-hdr{
+    margin-left:24px;
+    display:flex;gap:40px;align-items:flex-start;
+  }
+  .sec07-hdr .tt p{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:34px;letter-spacing:-1px;line-height:1.2;color:var(--ink);white-space:nowrap;
+  }
+  .sec07-brand{
+    width:999px;
+    margin:32px 0 0 106px;
+    display:flex;align-items:flex-start;
+  }
+  .sec07-efip{
+    width:220px;height:auto;display:block;
+    object-fit:contain;
+  }
+
+  .sec07-intro{
+    width:927px;padding-left:82px;
+    margin:40px 0 0 24px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .sec07-intro p{
+    width:845px;
+    font-family:'Manrope',sans-serif;font-weight:500;font-style:normal;
+    font-size:17px;line-height:1.7;opacity:.9;color:var(--ink);
+  }
+
+  .roadmap-row{
+    width:999px;
+    margin:56px 0 0 106px;
+    display:flex;gap:0;align-items:stretch;position:relative;
+  }
+  /* Horizontal connector line between tracks */
+  .roadmap-row::before{
+    content:none;
+  }
+  .track-card{
+    flex:1 1 0;min-width:0;
+    background:rgba(113,141,200,.04);
+    border-radius:32px;
+    padding:32px 21px 36px;
+    display:flex;flex-direction:column;gap:20px;
+    position:relative;z-index:1;
+    margin:0 8px;
+  }
+  .track-card:first-child{margin-left:0}
+  .track-card:last-child{margin-right:0}
+  .track-card .track-num{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:13px;letter-spacing:1.43px;text-transform:uppercase;
+    opacity:.5;color:var(--ink);line-height:1;
+  }
+  .track-card .track-title{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:28px;letter-spacing:-.5px;line-height:1.2;color:var(--ink);
+  }
+  .track-card .layer-badge{
+    display:inline-block;align-self:flex-start;
+    background:#ECF2FF;color:#7C90E9;
+    font-family:'Outfit',sans-serif;font-weight:700;
+    font-size:10px;letter-spacing:.85px;text-transform:uppercase;
+    padding:6px 14px;border-radius:20px;line-height:1;
+  }
+  .track-card .track-desc{
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:15px;line-height:1.55;opacity:.85;color:var(--ink);
+  }
+  .track-card .tag-list{
+    display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;
+  }
+  .track-card .tag{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:12px;letter-spacing:.5px;
+    padding:6px 12px;border-radius:20px;
+    background:transparent;
+    border:1px solid rgba(74,74,86,.2);
+    color:var(--ink);opacity:.8;line-height:1;
+    text-decoration:none;
+  }
+  a.track-card .tag,
+  .track-card a.tag{cursor:pointer;transition:background .15s ease,border-color .15s ease,opacity .15s ease}
+  .track-card a.tag:hover{background:rgba(124,144,233,.1);border-color:rgba(124,144,233,.4);opacity:1}
+  a.sec07-heading{color:inherit;text-decoration:none}
+  a.sec07-heading:hover{opacity:.7}
+  /* IPTF block within section 07 */
+  .sec07-iptf{
+    width:999px;
+    margin:64px 0 0 106px;
+    background:rgba(113,141,200,.12);
+    border-radius:32px;
+    padding:32px 40px 40px;
+  }
+  .sec07-iptf .iptf-kicker{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:13px;letter-spacing:1.43px;text-transform:uppercase;
+    opacity:.5;color:var(--ink);line-height:1;
+    margin-bottom:12px;
+  }
+  .sec07-iptf .iptf-title{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:26px;letter-spacing:-.5px;line-height:1.2;
+    color:var(--ink);
+    margin-bottom:20px;
+  }
+  .sec07-iptf p{
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:15px;line-height:1.65;opacity:.85;color:var(--ink);
+    margin-bottom:16px;
+  }
+  .sec07-iptf p:last-of-type{margin-bottom:24px}
+  .sec07-iptf p strong{font-weight:700;opacity:1}
+  .sec07-iptf .iptf-links{
+    display:flex;flex-wrap:wrap;gap:6px;
+  }
+  .sec07-iptf .iptf-link{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:12px;letter-spacing:.3px;
+    padding:6px 12px;border-radius:20px;
+    background:#fff;border:1px solid rgba(74,74,86,.15);
+    color:#7C90E9;text-decoration:none;
+    transition:background .15s ease;
+  }
+  .sec07-iptf .iptf-link:hover{background:#ECF2FF}
+
+  /* ============================================================
+     Section 08 — Trust Models (top 9250)
+     ============================================================ */
+  .sec08-block{
+    position:absolute;
+    left:24px;
+    top:calc(9164px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));
+    width:1105px;
+    display:flex;
+    flex-direction:column;
+    z-index:1;
+  }
+  .sec08-hdr{
+    margin-left:24px;
+    display:flex;gap:40px;align-items:flex-start;
+  }
+  .sec08-hdr .tt p{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:34px;letter-spacing:-1px;line-height:1.2;color:var(--ink);white-space:nowrap;
+  }
+
+  .sec08-intro{
+    width:927px;padding-left:82px;
+    margin:40px 0 0 24px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .sec08-intro p{
+    width:845px;
+    font-family:'Manrope',sans-serif;font-weight:500;font-style:normal;
+    font-size:17px;line-height:1.7;opacity:.9;color:var(--ink);
+  }
+
+  .trust-row{
+    width:1105px;
+    margin-top:56px;
+    position:relative;
+  }
+  .trust-row::before{
+    content:none;
+  }
+  .trust-row img{
+    display:block;
+    width:100%;
+    height:auto;
+    aspect-ratio:2210 / 936;
+    border-radius:40px;
+  }
+  .trust-row-inner{
+    position:relative;
+    display:flex;gap:8px;align-items:stretch;
+  }
+  .trust-card{
+    flex:1 1 0;min-width:0;
+    background:rgba(255,255,255,.17);
+    backdrop-filter:blur(16px) saturate(160%);
+    -webkit-backdrop-filter:blur(16px) saturate(160%);
+    border-radius:24px;
+    padding:28px 20px;
+    display:flex;flex-direction:column;gap:28px;align-items:center;
+    position:relative;
+  }
+  .trust-card::before{
+    content:'';
+    position:absolute;inset:0;
+    padding:1px;
+    border-radius:24px;
+    background:linear-gradient(135deg,
+      rgba(255,255,255,.9) 0%,
+      rgba(255,255,255,.25) 50%,
+      rgba(255,255,255,.6) 100%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+            mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;
+            mask-composite:exclude;
+    pointer-events:none;
+  }
+  .trust-card .trust-top{
+    display:flex;flex-direction:column;gap:20px;width:100%;
+  }
+  .trust-card .trust-title-wrap{
+    display:flex;flex-direction:column;gap:12px;width:100%;
+  }
+  .trust-card .trust-title{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:24px;letter-spacing:-1px;line-height:1.2;color:#4A4A56;
+  }
+  .trust-card .trust-tags{
+    display:flex;flex-wrap:wrap;gap:4px;
+  }
+  .trust-card .trust-tag{
+    background:rgba(255,255,255,.1);
+    color:#4A4A56;
+    font-family:'Outfit',sans-serif;font-weight:600;
+    font-size:14px;letter-spacing:.14px;line-height:1.4;
+    padding:8px 16px;border-radius:28px;
+  }
+  .trust-card .trust-desc{
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:14px;line-height:1.5;opacity:.9;color:#4A4A56;
+    width:100%;
+  }
+  .trust-card .trust-divider{
+    width:100%;height:1px;flex-shrink:0;
+    background-image:linear-gradient(to right,rgba(74,74,86,.3) 50%,transparent 50%);
+    background-size:8px 1px;background-repeat:repeat-x;
+  }
+  .trust-card .fail-wrap{
+    display:flex;flex-direction:column;gap:12px;width:100%;
+  }
+  .trust-card .fail-label{
+    font-family:'Outfit',sans-serif;font-weight:600;
+    font-size:14px;letter-spacing:.14px;line-height:1.4;
+    color:#564A4A;
+  }
+  .trust-card .fail-list{
+    display:flex;flex-direction:column;gap:12px;margin:0;padding:0;list-style:none;
+  }
+  .trust-card .fail-list li{
+    display:flex;align-items:center;gap:8px;
+    font-family:'Outfit',sans-serif;font-weight:400;
+    font-size:14px;letter-spacing:.14px;line-height:1.4;color:#4A4A56;
+  }
+  .trust-card .fail-list li::before{
+    content:'';flex-shrink:0;
+    width:12px;height:12px;
+    background:#F59E0B;
+    -webkit-mask:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2L1 21h22L12 2zm0 6l7.5 13h-15L12 8zm-1 4v4h2v-4h-2zm0 5v2h2v-2h-2z'/%3E%3C/svg%3E") no-repeat center/contain;
+            mask:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2L1 21h22L12 2zm0 6l7.5 13h-15L12 8zm-1 4v4h2v-4h-2zm0 5v2h2v-2h-2z'/%3E%3C/svg%3E") no-repeat center/contain;
+  }
+  /* IPTF PoCs block within section 08 — under Trust Models image */
+  .sec08-iptf-pocs{
+    width:1057px;
+    margin:48px auto 0;
+    padding:32px 40px 36px;
+    background:rgba(113,141,200,.12);
+    border-radius:32px;
+  }
+  .sec08-iptf-pocs .pocs-kicker{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:13px;letter-spacing:1.43px;text-transform:uppercase;
+    opacity:.5;color:var(--ink);line-height:1;
+    margin-bottom:12px;
+  }
+  .sec08-iptf-pocs .pocs-title{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:24px;letter-spacing:-.5px;line-height:1.2;
+    color:var(--ink);
+    margin-bottom:24px;
+  }
+  .sec08-iptf-pocs .pocs-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+    border-top:1px solid rgba(74,74,86,.13);
+    border-left:1px solid rgba(74,74,86,.13);
+  }
+  .sec08-iptf-pocs .poc-cell{
+    padding:20px 24px;
+    border-right:1px solid rgba(74,74,86,.13);
+    border-bottom:1px solid rgba(74,74,86,.13);
+    display:flex;flex-direction:column;gap:8px;
+  }
+  .sec08-iptf-pocs .poc-tag{
+    font-family:'Outfit',sans-serif;font-weight:700;
+    font-size:11px;letter-spacing:1.4px;text-transform:uppercase;
+    opacity:.5;color:var(--ink);line-height:1;
+  }
+  .sec08-iptf-pocs .poc-name{
+    font-family:'Outfit',sans-serif;font-weight:600;
+    font-size:16px;letter-spacing:-.2px;line-height:1.25;
+    color:var(--ink);
+  }
+  .sec08-iptf-pocs .poc-desc{
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:13px;line-height:1.5;opacity:.7;color:var(--ink);
+    margin-bottom:4px;
+  }
+  .sec08-iptf-pocs .poc-link{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:11px;letter-spacing:.3px;
+    color:#7C90E9;text-decoration:none;
+    align-self:flex-start;
+  }
+  .sec08-iptf-pocs .poc-link:hover{text-decoration:underline}
+
+  /* ============================================================
+     Section 09 — Readiness Matrix (top 10120)
+     ============================================================ */
+  .sec09-hdr{
+    left:48px;top:calc(10120px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));
+    display:flex;gap:40px;align-items:flex-start;
+  }
+  .sec09-hdr .tt p{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:34px;letter-spacing:-1px;line-height:1.2;color:var(--ink);white-space:nowrap;
+  }
+
+  .sec09-intro{
+    left:48px;top:calc(10252px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:927px;padding-left:82px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .sec09-intro p{
+    width:845px;
+    font-family:'Manrope',sans-serif;font-weight:500;font-style:normal;
+    font-size:17px;line-height:1.7;opacity:.9;color:var(--ink);
+  }
+
+  .sec09-legend{
+    left:48px;top:calc(10380px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:1057px;
+    display:flex;gap:12px;flex-wrap:wrap;
+  }
+  .legend-pill{
+    display:flex;align-items:center;gap:8px;
+    padding:10px 18px;border-radius:28px;
+    background:rgba(255,255,255,.5);
+    border:1px solid rgba(74,74,86,.12);
+    font-family:'Manrope',sans-serif;font-weight:600;
+    font-size:13px;color:var(--ink);
+  }
+  .legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .legend-dot.prod{background:#22C55E}
+  .legend-dot.early{background:#F59E0B}
+  .legend-dot.pilot{background:#7C90E9}
+
+  .sec09-cards{
+    left:24px;top:calc(10460px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:1105px;
+    display:flex;flex-direction:column;gap:12px;
+  }
+  .rm-card{
+    background:rgba(113,141,200,.04);
+    border-radius:24px;
+    padding:28px 32px;
+    display:flex;gap:32px;align-items:flex-start;
+  }
+  .rm-card .rm-head{
+    width:280px;flex-shrink:0;
+    display:flex;flex-direction:column;gap:8px;
+  }
+  .rm-card .rm-name{
+    font-family:'Outfit',sans-serif;font-weight:600;
+    font-size:22px;letter-spacing:-.3px;line-height:1.25;color:var(--ink);
+  }
+  .rm-card .rm-tech{
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:14px;color:var(--ink);opacity:.6;
+  }
+  .rm-card .rm-status{
+    display:inline-flex;align-items:center;gap:6px;align-self:flex-start;
+    padding:6px 12px;border-radius:20px;
+    font-family:'Outfit',sans-serif;font-weight:600;
+    font-size:12px;letter-spacing:.5px;text-transform:uppercase;
+    margin-top:4px;
+  }
+  .rm-card .rm-status.prod{background:rgba(34,197,94,.12);color:#15803D}
+  .rm-card .rm-status.early{background:rgba(245,158,11,.12);color:#B45309}
+  .rm-card .rm-status.pilot{background:rgba(124,144,233,.16);color:#5468C4}
+  .rm-card .rm-status .dot{width:6px;height:6px;border-radius:50%}
+  .rm-card .rm-status.prod .dot{background:#22C55E}
+  .rm-card .rm-status.early .dot{background:#F59E0B}
+  .rm-card .rm-status.pilot .dot{background:#7C90E9}
+  .rm-card .rm-body{
+    flex:1 1 0;display:flex;flex-direction:column;gap:16px;min-width:0;
+  }
+  .rm-card .rm-evidence{
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:15px;line-height:1.55;color:var(--ink);opacity:.85;
+  }
+  .rm-card .rm-links{
+    display:flex;flex-wrap:wrap;gap:6px;
+  }
+  .rm-card .rm-link{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:12px;letter-spacing:.3px;
+    padding:6px 12px;border-radius:20px;
+    background:#fff;border:1px solid rgba(74,74,86,.15);
+    color:#7C90E9;text-decoration:none;
+    transition:background .15s ease;
+  }
+  .rm-card .rm-link:hover{background:#ECF2FF}
+
+  .rm-card .rm-disclosure{margin-top:.75rem;padding:.75rem 1rem;background:rgba(124,144,233,.05);border:1px solid rgba(124,144,233,.15);border-radius:8px}
+  .rm-card .rm-disclosure-label{font-family:'Outfit',sans-serif;font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;opacity:.5;color:var(--ink);margin:0 0 .5rem}
+  .rm-card .rm-d-grid{display:grid;grid-template-columns:1fr;gap:0}
+  .rm-card .rm-d-row{display:grid;grid-template-columns:30% 70%;gap:.5rem;padding:.3rem .35rem;border-radius:4px;align-items:baseline}
+  .rm-card .rm-d-row:nth-child(even){background:rgba(124,144,233,.06)}
+  .rm-card .rm-d-k{font-family:'Outfit',sans-serif;font-weight:600;font-size:10.5px;letter-spacing:.02em;text-transform:uppercase;opacity:.45;color:var(--ink)}
+  .rm-card .rm-d-v{font-family:'Manrope',sans-serif;font-weight:500;font-size:12.5px;color:var(--ink);opacity:.8;line-height:1.4}
+  .rm-card .rm-d-v.nd{font-style:italic;opacity:.45}
+
+  .sec09-method{
+    left:48px;top:calc(11440px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:1057px;padding-left:82px;
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:14px;line-height:1.7;color:var(--ink);opacity:.7;font-style:italic;
+  }
+  .sec09-method strong{font-weight:700;font-style:normal;opacity:1}
+
+  .sec09-disqualify{
+    left:48px;top:calc(11340px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:1057px;padding-left:82px;
+    font-family:'Manrope',sans-serif;font-size:14px;line-height:1.7;color:var(--ink);
+  }
+  .sec09-disqualify-label{font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.5;margin:0 0 .25rem}
+  .sec09-disqualify-intro{opacity:.7;margin:0 0 .5rem}
+  .sec09-disqualify-list{margin:0;padding-left:1.25rem;opacity:.7}
+  .sec09-disqualify-list li{margin-bottom:.25rem}
+
+  /* ============================================================
+     Flow layout from Section 09 onward
+     ============================================================ */
+  .flow-sections{
+    position:absolute;
+    left:0;
+    top:calc(10120px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));
+    width:1153px;
+    display:flex;
+    flex-direction:column;
+    background:#fff;
+    z-index:20;
+    isolation:isolate;
+    opacity:1;
+  }
+  .flow-sections::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:#fff;
+    z-index:0;
+  }
+  .flow-sections > *{
+    position:relative !important;
+    left:auto !important;
+    top:auto !important;
+    z-index:1 !important;
+    opacity:1 !important;
+    filter:none !important;
+  }
+  .flow-sections .section-hdr{margin-left:48px}
+  .flow-sections .sec09-intro,
+  .flow-sections .sec10-intro,
+  .flow-sections .sec11-intro,
+  .flow-sections .sec12-intro{
+    margin:40px 0 0 48px;
+  }
+  .flow-sections .sec13-intro,
+  .flow-sections .sec15-intro{
+    margin:40px 0 0 48px;
+  }
+  .flow-sections .sec09-legend,
+  .flow-sections .sec10-hint,
+  .flow-sections .sec11-lead,
+  .flow-sections .sec12-lead,
+  .flow-sections .sec14-wgc-label{
+    margin:24px 0 0 48px;
+  }
+  .flow-sections .sec09-cards,
+  .flow-sections .sec10-profiles,
+  .flow-sections .sec12-questions,
+  .flow-sections .sec12-joint,
+  .flow-sections .sec13-table,
+  .flow-sections .sec14-contact,
+  .flow-sections .sec14-wgc,
+  .flow-sections .sec15-grid,
+  .flow-sections .sec-footer{
+    margin:32px 0 0 24px;
+  }
+  .flow-sections .sec09-legend{
+    margin:24px 0 0 130px;
+    width:975px;
+  }
+  .flow-sections .sec09-cards{
+    margin:32px 0 0 130px;
+    width:975px;
+  }
+  .flow-sections .sec12-questions{
+    margin:32px 0 0 130px;
+    width:845px;
+  }
+  .flow-sections .sec13-table{
+    margin:24px 0 0 130px;
+    width:893px;
+  }
+  .flow-sections .sec14-wgc-label{
+    margin:64px 0 0 106px;
+    width:975px;
+    padding-left:0;
+  }
+  .flow-sections .sec14-wgc{
+    margin:20px 0 0 106px;
+    width:975px;
+  }
+  .flow-sections .sec15-grid{
+    margin:32px 0 0 106px;
+    width:975px;
+  }
+  .flow-sections .sec15-title{
+    margin:104px 0 0 106px;
+    width:845px;
+    padding-left:0;
+  }
+  .flow-sections .sec10-profiles{
+    margin:32px 0 0 130px;
+    width:975px;
+  }
+  .flow-sections .sec09-method{margin:40px 0 0 48px}
+  .flow-sections .sec10-hdr,
+  .flow-sections .sec11-hdr,
+  .flow-sections .sec12-hdr,
+  .flow-sections .sec13-hdr,
+  .flow-sections .sec14-hdr,
+  .flow-sections .sec15-hdr{
+    margin-top:104px;
+  }
+  .flow-sections .sec11-questions,
+  .flow-sections .sec11-conclusion{
+    margin-top:32px;
+  }
+  .flow-sections .sec11-questions{
+    margin-left:130px;
+  }
+  .flow-sections .sec11-iptf-ref{
+    margin-top:48px;
+    margin-left:192px;
+    width:848px;
+  }
+  .flow-sections .sec11-conclusion{
+    margin-left:192px;
+  }
+  .flow-sections .pill-outline,
+  .flow-sections .legend-pill,
+  .flow-sections .rm-name,
+  .flow-sections .sec09-intro p,
+  .flow-sections .sec10-intro p,
+  .flow-sections .sec11-intro p,
+  .flow-sections .sec12-intro p,
+  .flow-sections .sec13-intro,
+  .flow-sections .sec15-intro,
+  .flow-sections .sec09-method,
+  .flow-sections .sec10-hint,
+  .flow-sections .rm-tech,
+  .flow-sections .rm-evidence,
+  .flow-sections .profile-body p,
+  .flow-sections .profile-body ul li,
+  .flow-sections .fc-row,
+  .flow-sections .fl-disclaimer,
+  .flow-sections .fl-copy{
+    opacity:1;
+  }
+  .flow-sections .subtitle{
+    opacity:.5;
+  }
+  .flow-sections .rm-card,
+  .flow-sections .profile,
+  .flow-sections .sec-footer,
+  .flow-sections .as-row,
+  .flow-sections .wgc-row,
+  .flow-sections .rev-card,
+  .flow-sections .df-card,
+  .flow-sections .oq-card{
+    background:#F8FAFF;
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+    box-shadow:none;
+    border:1px solid rgba(74,74,86,.06);
+  }
+  .flow-sections .legend-pill{
+    background:#fff;
+    border:1px solid rgba(74,74,86,.14);
+  }
+  .flow-sections .rm-card{
+    background:#F8FAFF;
+    border:1px solid rgba(74,74,86,.06);
+  }
+
+  /* ============================================================
+     Section 10 — Solution Profiles (top 11680)
+     ============================================================ */
+  .sec10-hdr{
+    left:48px;top:calc(11680px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));
+    display:flex;gap:40px;align-items:flex-start;
+  }
+  .sec10-hdr .tt p{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:34px;letter-spacing:-1px;line-height:1.2;color:var(--ink);white-space:nowrap;
+  }
+
+  .sec10-intro{
+    left:48px;top:calc(11800px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:927px;padding-left:82px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .sec10-intro p{
+    width:845px;
+    font-family:'Manrope',sans-serif;font-weight:500;font-style:normal;
+    font-size:17px;line-height:1.7;opacity:.9;color:var(--ink);
+  }
+
+  .sec10-hint{
+    left:48px;top:calc(11932px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:1057px;padding-left:82px;
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:15px;line-height:1.5;color:var(--ink);opacity:.6;font-style:italic;
+  }
+
+  .sec10-profiles{
+    left:24px;top:calc(12000px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:1105px;
+    display:flex;flex-direction:column;gap:12px;
+  }
+  .profile{
+    background:rgba(113,141,200,.04);
+    border-radius:24px;
+    overflow:hidden;
+  }
+  .profile-head{
+    padding:24px 32px;
+    display:flex;gap:20px;align-items:flex-start;
+    cursor:pointer;
+    user-select:none;
+    transition:background .15s ease;
+  }
+  .profile-head:hover{background:rgba(113,141,200,.08)}
+  .profile-head .num{display:none}
+  .profile-head .logo-slot{
+    width:48px;height:48px;flex-shrink:0;
+    border-radius:12px;
+    background:#fff;
+    border:1px solid rgba(74,74,86,.08);
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+  }
+  .profile-head .logo-slot img{
+    width:32px;height:32px;
+    object-fit:contain;
+  }
+  .profile-head .info{
+    flex:1 1 0;min-width:0;
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .profile-head .name{
+    font-family:'Outfit',sans-serif;font-weight:600;
+    font-size:22px;letter-spacing:-.3px;line-height:1.2;color:var(--ink);
+  }
+  .profile-head .meta{
+    display:flex;gap:6px;flex-wrap:wrap;
+  }
+  /* Glass pill tags in profile meta */
+  .profile-head .meta-tag{
+    position:relative;
+    display:inline-flex;align-items:center;
+    padding:10px 18px;
+    border-radius:24px;
+    background:rgba(255,255,255,.5);
+    backdrop-filter:blur(12px) saturate(140%);
+    -webkit-backdrop-filter:blur(12px) saturate(140%);
+    font-family:'Manrope',sans-serif;font-weight:600;
+    font-size:13px;letter-spacing:.2px;
+    color:var(--ink);line-height:1;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.8),
+      inset 0 -1px 2px rgba(74,74,86,.06),
+      0 1px 2px rgba(74,74,86,.04);
+  }
+  .profile-head .meta-tag::before{
+    content:'';
+    position:absolute;inset:0;
+    padding:1px;
+    border-radius:24px;
+    background:linear-gradient(135deg,
+      rgba(255,255,255,.95) 0%,
+      rgba(255,255,255,.3) 45%,
+      rgba(74,74,86,.08) 100%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+            mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;
+            mask-composite:exclude;
+    pointer-events:none;
+  }
+  .profile-head .meta-tag.tech{color:#7C90E9}
+  .profile-head .arrow{
+    width:32px;height:32px;flex-shrink:0;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--ink);opacity:.5;
+    transition:transform .25s ease;
+  }
+  .profile.open .arrow{transform:rotate(180deg)}
+  .profile-head .arrow svg{width:14px;height:14px}
+
+  .profile-body{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .4s ease;
+  }
+  .profile.open .profile-body{max-height:4000px}
+  .profile-body-inner{
+    padding:8px 32px 36px;
+    border-top:1px solid rgba(74,74,86,.08);
+    margin-top:0;
+    display:flex;flex-direction:column;gap:24px;
+  }
+  .profile-body h4{
+    font-family:'Outfit',sans-serif;font-weight:600;
+    font-size:16px;letter-spacing:-.2px;
+    color:var(--ink);margin-top:16px;margin-bottom:12px;
+  }
+  .profile-body p{
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:15px;line-height:1.6;color:var(--ink);opacity:.85;
+  }
+  .ey-disclaimer {
+  font-size: 0.85em;
+  line-height: 1.5;
+  margin-top: 16px;
+  color: #666;
+  opacity: 1;
+  border-left: 2px solid #ddd;
+  padding-left: 12px;
+  }
+  .profile-body ul{
+    list-style:none;padding:0;margin:0;
+    display:flex;flex-direction:column;gap:8px;
+  }
+  .profile-body ul li{
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:14px;line-height:1.55;color:var(--ink);opacity:.85;
+    padding-left:18px;position:relative;
+  }
+  .profile-body ul li::before{
+    content:'';position:absolute;left:0;top:9px;
+    width:5px;height:5px;border-radius:50%;
+    background:#7C90E9;opacity:.7;
+  }
+  .profile-body ul li strong{font-weight:700;opacity:1}
+  .profile-body .links{
+    display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;
+  }
+  .profile-body .links a{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:12px;letter-spacing:.3px;
+    padding:6px 12px;border-radius:20px;
+    background:#fff;border:1px solid rgba(74,74,86,.15);
+    color:#7C90E9;text-decoration:none;
+    transition:background .15s ease;
+  }
+  .profile-body .links a:hover{background:#ECF2FF}
+
+  /* ============================================================
+     Section 11 — Decision Framework (top 13280)
+     ============================================================ */
+  .sec11-hdr{
+    left:48px;top:calc(13280px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));
+    display:flex;gap:40px;align-items:flex-start;
+  }
+  .sec11-hdr .tt p{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:34px;letter-spacing:-1px;line-height:1.2;color:var(--ink);white-space:nowrap;
+  }
+
+  .sec11-intro{
+    left:48px;top:calc(13400px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:927px;padding-left:82px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .sec11-intro p{
+    width:845px;
+    font-family:'Manrope',sans-serif;font-weight:500;font-style:italic;
+    font-size:17px;line-height:1.7;opacity:.9;color:var(--ink);
+  }
+
+  .sec11-lead{
+    left:48px;top:calc(13540px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:1057px;padding-left:82px;
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:15px;line-height:1.6;color:var(--ink);opacity:.85;
+  }
+
+  /* Decision Framework — rail + cards */
+  .sec11-questions{
+    left:130px;top:calc(13620px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:910px;
+    display:flex;gap:12px;align-items:flex-start;
+  }
+  .df-rail{
+    width:79px;flex-shrink:0;
+    display:flex;flex-direction:column;align-items:center;
+    padding-top:14px;
+  }
+  .df-rail .df-num{
+    width:64px;height:64px;flex-shrink:0;
+    border-radius:50%;
+    background:url('./ball.png') center/cover no-repeat;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Outfit',sans-serif;font-weight:800;
+    font-size:17px;letter-spacing:1.87px;text-transform:uppercase;
+    color:#fff;
+  }
+  .df-rail .df-line{
+    width:1px;height:96px;flex-shrink:0;
+    background-image:linear-gradient(to bottom,rgba(124,144,233,.5) 50%,transparent 50%);
+    background-size:1px 6px;
+    background-repeat:repeat-y;
+  }
+  .df-cards{
+    flex:1 1 0;min-width:0;
+    display:flex;flex-direction:column;gap:8px;
+  }
+  .df-card{
+    background:#FBFBFB;
+    border-radius:24px;
+    padding:24px 32px;
+    display:flex;flex-direction:column;gap:16px;
+    min-height:154px;
+  }
+  .df-card .df-q{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:23px;letter-spacing:-.3px;line-height:1.2;color:#4A4A56;
+    width:100%;
+  }
+  .df-card .df-desc{
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:16px;line-height:1.7;color:#4A4A56;opacity:.9;
+    width:100%;
+  }
+  .sec11-iptf-ref{
+    left:192px;top:calc(14400px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:848px;
+    display:flex;flex-direction:column;gap:8px;
+  }
+  .sec11-iptf-ref .iptf-ref-kicker{
+    font-family:'Outfit',sans-serif;font-weight:700;
+    font-size:11px;letter-spacing:1.43px;text-transform:uppercase;
+    opacity:.5;color:var(--ink);line-height:1;
+  }
+  .sec11-iptf-ref .iptf-ref-text{
+    font-family:'Manrope',sans-serif;font-weight:500;font-style:italic;
+    font-size:14px;line-height:1.6;color:var(--ink);opacity:.85;
+  }
+  .sec11-iptf-ref a{color:#7C90E9;text-decoration:none;font-style:normal}
+  .sec11-iptf-ref a:hover{text-decoration:underline}
+  .sec11-conclusion{
+    left:192px;top:calc(14620px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:848px;
+    display:flex;gap:24px;align-items:stretch;
+  }
+  .sec11-conclusion .conc-bar{
+    width:5px;border-radius:9px;background:#B6C5F9;flex-shrink:0;
+  }
+  .sec11-conclusion .conc-text{
+    flex:1 1 0;
+    font-family:'Manrope',sans-serif;font-weight:500;font-style:italic;
+    font-size:18px;line-height:1.6;color:#4A4A56;opacity:.9;
+  }
+
+  /* ============================================================
+     Section 12 — Future Outlook (top 14720)
+     ============================================================ */
+  .sec12-hdr{
+    left:48px;top:calc(14720px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));
+    display:flex;gap:40px;align-items:flex-end;
+  }
+  .sec12-hdr .tt p{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:34px;letter-spacing:-1px;line-height:1.2;color:var(--ink);white-space:nowrap;
+  }
+
+  .sec12-intro{
+    left:48px;top:calc(14840px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:927px;padding-left:82px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .sec12-intro p{
+    width:845px;
+    font-family:'Manrope',sans-serif;font-weight:500;font-style:normal;
+    font-size:17px;line-height:1.7;opacity:.9;color:var(--ink);
+  }
+
+  .sec12-lead{
+    left:48px;top:calc(15000px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:1057px;padding-left:82px;
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:15px;line-height:1.6;color:var(--ink);opacity:.85;
+  }
+
+  .sec12-questions{
+    left:24px;top:calc(15080px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:1105px;
+    display:flex;flex-direction:column;gap:12px;
+  }
+  .oq-card{
+    position:relative;
+    background:rgba(113,141,200,.04);
+    border-radius:24px;
+    padding:28px 32px;
+    overflow:hidden;
+    min-height:88px;
+    display:flex;align-items:center;
+  }
+  .oq-card .oq-text{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:22px;letter-spacing:-.3px;line-height:1.3;
+    color:var(--ink);
+    width:100%;
+    position:relative;
+  }
+
+  /* Joint Statement */
+  .sec12-joint{
+    left:24px;top:calc(15660px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:1105px;
+    padding:44px 48px;
+    border-radius:40px;
+    background:url('./Frame 41.png') center/cover no-repeat;
+    position:relative;
+    overflow:hidden;
+  }
+  .sec12-joint::before{
+    content:none;
+  }
+  .sec12-joint-inner{
+    position:relative;
+    display:flex;flex-direction:column;gap:16px;
+    max-width:920px;
+  }
+  .sec12-joint .js-kicker{
+    font-family:'Outfit',sans-serif;font-weight:700;
+    font-size:13px;letter-spacing:1.43px;text-transform:uppercase;
+    color:#fff;opacity:.7;line-height:1;
+  }
+  .sec12-joint .js-title{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:34px;letter-spacing:-1px;line-height:1.08;
+    color:#fff;
+  }
+  .sec12-joint .js-title em{
+    font-style:normal;color:#fff;font-weight:600;
+  }
+  .sec12-joint .js-body{
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:15px;line-height:1.6;color:#fff;opacity:.92;
+    max-width:820px;
+  }
+
+  /* ============================================================
+     Section 13 — Additional Solutions (top 16240)
+     ============================================================ */
+  .sec13-hdr{
+    left:48px;top:calc(16240px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));
+    display:flex;gap:40px;align-items:flex-start;
+  }
+  .sec13-hdr .tt p{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:34px;letter-spacing:-1px;line-height:1.2;color:var(--ink);white-space:nowrap;
+  }
+
+  .sec13-intro{
+    left:48px;top:calc(16332px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:1057px;padding-left:82px;padding-right:82px;
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:15px;line-height:1.6;color:var(--ink);opacity:.85;
+  }
+  .sec13-intro p{margin:0 0 12px}
+  .sec13-intro p:last-child{margin-bottom:0}
+
+  .sec13-table{
+    left:24px;top:calc(16540px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:1105px;
+    display:flex;flex-direction:column;gap:8px;
+  }
+  .as-head{
+    display:flex;gap:16px;
+    padding:14px 32px;
+    background:#EEF3FF;
+    border:1px solid rgba(124,144,233,.14);
+    border-radius:16px;
+    font-family:'Outfit',sans-serif;font-weight:700;
+    font-size:12px;letter-spacing:1.43px;text-transform:uppercase;
+    color:var(--ink);opacity:.55;
+  }
+  .as-head .as-col-1{width:220px;flex-shrink:0}
+  .as-head .as-col-2{flex:1 1 0}
+
+  .as-row{
+    background:rgba(113,141,200,.04);
+    border-radius:20px;
+    padding:22px 32px;
+    display:flex;gap:16px;align-items:center;
+  }
+  .as-row .as-company{
+    width:220px;flex-shrink:0;
+    font-family:'Outfit',sans-serif;font-weight:600;
+    font-size:17px;letter-spacing:-.2px;color:var(--ink);
+  }
+  .as-row .as-solution{
+    flex:1 1 0;
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:15px;line-height:1.55;color:var(--ink);opacity:.85;
+  }
+
+  /* ============================================================
+     Section 14 — Contact (top 17380)
+     ============================================================ */
+  .sec14-hdr{
+    left:48px;top:calc(17380px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));
+    display:flex;gap:40px;align-items:flex-start;
+  }
+  .sec14-hdr .tt p{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:34px;letter-spacing:-1px;line-height:1.2;color:var(--ink);white-space:nowrap;
+  }
+
+  .sec14-contact{
+    left:24px;top:calc(17500px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:1105px;
+    padding:44px 48px;
+    border-radius:32px;
+    background:url('./Frame 204.png') center/cover no-repeat;
+    position:relative;overflow:hidden;
+  }
+  .sec14-contact::before{
+    content:none;
+  }
+  .sec14-contact-inner{
+    position:relative;
+    display:flex;flex-direction:column;gap:16px;
+  }
+  .sec14-contact .cx-kicker{
+    font-family:'Outfit',sans-serif;font-weight:700;
+    font-size:13px;letter-spacing:1.43px;text-transform:uppercase;
+    color:#4A4A56;opacity:.55;line-height:1;
+  }
+  .sec14-contact .cx-text{
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:17px;line-height:1.6;color:#4A4A56;max-width:820px;
+  }
+  .sec14-contact .cx-email{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:14px 24px;border-radius:28px;
+    background:rgba(255,255,255,.5);
+    backdrop-filter:blur(12px) saturate(140%);
+    -webkit-backdrop-filter:blur(12px) saturate(140%);
+    font-family:'Outfit',sans-serif;font-weight:600;
+    font-size:16px;color:#7C90E9;
+    text-decoration:none;align-self:flex-start;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.8),
+      0 2px 6px rgba(74,74,86,.06);
+    transition:background .15s ease;
+  }
+  .sec14-contact .cx-email:hover{background:rgba(255,255,255,.7)}
+  .sec14-contact .cx-join{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:14px 24px;border-radius:28px;
+    background:rgba(124,144,233,.12);
+    font-family:'Outfit',sans-serif;font-weight:600;
+    font-size:16px;color:#5468C4;
+    text-decoration:none;align-self:flex-start;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 2px 6px rgba(74,74,86,.06);
+    transition:background .15s ease;margin-top:.75rem;
+  }
+  .sec14-contact .cx-join:hover{background:rgba(124,144,233,.2)}
+
+  /* Working Group Contributors Table */
+  .sec14-wgc-label{
+    left:48px;top:calc(17780px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:1057px;padding-left:82px;
+    font-family:'Outfit',sans-serif;font-weight:600;
+    font-size:28px;letter-spacing:-.6px;line-height:1.2;color:var(--ink);
+  }
+  .sec14-wgc{
+    left:24px;top:calc(17840px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:1105px;
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .wgc-head{
+    display:flex;gap:16px;
+    padding:14px 32px;
+    background:#EEF3FF;
+    border:1px solid rgba(124,144,233,.14);
+    border-radius:16px;
+    font-family:'Outfit',sans-serif;font-weight:700;
+    font-size:11px;letter-spacing:1.43px;text-transform:uppercase;
+    color:var(--ink);opacity:.55;
+  }
+  .wgc-head .wgc-c-1{width:180px;flex-shrink:0}
+  .wgc-head .wgc-c-2{width:170px;flex-shrink:0}
+  .wgc-head .wgc-c-3{flex:1 1 0}
+  .wgc-row{
+    background:rgba(113,141,200,.04);
+    border-radius:16px;
+    padding:18px 32px;
+    display:flex;gap:16px;align-items:center;
+  }
+  .wgc-row .wgc-org{
+    width:180px;flex-shrink:0;
+    font-family:'Outfit',sans-serif;font-weight:600;
+    font-size:15px;color:var(--ink);
+  }
+  .wgc-row .wgc-sol{
+    width:170px;flex-shrink:0;
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:14px;color:#7C90E9;
+  }
+  .wgc-row .wgc-peo{
+    flex:1 1 0;
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:14px;line-height:1.55;color:var(--ink);opacity:.8;
+  }
+
+  /* ============================================================
+     Section 15 — Contributors & Reviewers (top 18780)
+     ============================================================ */
+  .sec15-hdr{
+    left:48px;top:calc(18780px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));
+    display:flex;gap:40px;align-items:flex-start;
+  }
+  .sec15-hdr .tt p{
+    font-family:'Outfit',sans-serif;font-weight:500;
+    font-size:34px;letter-spacing:-1px;line-height:1.2;color:var(--ink);white-space:nowrap;
+  }
+
+  .sec15-title{
+    left:48px;top:calc(18780px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:1057px;padding-left:82px;
+    font-family:'Outfit',sans-serif;font-weight:600;
+    font-size:28px;letter-spacing:-.6px;line-height:1.2;color:var(--ink);
+  }
+
+  .sec15-grid{
+    left:24px;top:calc(18970px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:1105px;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
+  }
+  .rev-card{
+    background:rgba(113,141,200,.04);
+    border-radius:16px;
+    padding:16px 20px;
+    display:flex;flex-direction:column;gap:4px;
+  }
+  .rev-card .rev-name{
+    font-family:'Outfit',sans-serif;font-weight:600;
+    font-size:15px;letter-spacing:-.1px;color:var(--ink);line-height:1.3;
+  }
+  .rev-card .rev-org{
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:13px;color:#7C90E9;line-height:1.3;
+  }
+
+  /* ============================================================
+     Footer (top 19700)
+     ============================================================ */
+  .sec-footer{
+    left:24px;top:calc(19700px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:1105px;
+    padding:40px 48px 28px;
+    border-radius:32px;
+    background:rgba(113,141,200,.04);
+    display:flex;flex-direction:column;gap:28px;
+  }
+  .footer-cols{
+    display:flex;gap:48px;align-items:flex-start;
+  }
+  .footer-col{
+    flex:1 1 0;min-width:0;
+    display:flex;flex-direction:column;gap:12px;
+  }
+  .footer-col.contact-col{
+    gap:16px;
+  }
+  .footer-brand{
+    width:148px;
+    height:56px;
+    flex-shrink:0;
+    margin-bottom:8px;
+    background-image:url('./EEA logo.png');
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-position:left top;
+    opacity:.92;
+  }
+  .footer-col .fc-head{
+    font-family:'Outfit',sans-serif;font-weight:700;
+    font-size:12px;letter-spacing:1.43px;text-transform:uppercase;
+    color:var(--ink);opacity:.5;line-height:1;
+    margin-bottom:4px;
+  }
+  .footer-col .fc-row{
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:14px;line-height:1.55;color:var(--ink);
+  }
+  .footer-col .fc-row a{color:#7C90E9;text-decoration:none}
+  .footer-col .fc-row a:hover{text-decoration:underline}
+
+  .footer-legal{
+    display:flex;flex-direction:column;gap:12px;
+    padding-top:24px;
+    border-top:1px solid rgba(74,74,86,.08);
+  }
+  .footer-legal .fl-disclaimer{
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:12px;line-height:1.6;color:var(--ink);opacity:.65;
+  }
+  .footer-legal .fl-disclaimer strong{font-weight:700;opacity:1}
+  .footer-legal .fl-copy{
+    font-family:'Manrope',sans-serif;font-weight:500;
+    font-size:12px;color:var(--ink);opacity:.55;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <button class="mobile-nav-toggle" type="button" aria-label="Open navigation" aria-controls="nav" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="mobile-nav-backdrop" aria-hidden="true"></div>
+
+  <!-- =========================================================
+       Sidebar (200px, sticky, 14 items, scroll-spy)
+       ========================================================= -->
+  <aside class="sidebar">
+    <div class="logo" aria-label="Enterprise Ethereum Alliance"></div>
+    <nav class="nav" id="nav">
+      <a href="#sec-01" data-target="sec-01" data-spy class="active"><span class="n">01</span><span>Overview</span></a>
+      <a href="#sec-02" data-target="sec-02" data-spy><span class="n">02</span><span>Executive Summary</span></a>
+      <a href="#sec-03" data-target="sec-03" data-spy><span class="n">03</span><span>Methodology</span></a>
+      <a href="#sec-04" data-target="sec-04" data-spy><span class="n">04</span><span>Privacy Problem</span></a>
+      <a href="#sec-05" data-target="sec-05" data-spy><span class="n">05</span><span>Addressable Market</span></a>
+      <a href="#sec-06" data-target="sec-06" data-spy><span class="n">06</span><span>Taxonomy</span></a>
+      <a href="#sec-07" data-target="sec-07" data-spy><span class="n">07</span><span>EF Roadmap</span></a>
+      <a href="#sec-08" data-target="sec-08" data-spy><span class="n">08</span><span>Trust Models</span></a>
+      <a href="#sec-09" data-target="sec-09" data-spy><span class="n">09</span><span>Readiness Matrix</span></a>
+      <a href="#sec-10" data-target="sec-10" data-spy><span class="n">10</span><span>Solution Profiles</span></a>
+      <a href="#sec-11" data-target="sec-11" data-spy><span class="n">11</span><span>Decision Framework</span></a>
+      <a href="#sec-12" data-target="sec-12" data-spy><span class="n">12</span><span>Future Outlook</span></a>
+      <a href="#sec-13" data-target="sec-13" data-spy><span class="n">13</span><span>Additional Solutions</span></a>
+      <a href="#sec-14" data-target="sec-14" data-spy><span class="n">14</span><span>Contact &amp; Contributors</span></a>
+    </nav>
+  </aside>
+
+  <!-- =========================================================
+       Main white card
+       ========================================================= -->
+  <div class="card">
+    <div class="card-stage">
+    <div class="card-inner">
+
+    <!-- HERO -->
+    <div class="abs hero" id="sec-01">
+      <div class="hero-title">
+        <p>State of Privacy on Ethereum</p>
+        <div class="line2">
+          <p>for Enterprise</p>
+          <div class="hero-pill"><p>Privacy Working Group</p></div>
+        </div>
+      </div>
+      <div class="hero-blurb">
+        <p>Mapping financial institution requirements to Ethereum privacy solutions — a cross-institutional analysis by 17 experts across 11 organizations.</p>
+      </div>
+    </div>
+
+    <!-- STATS ROW: Organization/Edition | 4 of 7 / $700T+ | Contributing Orgs -->
+    <div class="abs stats-row">
+      <div class="stat-card org">
+        <div class="inner">
+          <div class="stat-block">
+            <p class="stat-label">Organization</p>
+            <div class="stat-val-pill"><p>Enterprise Ethereum Alliance</p></div>
+          </div>
+          <div class="stat-block">
+            <p class="stat-label">Edition</p>
+            <div class="stat-val-pill"><p>Version 1 · April 2026</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="stat-card metrics">
+        <div class="inner">
+          <div class="stat-block with-big">
+            <p class="stat-label">solutions reviewed</p>
+            <p class="stat-big">7</p>
+          </div>
+          <div class="stat-block with-big">
+            <p class="stat-label">addressable market</p>
+            <p class="stat-big">$700T+</p>
+          </div>
+        </div>
+      </div>
+      <div class="stat-card orgs">
+        <div class="inner">
+          <p class="stat-label">Contributing Organizations</p>
+          <div class="orgs-grid">
+            <div class="org-chip"><div class="avatar av-consensys"></div><p>Consensys</p></div>
+            <div class="org-chip"><div class="avatar av-coti"></div><p>COTI</p></div>
+            <div class="org-chip"><div class="avatar av-kaleido"></div><p>Kaleido</p></div>
+            <div class="org-chip"><div class="avatar av-ey"></div><p>EY</p></div>
+            <div class="org-chip"><div class="avatar av-polygon"></div><p>Polygon</p></div>
+            <div class="org-chip"><div class="avatar av-zksync"></div><p>ZKsync</p></div>
+            <div class="org-chip"><div class="avatar av-applied"></div><p>Applied Blockchain</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============= SECTION 01 — Opening Statement (top 730) ============= -->
+    <div class="abs sec01">
+      <div class="section-hdr">
+        <div class="lhs">
+          <div class="pill-outline">01</div>
+          <p class="h-section">Opening Statement</p>
+        </div>
+        <div class="rhs">
+          <p class="subtitle" style="width:258px">Evidence-Based<br>Version 1</p>
+        </div>
+      </div>
+      <div class="sec01-body">
+        <div class="body-text">
+          <p>This is Version 1 of a recurring report series from the Enterprise Ethereum Alliance (EEA) Privacy Working Group. It maps the current landscape of enterprise privacy on Ethereum, drawing on six months of work — beginning November 2025 — by experts across 8 organizations: Applied Blockchain, Consensys, COTI, EY, Kaleido, Polygon, ZKsync/Matter Labs, the Ethereum Foundation and the EEA. The work synthesized technical documentation and deployment evidence.</p>
+          <p>The privacy space on Ethereum is evolving rapidly. New implementations launch and existing ones mature almost weekly. This document is therefore a snapshot, with a defined scope: the major privacy implementations contributed by EEA member organizations, where solution characteristics can be supported by live pilots or named enterprise deployments. The same evidence rubric applies to every member.</p>
+          <p>This report aims to stay as non-technical as practical — but the topic resists oversimplification. At the EEA we believe the only way to arm a reader against buzzwords is through education. The report links throughout to reference work from neutral organizations such as the Ethereum Foundation's Institutional Privacy Task Force (IPTF), whose IPTF Privacy Map offers a near-holistic mapping of known institutional privacy work.</p>
+          <p>Implementations outside this version exist — non-member projects, academic primitives, and recently launched solutions still being evaluated. The most prominent are listed in Additional Privacy Solutions at the end of the report. Future versions will expand coverage as the space matures, as more evidence accumulates, and as additional organizations engage with the working group. Inclusion is a function of evidence and engagement, not endorsement. Participation in the Privacy Working Group is open to EEA member organizations. If you are interested in joining, <a href="https://webforms.pipedrive.com/f/6UT1OXeG6VRdX4Cf4AHlF5B1f8tS5axIGahvukW1AEHafwmRuRGVAYo1SKByE9gRPR" target="_blank" rel="noopener">apply for EEA membership →</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============= SECTION 02 — Executive Summary (top 1462) ============= -->
+    <div class="abs section-hdr sec02-hdr" id="sec-02">
+      <div class="lhs">
+        <div class="pill-outline">02</div>
+        <p class="h-section">Executive Summary</p>
+      </div>
+      <div class="rhs">
+        <p class="subtitle">Key<br>Findings</p>
+      </div>
+    </div>
+
+    <!-- Executive Summary stats (rendered as image) -->
+    <img class="abs stats-bar-img" src="summary.png" alt="Executive summary: 7 solutions evaluated · $100T+ bond market · $600T derivatives · 3 trust models" />
+
+    <!-- The Challenge -->
+    <div class="abs the-challenge">
+      <p class="h-sub">The Challenge</p>
+      <div style="display:flex;flex-direction:column;gap:20px;width:100%">
+        <p class="body-text">Financial institutions are increasingly deploying tokenized assets on Ethereum, but public blockchains expose all transaction data by default—amounts, counterparties, and business relationships are visible to anyone monitoring the network. This transparency creates a critical barrier: enterprises cannot move trillion-dollar bond markets, derivatives positions, or proprietary trading strategies onto infrastructure where competitors and adversaries can observe every move.</p>
+        <p class="callout">Privacy and confidentiality are not features — they are prerequisites for enterprise adoption.</p>
+      </div>
+    </div>
+
+    <!-- What This Report Provides -->
+    <div class="abs report-provides">
+      <p class="h-sub">What This Report Provides</p>
+      <p class="body-text">The Enterprise Ethereum Alliance Privacy Working Group mapped the current enterprise privacy landscape on Ethereum. Seven member organizations contributed their solutions, creating the first evidence-based view of privacy capabilities aligned to enterprise requirements:</p>
+    </div>
+
+    <!-- 7 solutions grid -->
+    <div class="abs solutions-grid">
+      <div class="row-cells">
+        <div class="sol-card"><p class="num">01</p><div class="body"><p class="t">COTI</p><p class="s">Garbled Circuits for programmable privacy</p></div></div>
+        <div class="sol-card"><p class="num">02</p><div class="body"><p class="t">Linea Enterprise (Consensys)</p><p class="s">Private Validium with ZK proofs</p></div></div>
+      </div>
+      <div class="row-cells">
+        <div class="sol-card"><p class="num">03</p><div class="body"><p class="t">Nightfall</p><p class="s">Open-source ZK protocol for confidential tokens</p></div></div>
+        <div class="sol-card"><p class="num">04</p><div class="body"><p class="t">Paladin</p><p class="s">Modular privacy framework</p></div></div>
+      </div>
+      <div class="row-cells">
+        <div class="sol-card"><p class="num">05</p><div class="body"><p class="t">Prividium</p><p class="s">Permissioned ZK Layer 2</p></div></div>
+        <div class="sol-card"><p class="num">06</p><div class="body"><p class="t">Polygon CDK</p><p class="s">Configurable privacy spectrum</p></div></div>
+      </div>
+      <div class="row-cells">
+        <div class="sol-card half"><p class="num">07</p><div class="body"><p class="t">Silent Data (Applied Blockchain)</p><p class="s">TEE-based programmable privacy</p></div></div>
+      </div>
+    </div>
+
+    <!-- Key Findings / Who Should Read / Bottom Line -->
+    <div class="abs key-findings">
+      <div class="kf-row">
+        <p class="label">Key Findings</p>
+        <p class="text">
+          <span class="r">Privacy has multiple dimensions – transaction amounts, counterparty identities, business logic, and regulatory access all require different technical approaches. No single solution covers all requirements. </span>
+          <span class="b">Different solutions protect different aspects of operations using distinct trust models:</span>
+          <span class="r"> cryptographic proofs (ZK), secure hardware (TEEs), multi-party computation (MPC), or organizational controls.</span>
+        </p>
+      </div>
+      <div class="kf-row">
+        <p class="label">Who Should Read This</p>
+        <p class="text">
+          <span class="r">This paper is designed for</span>
+          <span class="b"> CIOs, compliance officers,</span>
+          <span class="r"> and </span>
+          <span class="b">digital asset leads</span>
+          <span class="r"> who need to evaluate privacy options for tokenized asset deployments. It provides a practical framework to understand what exists, how each approach works, what trust assumptions apply, and what implementation requires – enabling institutions to make informed decisions for their specific regulatory and operational needs.</span>
+        </p>
+      </div>
+      <div class="kf-row">
+        <p class="label">Bottom Line</p>
+        <p class="text">
+          <span class="b">The enterprise privacy landscape on Ethereum is maturing rapidly</span>
+          <span class="r">, with live deployments and pilots already covering tokenized funds, central bank programs, and private trading platforms. This report maps the territory so institutions can navigate from experimentation to implementation.</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- ============= SECTION 03 — Research Methodology (top 3581) ============= -->
+    <div class="abs section-hdr sec03-hdr" id="sec-03">
+      <div class="lhs">
+        <div class="pill-outline">03</div>
+        <p class="h-section">Research Methodology</p>
+      </div>
+      <div class="rhs">
+        <p class="subtitle">Our<br>Approach</p>
+      </div>
+    </div>
+
+    <!-- Quote -->
+    <div class="abs quote-1">
+      <div class="quote-bar-purple"></div>
+      <p class="quote-text">Before examining the solutions themselves, it is important to understand how this assessment was conducted. The following methodology explains how each privacy solution was evaluated and how readiness classifications were determined.</p>
+    </div>
+
+    <!-- Methodology intro + steering -->
+    <div class="abs method-intro">
+      <div class="body-text">
+        <p>The findings in this report were developed within the EEA Privacy Working Group over six months, beginning November 2025, in collaboration with leading cryptographic and enterprise blockchain organizations. The methodology drew on vendor-provided technical documentation and publicly verifiable deployment evidence. The working group sought to cross-check vendor claims where possible, and to establish a shared, precise language for describing privacy capabilities — one that means the same thing across vendors and can be applied consistently in future editions.</p>
+        <p>The working group was led by a steering committee comprising:</p>
+      </div>
+    </div>
+
+    <!-- Contributing orgs chips (in methodology) -->
+    <div class="abs contrib-orgs">
+      <div class="org-chip"><div class="avatar av-applied"></div><p>Applied Blockchain / Silent Data</p></div>
+      <div class="org-chip"><div class="avatar av-consensys"></div><p>Consensys / Linea</p></div>
+      <div class="org-chip"><div class="avatar av-coti"></div><p>COTI</p></div>
+      <div class="org-chip"><div class="avatar av-ey"></div><p>EY</p></div>
+      <div class="org-chip"><div class="avatar av-kaleido"></div><p>Kaleido</p></div>
+      <div class="org-chip"><div class="avatar av-polygon"></div><p>Polygon</p></div>
+      <div class="org-chip"><div class="avatar av-zksync"></div><p>ZKsync / Matter Labs</p></div>
+    </div>
+
+    <!-- 3-step method cards -->
+    <div class="abs method-cards">
+      <div class="method-card mc1">
+        <p class="step">01 — Input</p>
+        <div class="body">
+          <p class="ttl">Technical documentation</p>
+          <p class="desc">Vendor-provided documentation and publicly verifiable deployment evidence.</p>
+        </div>
+      </div>
+      <div class="method-card mc2">
+        <p class="step">02 — Process</p>
+        <div class="body">
+          <p class="ttl">Cross-institutional review</p>
+          <p class="desc">Cross-review of privacy primitives and vendor claims across all working group members.</p>
+        </div>
+      </div>
+      <div class="method-card mc3">
+        <p class="step">03 — Output</p>
+        <div class="body">
+          <p class="ttl">Shared language</p>
+          <p class="desc">A common vocabulary for describing privacy capabilities consistently across vendors and future editions.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scope and Approach -->
+    <div class="abs scope-approach">
+      <p class="t">Scope and Approach</p>
+      <p class="d">This is Version 1 of a recurring report series. It is an ecosystem mapping and overview — not independent testing, benchmarking, or vendor validation. Assessments are based on publicly available information, including provider documentation, case study announcements, and verifiable deployment references. Solution profiles reflect provider-stated capabilities.</p>
+    </div>
+
+    <!-- ============= SECTION 04 — Enterprise Privacy Problem (top 4755) ============= -->
+    <div class="abs section-hdr sec04-hdr" id="sec-04">
+      <div class="lhs" style="align-items:flex-start">
+        <div class="pill-outline">04</div>
+        <div class="title-stack">
+          <p>Enterprise Privacy Problem:</p>
+          <p>The Barriers to Public Blockchain</p>
+        </div>
+      </div>
+      <div class="rhs">
+        <p class="subtitle">The<br>Challenge</p>
+      </div>
+    </div>
+
+    <!-- quote + blurb -->
+    <div class="abs quote-2">
+      <div class="row">
+        <div class="quote-bar-blue"></div>
+        <p class="txt">With the methodology established, we now turn to why privacy matters in the first place. Understanding the specific barriers that prevent enterprise adoption is critical to evaluating which solutions address real business needs.</p>
+      </div>
+      <p class="after">For enterprises, the transparency that defines public blockchains is a "double-edged sword." While it provides immutable trust, it simultaneously creates a critical confidentiality deficit. The primary issues include:</p>
+    </div>
+
+    <!-- 4 challenge cards over Frame 128 backdrop -->
+    <div class="abs challenge-cards">
+      <div class="row">
+        <div class="ch-card">
+          <div class="icn ic-biz"></div>
+          <p class="ttl">Exposure of Business Logic</p>
+          <p class="desc">On a public ledger, smart contract interactions can reveal sensitive business logic, trade secrets, and proprietary algorithms to competitors.</p>
+        </div>
+        <div class="ch-card">
+          <div class="icn ic-coin"></div>
+          <p class="ttl">Lack of Financial Discretion</p>
+          <p class="desc" style="width:387px">Publicly visible transaction amounts and wallet balances are incompatible with corporate treasury requirements and high-stakes financial maneuvers.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="ch-card">
+          <div class="icn ic-shield"></div>
+          <p class="ttl">Regulatory Non-Compliance</p>
+          <p class="desc">Regulations such as GDPR and MiCA require strict controls over data access and the "right to be forgotten," which are fundamentally at odds with a permanent, public, transparent ledger.</p>
+        </div>
+        <div class="ch-card">
+          <div class="icn ic-health"></div>
+          <p class="ttl">Impact on Financial Strategy</p>
+          <p class="desc" style="width:407px">Visibility into transaction flows allows for front-running and "MEV" (Maximal Extractable Value) exploitation, which erodes the profitability of institutional trading strategies and introduces unacceptable threat actors.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Institutional Trust Requirements -->
+    <div class="abs trust-req">
+      <p class="t">Institutional Trust Requirements</p>
+      <p class="d">Institutions require an infallible level of trust in their financial products and instruments. The option for confidentiality is a requisite to preserve this trust in the process of tokenized assets. Without robust privacy, the public blockchain remains a "read-only" experiment for the world's largest enterprises.</p>
+    </div>
+
+    <!-- ============= SECTION 05 — Addressable Market (top 6037) ============= -->
+    <div class="abs sec05" id="sec-05">
+      <div class="section-hdr hdr">
+        <div class="lhs">
+          <div class="pill-outline">05</div>
+          <p class="h-section">Privacy Addressable Market</p>
+        </div>
+        <div class="rhs">
+          <p class="subtitle">Market<br>Opportunity</p>
+        </div>
+      </div>
+      <div class="intro">
+        <div class="body-text">
+          <p>Having identified the barriers, it's important to quantify the opportunity. The following sectors represent the economic scale that privacy-preserving technology can unlock on Ethereum.</p>
+          <p>The transition of institutional assets to the blockchain represents a multi-trillion-dollar opportunity. Privacy is not just a feature, it is the key that unlocks these sectors:</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Market segments (3) -->
+    <div class="abs market-segments">
+      <div class="seg">
+        <div class="stat">
+          <p class="lbl">bond market</p>
+          <p class="num">$100T+</p>
+        </div>
+        <div class="content">
+          <p class="h">Global Finance (TradFi)</p>
+          <p class="p">The total addressable market for private decentralized finance (DeFi) includes the $100T+ global bond market and the $600T derivatives market, both of which require strict transaction privacy.</p>
+        </div>
+      </div>
+      <div class="seg">
+        <div class="stat">
+          <p class="lbl">derivatives</p>
+          <p class="num">$600T</p>
+        </div>
+        <div class="content">
+          <p class="h">Supply Chain &amp; Logistics</p>
+          <p class="p">Protecting the identity of suppliers and the pricing of raw materials is essential for maintaining competitive advantages in global trade.</p>
+        </div>
+      </div>
+      <div class="seg">
+        <div class="stat end">
+          <p class="lbl">healthcare</p>
+          <p class="num">Multi-T</p>
+        </div>
+        <div class="content">
+          <p class="h">Healthcare &amp; Data Sovereignty</p>
+          <p class="p">The secure, private exchange of patient records and genomic data requires a "Privacy-First" architecture to meet global compliance standards.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============= SECTION 06 — Taxonomy (top 6887) ============= -->
+    <div class="abs sec06-hdr" id="sec-06">
+      <div class="main">
+        <div class="pill-outline">06</div>
+        <div class="tt">
+          <p>Taxonomy of Privacy Approaches</p>
+          <p>in the Ethereum Ecosystem</p>
+        </div>
+      </div>
+      <div class="sec06-sub">
+        <p class="subtitle">Technical</p>
+        <p class="subtitle">Foundations</p>
+      </div>
+    </div>
+
+    <div class="abs sec06-intro">
+      <p>A common vocabulary for understanding how enterprise privacy on Ethereum is implemented across six foundational approaches.</p>
+    </div>
+
+    <!-- Taxonomy 2x3 grid -->
+    <div class="abs tax-grid">
+      <div class="row">
+        <div class="tax-cell br bb">
+          <div class="top"><div class="num-pill"><p>01</p></div><p class="code">FHE</p></div>
+          <div class="bot"><p class="h">Fully Homomorphic Encryption</p><p class="d">Computation on encrypted data without ever decrypting it.</p></div>
+        </div>
+        <div class="tax-cell br bb">
+          <div class="top"><div class="num-pill"><p>02</p></div><p class="code">GC</p></div>
+          <div class="bot"><p class="h">Garbled Circuits</p><p class="d">Secure computation over encrypted inputs without exposing data to any party.</p></div>
+        </div>
+        <div class="tax-cell bb">
+          <div class="top"><div class="num-pill"><p>03</p></div><p class="code">MPC</p></div>
+          <div class="bot"><p class="h">Multi-Party Computation</p><p class="d">Compute jointly over private inputs without any party seeing all data.</p></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="tax-cell br">
+          <div class="top"><div class="num-pill"><p>04</p></div><p class="code">tee</p></div>
+          <div class="bot"><p class="h">Trusted Execution Environments</p><p class="d">Hardware-secured enclaves for isolated computation.</p></div>
+        </div>
+        <div class="tax-cell br">
+          <div class="top"><div class="num-pill"><p>05</p></div><p class="code">ZKP</p></div>
+          <div class="bot"><p class="h">Zero-Knowledge Proofs</p><p class="d">Prove a statement is true without revealing underlying data.</p></div>
+        </div>
+        <div class="tax-cell">
+          <div class="top"><div class="num-pill"><p>06</p></div><p class="code">PG</p></div>
+          <div class="bot"><p class="h">Privacy Groups</p><p class="d">Sub-networks visible only to designated participants.</p></div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ERC standards section -->
+    <div class="abs sec06b-hdr">
+      <div class="main">
+        <div class="pill-outline">06.b</div>
+        <div class="tt">
+          <p>Privacy-Related Ethereum Standards</p>
+        </div>
+      </div>
+      <div class="sec06-sub">
+        <p class="subtitle">Interoperable</p>
+        <p class="subtitle">Building Blocks</p>
+      </div>
+    </div>
+
+    <div class="abs sec06b-intro">
+      <p>Beyond cryptographic primitives, the Ethereum ecosystem has standardized interoperable interfaces for privacy-preserving transactions. These standards define building blocks upon which enterprise privacy solutions are constructed — they do not provide end-to-end privacy on their own.</p>
+    </div>
+
+    <!-- Anchor passage: deployment readiness context for ERC standards -->
+    <div class="abs sec06b-anchor">
+      <p class="railway-intro">Standards in this section sit at different levels of deployment readiness — think of them as a railway.</p>
+      <div class="railway-item">
+        <p><strong>ERC-5564</strong> and <strong>ERC-6538</strong> are rails. They are laid on Ethereum mainnet, but not on ZKsync, Polygon CDK, COTI, Linea, Silent Data, or Prividium — those chains' documentation does not reference them. Adding them on EVM-equivalent L2s is light work. Even on mainnet, the rails are only half the system: a usable stealth-address experience also needs wallet and SDK software on top — that's the train, and it's a separate, larger build.</p>
+      </div>
+      <div class="railway-item">
+        <p><strong>ERC-7984</strong> is a train design. It only runs if the chain has installed the right engine — today, Zama's fhEVM — which is currently configured for Ethereum mainnet and must be ported chain by chain.</p>
+      </div>
+      <div class="railway-item">
+        <p><strong>EIP-8105</strong> is not rails or a train. It changes the railway itself — Ethereum's underlying transaction layer. It is a draft, not live anywhere, including mainnet.</p>
+      </div>
+    </div>
+
+    <!-- ERC standards grid: 4 cells — first 3 are rails, last is protocol roadmap -->
+    <div class="abs erc-grid">
+      <div class="row">
+        <div class="tax-cell br">
+          <div class="top">
+            <div class="num-pill"><p>01</p></div>
+            <p class="code">ERC-5564</p>
+          </div>
+          <div class="bot">
+            <p class="h">Stealth Addresses</p>
+            <p class="d">Generates one-time addresses for private transfers. Enables recipient privacy without prior interaction.</p>
+          </div>
+          <div class="erc-links">
+            <a class="erc-link" href="https://eips.ethereum.org/EIPS/eip-5564" target="_blank" rel="noopener">Spec</a>
+            <a class="erc-link" href="https://github.com/ScopeLift/stealth-address-erc-contracts" target="_blank" rel="noopener">Implementation</a>
+          </div>
+        </div>
+        <div class="tax-cell br">
+          <div class="top">
+            <div class="num-pill"><p>02</p></div>
+            <p class="code">ERC-6538</p>
+          </div>
+          <div class="bot">
+            <p class="h">Stealth Meta-Address Registry</p>
+            <p class="d">Provides a registry to discover stealth recipients. Enables senders to generate private addresses without direct contact.</p>
+          </div>
+          <div class="erc-links">
+            <a class="erc-link" href="https://eips.ethereum.org/EIPS/eip-6538" target="_blank" rel="noopener">Spec</a>
+            <a class="erc-link" href="https://github.com/ScopeLift/stealth-address-erc-contracts" target="_blank" rel="noopener">Implementation</a>
+          </div>
+        </div>
+        <div class="tax-cell br">
+          <div class="top">
+            <div class="num-pill"><p>03</p></div>
+            <p class="code">ERC-7984 <span class="draft-tag">Draft</span></p>
+          </div>
+          <div class="bot">
+            <p class="h">Confidential Fungible Token</p>
+            <p class="d">Supports confidential balances and transfer amounts. Enables privacy-preserving tokens using FHE, ZK, or TEEs.</p>
+          </div>
+          <div class="erc-links">
+            <a class="erc-link" href="https://eips.ethereum.org/EIPS/eip-7984" target="_blank" rel="noopener">Spec</a>
+            <a class="erc-link" href="https://github.com/OpenZeppelin/openzeppelin-confidential-contracts" target="_blank" rel="noopener">Reference Implementation</a>
+            <a class="erc-link" href="https://ethereum-magicians.org/t/erc-7984-confidential-fungible-token-interface/24735" target="_blank" rel="noopener">Discussion</a>
+          </div>
+        </div>
+        <div class="tax-cell erc-protocol-cell">
+          <div class="top">
+            <div class="num-pill"><p>04</p></div>
+            <p class="code">EIP-8105 <span class="draft-tag">Draft</span></p>
+          </div>
+          <div class="bot">
+            <p class="h">Encrypted Mempools</p>
+            <p class="d">Encrypts transactions before inclusion to reduce front-running and MEV exposure. Particularly relevant for institutional execution.</p>
+          </div>
+          <div class="erc-links">
+            <a class="erc-link" href="https://eips.ethereum.org/EIPS/eip-8105" target="_blank" rel="noopener">Spec</a>
+            <a class="erc-link" href="https://ethereum-magicians.org/t/hegota-headliner-proposal-eip-8105-universal-enshrined-encrypted-mempool-eem/27448" target="_blank" rel="noopener">Hegotá Proposal</a>
+            <a class="erc-link" href="https://blog.shutter.network/introducing-the-universal-enshrined-encrypted-mempool-eip/" target="_blank" rel="noopener">Announcement</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============= SECTION 07 — The Ethereum Foundation's Privacy Roadmap (top 8036) ============= -->
+    <div class="abs sec07-block" id="sec-07">
+      <div class="section-hdr sec07-hdr">
+        <div class="lhs" style="align-items:flex-start">
+          <div class="pill-outline">07</div>
+          <div class="tt">
+            <a class="sec07-heading" href="https://pse.dev/blog/pse-roadmap-2025" target="_blank" rel="noopener">
+              <p>The Ethereum Foundation's</p>
+              <p>Privacy Roadmap</p>
+            </a>
+          </div>
+        </div>
+        <div class="rhs">
+          <p class="subtitle">Foundation<br>Initiatives</p>
+        </div>
+      </div>
+
+      <div class="sec07-intro">
+        <p>While member solutions address immediate enterprise needs, the Ethereum base protocol is also evolving. Understanding where the Ethereum Foundation is heading with privacy infrastructure helps contextualize these enterprise solutions within the broader roadmap.</p>
+      </div>
+
+      <div class="sec07-brand">
+        <img class="sec07-efip" src="./EFIP.jpg" alt="EFIP">
+      </div>
+
+      <div class="roadmap-row">
+        <div class="track-card">
+          <p class="track-num">Track 01</p>
+          <p class="track-title">Private Proving</p>
+          <span class="layer-badge">Application Layer</span>
+          <p class="track-desc">Enabling users to prove facts about themselves without revealing underlying data.</p>
+          <div class="tag-list">
+            <a class="tag" href="https://semaphore.pse.dev/" target="_blank" rel="noopener">Semaphore</a>
+            <a class="tag" href="https://maci.pse.dev/" target="_blank" rel="noopener">MACI</a>
+            <a class="tag" href="https://pse.dev/blog/zkpdf-unlocking-verifiable-data" target="_blank" rel="noopener">zkPDF</a>
+            <a class="tag" href="https://prove.email/" target="_blank" rel="noopener">zkEmail</a>
+          </div>
+        </div>
+        <div class="track-card">
+          <p class="track-num">Track 02</p>
+          <p class="track-title">Private Writes</p>
+          <span class="layer-badge">Transaction Layer</span>
+          <p class="track-desc">Enabling confidential actions on Ethereum mainnet. Developing infrastructure for private transfers, precompiles, and SDK integrations for privacy-first wallets.</p>
+          <div class="tag-list">
+            <a class="tag" href="https://pse.dev/blog/pse-roadmap-2025" target="_blank" rel="noopener">Private Transfers</a>
+            <a class="tag" href="https://pse.dev/blog/pse-roadmap-2025" target="_blank" rel="noopener">Precompiles</a>
+            <a class="tag" href="https://pse.dev/blog/pse-roadmap-2025" target="_blank" rel="noopener">SDK Integrations</a>
+          </div>
+        </div>
+        <div class="track-card">
+          <p class="track-num">Track 03</p>
+          <p class="track-title">Private Reads</p>
+          <span class="layer-badge">Network Layer</span>
+          <p class="track-desc">Tackles metadata leakage from reading state. Developing Private Information Retrieval (PIR). Target: privacy alternatives across major RPC providers within 12 months.</p>
+          <div class="tag-list">
+            <a class="tag" href="https://pse.dev/blog/pse-roadmap-2025" target="_blank" rel="noopener">PIR</a>
+            <a class="tag" href="https://pse.dev/blog/pse-roadmap-2025" target="_blank" rel="noopener">RPC Privacy</a>
+            <a class="tag" href="https://pse.dev/blog/pse-roadmap-2025" target="_blank" rel="noopener">Block Explorers</a>
+          </div>
+        </div>
+      </div>
+       <div class="sec07-iptf">
+          <p class="iptf-title">The Institutional Privacy Task Force</p>
+          <p>The Institutional Privacy Task Force (IPTF) is a team within the Ethereum Foundation that studies the privacy requirements of institutions using or evaluating Ethereum. Its outputs are public: a map of patterns, approaches, use cases, vendors, and jurisdictions; a set of open-source proof-of-concepts and writeups that document the design choices and tradeoffs for each implementation. Everything is released under CC0 and maintained in public GitHub repositories.</p>
+          <p>IPTF and the Ethereum Foundation's PSE team work in parallel. PSE focuses on protocol-level privacy primitives: private proving, private writes, and private reads. IPTF starts from specific institutional requirements such as, but not limited to, regulated payments, tokenized bonds, identity attestation, and cross-border settlement, and compares them against what the current ecosystem can deliver.</p>
+          <p>Evaluations in the map apply four properties the Ethereum Foundation treats as requirements for public infrastructure: <strong>Censorship Resistance, Open Source and Free Software, Privacy, and Security (CROPS)</strong>. The same framework is applied to EF-adjacent work and to third-party vendor work. Patterns and approaches also distinguish between <strong>Institution-to-Institution (I2I)</strong> and <strong>Institution-to-End-User (I2U)</strong> contexts, since the power dynamic between counterparties changes what "privacy" should mean in each case.</p>
+          <p>Contributors include researchers and engineers from inside and outside the Foundation.</p>
+          <div class="iptf-links">
+            <a class="iptf-link" href="https://iptf.ethereum.org/" target="_blank" rel="noopener">iptf.ethereum.org ↗</a>
+            <a class="iptf-link" href="https://github.com/ethereum/iptf-map" target="_blank" rel="noopener">IPTF Map ↗</a>
+            <a class="iptf-link" href="https://github.com/ethereum/iptf-pocs" target="_blank" rel="noopener">IPTF PoCs ↗</a>
+          </div>
+        </div>
+    </div>
+
+    <!-- ============= SECTION 08 — Trust Models of Enterprise Privacy Solutions (top 8830) ============= -->
+    <div class="sec08-block" id="sec-08">
+      <div class="section-hdr sec08-hdr">
+        <div class="lhs" style="align-items:flex-start">
+          <div class="pill-outline">08</div>
+          <div class="tt">
+            <p>Trust Models of Enterprise</p>
+            <p>Privacy Solutions</p>
+          </div>
+        </div>
+        <div class="rhs">
+          <p class="subtitle">Security<br>Foundations</p>
+        </div>
+      </div>
+
+      <div class="sec08-intro">
+        <p>Privacy technologies rely on different security assumptions. Before selecting a solution, enterprises must understand who or what they are trusting, under what conditions that trust can fail, and how those risks align with their regulatory and operational requirements.</p>
+      </div>
+
+      <div class="trust-row">
+        <img src="Frame 154.png" alt="Trust models of enterprise privacy solutions" width="2210" height="936" />
+      </div>
+      <div class="sec08-iptf-pocs">
+        <p class="pocs-kicker">Reference Implementations · IPTF</p>
+        <p class="pocs-title">Proof-of-concepts illustrating each trust model</p>
+        <div class="pocs-grid">
+          <div class="poc-cell">
+            <p class="poc-tag">Cryptographic Trust · ZK</p>
+            <p class="poc-name">DIY Validium PoC</p>
+            <p class="poc-desc">A ZK-based institutional payment system on RISC Zero, illustrating cryptographic trust without third-party execution.</p>
+            <a class="poc-link" href="https://iptf.ethereum.org/diy-validium/" target="_blank" rel="noopener">iptf.ethereum.org/diy-validium ↗</a>
+          </div>
+          <div class="poc-cell">
+            <p class="poc-tag">Hardware-Anchored Trust · TEE</p>
+            <p class="poc-name">Private Cross-Chain Atomic Swap</p>
+            <p class="poc-desc">A TEE-based coordination implementation using AWS Nitro Enclaves, with documented attestation assumptions and failure modes.</p>
+            <a class="poc-link" href="https://iptf.ethereum.org/private-crosschain-atomic-swap-part-2/" target="_blank" rel="noopener">iptf.ethereum.org/private-crosschain-atomic-swap-part-2 ↗</a>
+          </div>
+          <div class="poc-cell">
+            <p class="poc-tag">Organizational Honesty · FHE</p>
+            <p class="poc-name">FHE Bond on fhEVM</p>
+            <p class="poc-desc">A regulated fixed-income instrument implemented on Zama's fhEVM, illustrating FHE with decentralized co-processors.</p>
+            <a class="poc-link" href="https://iptf.ethereum.org/private-bonds-with-fhe/" target="_blank" rel="noopener">iptf.ethereum.org/private-bonds-with-fhe ↗</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="flow-sections">
+    <!-- ============= SECTION 09 — Readiness Matrix with Evidence (top 9800) ============= -->
+    <div class="abs section-hdr sec09-hdr" id="sec-09">
+      <div class="lhs" style="align-items:flex-start">
+        <div class="pill-outline">09</div>
+        <div class="tt">
+          <p>Readiness Matrix with Evidence</p>
+        </div>
+      </div>
+      <div class="rhs">
+        <p class="subtitle">Production<br>Readiness</p>
+      </div>
+    </div>
+
+    <div class="abs sec09-intro">
+      <p>With the foundational concepts established, this matrix provides a practical comparison of each solution's production readiness. The following assessment is evidence-based: classifications use three stages — Pilot, Early Production, and General Availability — each defined by independently verifiable criteria.</p>
+    </div>
+
+    <div class="abs sec09-legend">
+      <div class="legend-pill"><span class="legend-dot pilot"></span>Pilot — Demonstrable system; named participant or partnership; no live regulated traffic required</div>
+      <div class="legend-pill"><span class="legend-dot early"></span>Early Production — ≥1 named customer live in production; ≥3 months continuous operation; ≥1 third-party security audit (last 18 months); handles real-money or regulated traffic</div>
+      <div class="legend-pill"><span class="legend-dot prod"></span>General Availability — ≥3 named customers across ≥2 institution categories; ≥12 months continuous operation; ≥2 third-party audits within last 24 months; public volume/TVL or transaction count.</div>
+    </div>
+
+    <div class="abs sec09-cards">
+      <!-- COTI -->
+      <div class="rm-card">
+        <div class="rm-head">
+          <p class="rm-name">COTI</p>
+          <p class="rm-tech">Garbled Circuits</p>
+          <span class="rm-status prod"><span class="dot"></span>General Availability</span>
+        </div>
+        <div class="rm-body">
+          <p class="rm-evidence">Private RWAs on Testnet with Zonqix, Privex live on mainnet (June 2025); StaTwig VaccineLedger deployed in Bangladesh.</p>
+          <div class="rm-disclosure">
+            <p class="rm-disclosure-label">Mandatory Disclosures</p>
+            <div class="rm-d-grid">
+              <div class="rm-d-row"><span class="rm-d-k">Named customers + tier</span><span class="rm-d-v">Privex (COTI-native DEX, $25bn aggregate volume); StaTwig with UNICEF + Bangladesh Government (national-scale supply chain, 10M private computations); ECB (central bank — Digital Euro Pioneer Partner, partnership stage)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Months in production</span><span class="rm-d-v">~14 months COTI mainnet (since Mar 2025 — <a href="https://mainnet.cotiscan.io/block/0" target="_blank" rel="noopener">block 0</a>); Privex DEX live June 2025</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Last audit firm + date</span><span class="rm-d-v">Sayfer — Mar 2026 (Private ERC-20; MetaMask Snap); prior: Sayfer Nov 2025 (Redeemer), Aug 2025 Hacken (Go-Ethereum), Apr 2025 Sayfer (Account Onboard, gCOTI), Mar 2025 Hacken (MPC). <a href="https://docs.coti.io/coti-documentation/security/audit-reports" target="_blank" rel="noopener">Published audit index</a></span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Regulatory engagement</span><span class="rm-d-v">ECB Digital Euro (Pioneer Partner, partnership stage)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Public volume / TVL</span><span class="rm-d-v">$25bn aggregate volume on Privex</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">License</span><span class="rm-d-v">Apache 2.0 (coti-contracts, coti-sdk-typescript, coti-full-node, coti-snap)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Commercial model</span><span class="rm-d-v">Open-source SDK and contracts; use of COTI L2 network required</span></div>
+            </div>
+          </div>
+          <div class="rm-links">
+            <a class="rm-link" href="https://mainnet.cotiscan.io" target="_blank" rel="noopener">Mainnet Explorer</a>
+            <a class="rm-link" href="https://docs.coti.io" target="_blank" rel="noopener">Docs</a>
+            <a class="rm-link" href="https://cotinetwork.medium.com/a-new-era-of-defi-privex-is-now-live-on-coti-mainnet-0213ecf32e25" target="_blank" rel="noopener">Privex Announcement</a>
+            <a class="rm-link" href="https://cotinetwork.medium.com/statwig-partners-with-coti-for-medical-supply-chain-tracking-3625b83522c7" target="_blank" rel="noopener">StaTwig Partnership</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Linea Enterprise -->
+      <div class="rm-card">
+        <div class="rm-head">
+          <p class="rm-name">Linea Enterprise (Consensys)</p>
+          <p class="rm-tech">ZK-Proofs</p>
+          <span class="rm-status pilot"><span class="dot"></span>Pilot</span>
+        </div>
+        <div class="rm-body">
+          <p class="rm-evidence">Enterprise pilot program; SWIFT collaboration on private testnet.</p>
+          <div class="rm-disclosure">
+            <p class="rm-disclosure-label">Mandatory Disclosures</p>
+            <div class="rm-d-grid">
+              <div class="rm-d-row"><span class="rm-d-k">Named customers + tier</span><span class="rm-d-v">SWIFT pilot (financial market infrastructure — September 2025, private testnet) — 12+ banks including BNP Paribas, BNY Mellon</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Months in production</span><span class="rm-d-v">Not applicable — Linea Enterprise still in pilot. Public Linea mainnet since July 2023, but is a different product.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Last audit firm + date</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Regulatory engagement</span><span class="rm-d-v">None disclosed for Linea Enterprise specifically.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Public volume / TVL</span><span class="rm-d-v">Not applicable for the Enterprise variant.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">License</span><span class="rm-d-v">Apache 2.0 / MIT (dual license, linea-monorepo). Enterprise-specific gating and RBAC not disclosed as open-source.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Commercial model</span><span class="rm-d-v">Commercial engagement with Consensys for the Enterprise variant; public Linea governed by Linea Consortium and Linea Association (Swiss non-profit, since 2025)</span></div>
+            </div>
+          </div>
+          <div class="rm-links">
+            <a class="rm-link" href="https://consensys.io" target="_blank" rel="noopener">Consensys</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nightfall -->
+      <div class="rm-card">
+        <div class="rm-head">
+          <p class="rm-name">Nightfall</p>
+          <p class="rm-tech">Zero-Knowledge Proofs</p>
+          <span class="rm-status pilot"><span class="dot"></span>Pilot</span>
+        </div>
+        <div class="rm-body">
+          <p class="rm-evidence">Nightfall_4 released April 2025; open source on GitHub; integrated into EY OpsChain.</p>
+          <div class="rm-disclosure">
+            <p class="rm-disclosure-label">Mandatory Disclosures</p>
+            <div class="rm-d-grid">
+              <div class="rm-d-row"><span class="rm-d-k">Named customers + tier</span><span class="rm-d-v">Plume Network (L3 — institutional RWA, integration announced); Celo Foundation (payments, integration announced); Starknet (ecosystem integration). All announcements / integrations, not verified live regulated production.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Months in production</span><span class="rm-d-v">Not applicable — no named live production customer; Nightfall_4 released April 2025</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Last audit firm + date</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Regulatory engagement</span><span class="rm-d-v">None disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Public volume / TVL</span><span class="rm-d-v">Not applicable.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">License</span><span class="rm-d-v">CC0-1.0 (public domain) — EY explicitly disclaims warranty and ownership</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Commercial model</span><span class="rm-d-v">Community-only; no commercial entity backing the product</span></div>
+            </div>
+          </div>
+          <div class="rm-links">
+            <a class="rm-link" href="https://github.com/EYBlockchain/nightfall_4_CE" target="_blank" rel="noopener">GitHub</a>
+            <a class="rm-link" href="https://blockchain.ey.com" target="_blank" rel="noopener">EY Blockchain</a>
+            <a class="rm-link" href="https://www.ey.com/en_gl/newsroom/2025/04/ey-upgrades-nightfall-a-zero-knowledge-roll-up-enabling-private-transactions-on-the-ethereum-blockchain" target="_blank" rel="noopener">Press Release</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Paladin -->
+      <div class="rm-card">
+        <div class="rm-head">
+          <p class="rm-name">Paladin (Kaleido / LFDT)</p>
+          <p class="rm-tech">Privacy Groups (ZK/Notary)</p>
+          <span class="rm-status pilot"><span class="dot"></span>Pilot</span>
+        </div>
+        <div class="rm-body">
+          <p class="rm-evidence">Bank of Indonesia Digital Rupiah (Project Garuda) — PoC report published by central bank. HKMA eHKD &amp; Bank of Brazil Drex — references available on request.</p>
+          <div class="rm-disclosure">
+            <p class="rm-disclosure-label">Mandatory Disclosures</p>
+            <div class="rm-d-grid">
+              <div class="rm-d-row"><span class="rm-d-k">Named customers + tier</span><span class="rm-d-v">Bank of Indonesia (central bank — Project Garuda, PoC); HKMA (Hong Kong central bank — eHKD Phase 2); Banco Central do Brasil (central bank — Drex, with Mastercard and Banco BV)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Months in production</span><span class="rm-d-v">Not applicable — all references are PoCs</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Last audit firm + date</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Regulatory engagement</span><span class="rm-d-v">Three central bank programs: Project Garuda (BI), eHKD (HKMA), Drex (BCB)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Public volume / TVL</span><span class="rm-d-v">Not applicable — PoCs</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">License</span><span class="rm-d-v">Apache 2.0 (LFDT-Paladin/paladin)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Commercial model</span><span class="rm-d-v">Open-source community; commercial enterprise support available from Kaleido</span></div>
+            </div>
+          </div>
+          <div class="rm-links">
+            <a class="rm-link" href="https://www.kaleido.io/blockchain-blog/project-garuda-bank-indonesias-cbdc-infrastructure" target="_blank" rel="noopener">Kaleido Blog</a>
+            <a class="rm-link" href="https://www.bi.go.id/en/rupiah/digital-rupiah/Documents/Laporan_POC_Proyek_Garuda_EN.pdf" target="_blank" rel="noopener">BI Official Report (PDF)</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Polygon CDK -->
+      <div class="rm-card">
+        <div class="rm-head">
+          <p class="rm-name">Polygon CDK</p>
+          <p class="rm-tech">Zero-Knowledge Proofs</p>
+          <span class="rm-status pilot"><span class="dot"></span>Pilot</span>
+        </div>
+        <div class="rm-body">
+          <p class="rm-evidence">Recommended fit: institutions that need configurable privacy, structural compliance, and <code>Agglayer</code> connectivity on a private <code>EVM</code> chain. The named pilot is <code>T-REX Ledger</code>: Apex Group has committed $100B in tokenized RWAs, using <code>Zama FHE</code> on <code>ERC-3643</code> for confidential settlement.</p>
+          <div class="rm-disclosure">
+            <p class="rm-disclosure-label">Mandatory Disclosures</p>
+            <div class="rm-d-grid">
+              <div class="rm-d-row"><span class="rm-d-k">Named customers + tier</span><span class="rm-d-v"><code>T-REX Ledger</code>: Apex Group committed $100B in tokenized RWAs. The pilot uses <code>ERC-3643</code> with <code>Zama FHE</code> for confidential settlement and was announced in March 2026.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Months in production</span><span class="rm-d-v"><code>Polygon CDK</code> has been live as production infrastructure since 2024 across multiple deployments. <code>T-REX Ledger</code> with <code>Zama FHE</code> was announced in March 2026. <code>CDK Shield</code>, also called <code>CDK OP Succinct</code>, is <code>OP Succinct</code> with <code>Agglayer</code> as the bridge instead of Optimism's 7-day bridge; it uses <code>SP1 Hypercube</code> proving.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Last audit firm + date</span><span class="rm-d-v"><code>OP Succinct</code> has a 2025 Spearbit audit. <code>Agglayer</code> security reports list 2025 audits by Sigma Prime, Hexens, and Spearbit. See <a href="https://github.com/succinctlabs/op-succinct/tree/main/audits" target="_blank" rel="noopener"><code>OP Succinct</code> audit</a> and <a href="https://docs.polygon.technology/tools/security/reports" target="_blank" rel="noopener"><code>Agglayer</code> security reports</a>.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Regulatory engagement</span><span class="rm-d-v"><code>Gateway</code> regional node hosting supports data residency for EU and APAC frameworks. Role-based access gives regulators and auditors read-only views without exposing the full dataset. <code>T-REX Ledger</code> uses <code>ERC-3643</code> with <code>Zama FHE</code>.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Public volume / TVL</span><span class="rm-d-v">Deployed public volume/TVL for the privacy configuration hasn't been disclosed. Apex Group has committed $100B in tokenized RWAs.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">License</span><span class="rm-d-v">Open source: <code>cdk-erigon</code> is <code>LGPL-3.0</code> / <code>GPL-3.0</code>; <code>op-reth</code>, <code>op-succinct</code>, <code>AggLayer node</code>, and <code>AggKit</code> are <code>MIT OR Apache-2.0</code>; <code>AggLayer contracts</code> are <code>AGPL-3.0</code>.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Commercial model</span><span class="rm-d-v"><code>Polygon CDK</code> is delivered as chain as a service through Polygon Labs and implementation providers such as Conduit and Gateway. There are no protocol fees or token-gated licenses. Production deployments run under Conduit and Gateway enterprise SLAs.</span></div>
+            </div>
+          </div>
+          <div class="rm-links">
+            <a class="rm-link" href="https://polygon.technology/chain-development-kit" target="_blank" rel="noopener">Product Page</a>
+            <a class="rm-link" href="https://docs.polygon.technology/chain-development/cdk" target="_blank" rel="noopener"><code>CDK</code> Docs</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prividium -->
+      <div class="rm-card">
+        <div class="rm-head">
+          <p class="rm-name">Prividium (ZKsync)</p>
+          <p class="rm-tech">Zero-Knowledge Proofs</p>
+          <span class="rm-status pilot"><span class="dot"></span>Pilot</span>
+        </div>
+        <div class="rm-body">
+          <p class="rm-evidence">Deutsche Bank Project Dama 2 — live institutional L2 for asset tokenization (MAS Singapore).</p>
+          <div class="rm-disclosure">
+            <p class="rm-disclosure-label">Mandatory Disclosures</p>
+            <div class="rm-d-grid">
+              <div class="rm-d-row"><span class="rm-d-k">Named customers + tier</span><span class="rm-d-v">Memento Blockchain + Deutsche Bank (Tier 1 bank — DAMA 2, live); Cari Network (US regional / community banks — testnet); 35+ Global FIs (interoperable pilot, unnamed)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Months in production</span><span class="rm-d-v">Not disclosed. (DAMA 2 litepaper June 2025; go-live not stated)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Last audit firm + date</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Regulatory engagement</span><span class="rm-d-v">MAS Project Guardian (DAMA 2)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Public volume / TVL</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">License</span><span class="rm-d-v">Proprietary — commercial license required. Some satellite SDK tooling open-source.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Commercial model</span><span class="rm-d-v">Commercial license required for production; managed-service option available from Matter Labs</span></div>
+            </div>
+          </div>
+          <div class="rm-links">
+            <a class="rm-link" href="https://zksync.io/prividium" target="_blank" rel="noopener">Product Page</a>
+            <a class="rm-link" href="https://www.db.com/news/detail/20250618-dama-2-litepaper-institutional-blueprint-for-asset-tokenisation-and-servicing-on-ethereum-layer-2" target="_blank" rel="noopener">Deutsche Bank Litepaper</a>
+            <a class="rm-link" href="https://www.zksync.io/papers/reflexivity_research_memento_zk_chain.pdf" target="_blank" rel="noopener">Memento Report</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Silent Data -->
+      <div class="rm-card">
+        <div class="rm-head">
+          <p class="rm-name">Silent Data (Applied Blockchain)</p>
+          <p class="rm-tech">TEE</p>
+          <span class="rm-status early"><span class="dot"></span>Early Production</span>
+        </div>
+        <div class="rm-body">
+          <p class="rm-evidence">Archax tokenised funds (Aberdeen, BlackRock, Fidelity, State Street) live Feb 2026; CRYOPDP/DHL — SAP Award winner Dec 2025; Bank of England Digital Pound Lab Phase 1.</p>
+          <div class="rm-disclosure">
+            <p class="rm-disclosure-label">Mandatory Disclosures</p>
+            <div class="rm-d-grid">
+              <div class="rm-d-row"><span class="rm-d-k">Named customers + tier</span><span class="rm-d-v">Archax (FCA-regulated digital securities exchange — funds from Aberdeen, BlackRock, Fidelity, State Street); CRYOPDP (DHL Group — healthcare logistics, SAP Award winner); Shell (energy trading); Bank of England (central bank — Digital Pound Lab Phase 1)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Months in production</span><span class="rm-d-v">~5 months (CRYOPDP since Dec 2025); ~3 months (Archax since Feb 2026)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Last audit firm + date</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Regulatory engagement</span><span class="rm-d-v">Bank of England Digital Pound Lab (Phase 1); operating with FCA-regulated counterparty (Archax)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Public volume / TVL</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">License</span><span class="rm-d-v">Mixed — ancillary tools MIT (silent-data-rollup-providers, silentdata-polkadot, confidential-erc-20); core Silent Data Rollup is proprietary / commercial</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Commercial model</span><span class="rm-d-v">Commercial / SaaS engagement with Applied Blockchain</span></div>
+            </div>
+          </div>
+          <div class="rm-links">
+            <a class="rm-link" href="https://www.silentdata.com/blog/first-privacy-wrapped-tokenised-funds-from-aberdeen-blackrock-and-more-now-available-on-silent-data-via-archax" target="_blank" rel="noopener">Archax Funds</a>
+            <a class="rm-link" href="https://www.silentdata.com/case-study/cryopdp" target="_blank" rel="noopener">CRYOPDP Case Study</a>
+            <a class="rm-link" href="https://www.bankofengland.co.uk/the-digital-pound/lab" target="_blank" rel="noopener">BoE Digital Pound Lab</a>
+            <a class="rm-link" href="https://youtube.com/watch?v=k62bZg898jY" target="_blank" rel="noopener">Demo Video</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <p class="abs sec09-method"><strong>Methodology:</strong> Status classifications follow the principle: "No public evidence, no production claim." Solutions without verifiable public deployment references are classified accordingly. Private references verified by the EEA are noted where applicable.</p>
+
+    <!-- ============= SECTION 10 — Solution Profiles (top 11680) ============= -->
+    <div class="abs section-hdr sec10-hdr" id="sec-10">
+      <div class="lhs" style="align-items:flex-start">
+        <div class="pill-outline">10</div>
+        <div class="tt">
+          <p>Solution Profiles</p>
+        </div>
+      </div>
+      <div class="rhs">
+        <p class="subtitle">Detailed<br>Analysis</p>
+      </div>
+    </div>
+
+    <div class="abs sec10-intro">
+      <p>The matrix provides a high-level overview, but enterprise decision-makers need deeper technical detail. This section offers comprehensive profiles for each solution, including privacy approaches, integration requirements, case studies, and provider-stated characteristics.</p>
+    </div>
+
+    <p class="abs sec10-hint">Click on each solution to expand and view detailed information.</p>
+
+    <div class="abs sec10-profiles">
+      <!-- 1. COTI -->
+      <div class="profile" id="profile-1">
+        <div class="profile-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="num">1</div>
+          <div class="logo-slot"><img src="https://entethalliance.github.io/wg-privacy/logos/coti.png" alt="COTI"></div>
+          <div class="info">
+            <p class="name">COTI</p>
+            <div class="meta">
+              <span class="meta-tag">COTI Group</span>
+              <span class="meta-tag tech">Garbled Circuits</span>
+              <span class="meta-tag">Cryptographic</span>
+            </div>
+          </div>
+          <div class="arrow"><svg viewBox="0 0 14 14" fill="none"><path d="M3 5 L7 9 L11 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="profile-body">
+          <div class="profile-body-inner">
+            <div>
+              <h4>Summary</h4>
+              <p>COTI is the programmable privacy layer for Web3. Powered by high-performance Garbled Circuits, it delivers fast, low-cost, flexible, and compliant privacy across blockchains, and natively on its Ethereum Layer 2. COTI's architecture enables enterprises and developers to build privacy-preserving applications with end-to-end confidentiality and cost-efficiency at scale. It unlocks a wide variety of use cases in private DeFi, tokenized real-world assets (RWAs), trading, payments, and decentralized identity.</p>
+            </div>
+            <div>
+              <h4>Privacy Approach</h4>
+              <p>COTI uses Garbled Circuits (GC), an advanced multi-party computation (MPC) technique, to enable encrypted computation within workflows. Sensitive data including inputs, balances, on-chain state, and smart contract logic, remains encrypted end-to-end across storage, computation and transmission. Programmable smart contracts allow selective disclosure for audits, compliance, or permissions via permissioned view-keys.</p>
+              <p>Institutions can granularly select, on a per party basis, which participants have access to decryption rights. Further they may decide which parties may run computation on data that stays encrypted but provides decrypted outputs.</p>
+            </div>
+            <div>
+              <h4>Integration Requirements</h4>
+              <ul>
+                <li>Deploy on COTI network or bridge existing assets</li>
+                <li>Standard Solidity (Fully EVM compatible) with parameters specifying confidential data elements</li>
+                <li>TypeScript, Python, Hardhat tooling available</li>
+                <li>MCP, SKILL.MD and agentic support</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Case Studies</h4>
+              <ul>
+                <li><strong>Central Bank of Europe — Digital Euro:</strong> Pioneer Partner with the ECB to establish confidential consumer applications on top of a Euro CBDC settlement layer.</li>
+                <li><strong>Privex:</strong> A COTI native privacy-preserving perpetual exchange processing over $25bn in aggregate volume.</li>
+                <li><strong>Unicef, Bangladesh Government, StaTwig:</strong> National-scale rollout completing 10 million private computations on encrypted IoT-enabled vaccine data for approximately $7.00 in total gas fees (computation cost).</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Solution Characteristics</h4>
+              <ul>
+                <li>Extends confidential tokens, concealing transaction values and account balances</li>
+                <li>Real-time, scalable, confidential computations; private transactions at $0.0000007</li>
+                <li>1000× faster &amp; 250× lighter than alternative privacy solutions (FHE)</li>
+                <li><strong>Roadmap:</strong> Multichain expansion to 70+ chains (planned 2026)</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Documentation</h4>
+              <div class="links">
+                <a href="https://docs.coti.io" target="_blank" rel="noopener">Documentation</a>
+                <a href="https://github.com/coti-io" target="_blank" rel="noopener">GitHub</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Linea Enterprise -->
+      <div class="profile" id="profile-2">
+        <div class="profile-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="num">2</div>
+          <div class="logo-slot"><img src="https://entethalliance.github.io/wg-privacy/logos/consensys.png" alt="Consensys"></div>
+          <div class="info">
+            <p class="name">Linea Enterprise</p>
+            <div class="meta">
+              <span class="meta-tag">Consensys</span>
+              <span class="meta-tag tech">Zero-Knowledge Proofs</span>
+              <span class="meta-tag">Cryptographic</span>
+            </div>
+          </div>
+          <div class="arrow"><svg viewBox="0 0 14 14" fill="none"><path d="M3 5 L7 9 L11 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="profile-body">
+          <div class="profile-body-inner">
+            <div>
+              <h4>Summary</h4>
+              <p>An Ethereum Layer 2 solution that can be deployed as a private, permissioned "Validium" where the state remains private. Zero knowledge proofs are used to prove the validity of the state while keeping transaction data confidential as well as to enable trustless interoperability with Ethereum.</p>
+            </div>
+            <div>
+              <h4>Privacy Approach</h4>
+              <p>Uses a Private Validium architecture combined with an Access Control Engine. Transaction data and ledger state stay within the operator-controlled infrastructure and are never published externally. Only zero-knowledge validity proofs (ZKPs) and commitments to these data are posted to Ethereum. Role-Based Access Control (RBAC) restricts data visibility so that participants only see the specific transaction data they are entitled to view.</p>
+            </div>
+            <div>
+              <h4>Integration Requirements</h4>
+              <ul>
+                <li><strong>Existing Smart Contracts:</strong> Full EVM equivalence — existing contracts deploy without modification</li>
+                <li><strong>Tokens:</strong> Native support for all ERC standards (ERC-20, ERC-721, ERC-1155, ERC-3643)</li>
+                <li><strong>Tooling:</strong> Compatible with Hardhat, Foundry and standard Ethereum tools</li>
+                <li><strong>Identity:</strong> Linea Enterprise Gateway integration (OAuth2, wallet signing)</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Case Studies</h4>
+              <ul>
+                <li><strong>SWIFT September 2025 pilot:</strong> 12+ banks including BNP Paribas, BNY Mellon</li>
+                <li><strong>SharpLink Gaming:</strong> $170M ETH with Anchorage Digital custody</li>
+                <li>Total value secured on Linea Mainnet: up to +$2.5B</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Solution Characteristics</h4>
+              <ul>
+                <li><strong>Throughput:</strong> ~1000 TPS for simple transfers, roadmap to 30,000+ TPS</li>
+                <li><strong>Finality:</strong> Instant/single-slot finality on L2</li>
+                <li><strong>Cost:</strong> Sub-$0.01 per transaction</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Documentation</h4>
+              <div class="links">
+                <a href="https://github.com/Consensys/linea-monorepo" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://docs.linea.build/stack" target="_blank" rel="noopener">Documentation</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Nightfall -->
+      <div class="profile" id="profile-3">
+        <div class="profile-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="num">3</div>
+          <div class="logo-slot"><img src="https://entethalliance.github.io/wg-privacy/logos/ey.png" alt="EY"></div>
+          <div class="info">
+            <p class="name">Nightfall</p>
+            <div class="meta">
+              <span class="meta-tag">Public Domain</span>
+              <span class="meta-tag tech">Zero-Knowledge Proofs</span>
+              <span class="meta-tag">Cryptographic</span>
+            </div>
+          </div>
+          <div class="arrow"><svg viewBox="0 0 14 14" fill="none"><path d="M3 5 L7 9 L11 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="profile-body">
+          <div class="profile-body-inner">
+            <div>
+              <h4>Summary</h4>
+              <p>Nightfall_4<sup>*</sup> is an open-source zero-knowledge-based privacy protocol originally developed by EY and released to the public domain that enables confidential token transfers on Ethereum-compatible networks. It is designed for enterprise and institutional use cases, supporting selective disclosure for compliance and audit without introducing global decryption keys or protocol backdoors.</p>
+              <p>Nightfall_4 focuses on practical privacy for regulated environments, balancing confidentiality, auditability, and interoperability with public blockchain infrastructure.</p>
+              <p class="ey-disclaimer"><strong>Disclaimer:</strong> Nightfall is not owned by EY and EY provides no warranty and disclaims any and all liability for use of this code. Users must conduct their own diligence with respect to use for their purposes and any and all usage is on an as-is basis and at your own risk.</p>
+            </div>
+            <div>
+              <h4>Privacy Approach</h4>
+              <p>Converts tokens (ERC-20, ERC-721, ERC-1155, ERC-3525) into cryptographic 'commitments' using ZK-ZK rollup architecture. Validity proofs verify correctness without revealing amounts, parties, or transfer details.</p>
+            </div>
+            <div>
+              <h4>Integration Requirements</h4>
+              <ul>
+                <li>Tokens deposit to receive private commitments</li>
+                <li>Supports decentralized permissioning and KYC-gating</li>
+                <li>X.509 enterprise identity certificates supported for deposit/withdrawal</li>
+                <li>Gas fee abstraction available for ERC-20 tokens</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Case Studies</h4>
+              <ul>
+                <li><strong>Starknet Ecosystem:</strong> Integration for high-throughput privacy-preserving payments</li>
+                <li><strong>Plume Network:</strong> L3 deployment for privacy-enabled institutional RWA tokenization, combined with Plume's sequencer-level AML policy</li>
+                <li><strong>Celo Foundation:</strong> First payments-focused blockchain to deploy Nightfall ($180T B2B payments market)</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Solution Characteristics</h4>
+              <ul>
+                <li><strong>Cost:</strong> 3.5× cost reduction vs. public ERC-20 transfers</li>
+                <li><strong>Development history:</strong> Since 2019</li>
+                <li><strong>Open source:</strong> Fully public domain, no commercial licensing</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Documentation</h4>
+              <div class="links">
+                <a href="https://github.com/EYBlockchain/nightfall_4_CE" target="_blank" rel="noopener">GitHub</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Paladin -->
+      <div class="profile" id="profile-4">
+        <div class="profile-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="num">4</div>
+          <div class="logo-slot"><img src="./Paladin.svg" alt="Paladin"></div>
+          <div class="info">
+            <p class="name">Paladin</p>
+            <div class="meta">
+              <span class="meta-tag">Kaleido / LFDT</span>
+              <span class="meta-tag tech">ZK/Notary (Privacy Groups)</span>
+              <span class="meta-tag">Crypto + Organizational</span>
+            </div>
+          </div>
+          <div class="arrow"><svg viewBox="0 0 14 14" fill="none"><path d="M3 5 L7 9 L11 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="profile-body">
+          <div class="profile-body-inner">
+            <div>
+              <h4>Summary</h4>
+              <p>Paladin, a top-level project of the Linux Foundation Decentralized Trust (LFDT), is a unified framework for "Programmable Privacy" designed to bring enterprise-grade confidentiality to any EVM-compatible blockchain. Its standout feature is atomic, all-or-nothing transactions across multiple privacy domains (e.g., Delivery vs. Payment) where different legs of a trade might use different privacy models.</p>
+            </div>
+            <div>
+              <h4>Privacy Approach</h4>
+              <p>Paladin achieves confidentiality via Privacy Domains. Each domain consists of a module that generates proofs from private data and an on-chain smart contract that verifies them. The three built-in protocols implement their proof systems using a mix of Java, Go, and Rust/WebAssembly:</p>
+              <ul>
+                <li><strong>Pente:</strong> private smart contract execution through "ephemeral EVMs" with state commitments recorded on-chain</li>
+                <li><strong>Zeto:</strong> a ZKP-based token implementation</li>
+                <li><strong>Noto:</strong> a notary-based token implementation for regulated assets</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Integration Requirements</h4>
+              <ul>
+                <li><strong>Deployment:</strong> Each participant hosts a Paladin Node as sidecar to any EVM client</li>
+                <li><strong>Privacy Domain:</strong> Admins deploy "Domains" (Zeto, Noto, Pente) with cryptographic rules</li>
+                <li><strong>Identity &amp; Key Management:</strong> Enterprise KMS/HSM integration built-in</li>
+                <li><strong>Peer-to-Peer Connectivity:</strong> Secure mTLS for off-chain exchange</li>
+                <li><strong>Off-chain State Store:</strong> Each node uses a dedicated database</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Case Studies</h4>
+              <ul>
+                <li><strong>Central Bank of Brazil, Drex Project:</strong> Mastercard, Banco BV phase 2 use cases</li>
+                <li><strong>Bank Indonesia, Digital Rupiah:</strong> Cash Ledger</li>
+                <li><strong>Hong Kong Monetary Authority, eHKD Phase 2:</strong> Zeto tested as Privacy Enhancing Technology</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Solution Characteristics</h4>
+              <ul>
+                <li>Programmable Privacy &amp; Atomic Interoperability</li>
+                <li>High-Performance UTXO-based privacy tokens</li>
+                <li>Pluggable Cryptography</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Documentation</h4>
+              <div class="links">
+                <a href="https://github.com/LFDT-Paladin/paladin" target="_blank" rel="noopener">Source code</a>
+                <a href="https://lfdt-paladin.github.io/paladin" target="_blank" rel="noopener">Documentation</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Prividium -->
+      <div class="profile" id="profile-5">
+        <div class="profile-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="num">5</div>
+          <div class="logo-slot"><img src="https://entethalliance.github.io/wg-privacy/logos/zksync.png" alt="ZKsync"></div>
+          <div class="info">
+            <p class="name">Prividium</p>
+            <div class="meta">
+              <span class="meta-tag">ZKsync / Matter Labs</span>
+              <span class="meta-tag tech">Zero-Knowledge Proofs</span>
+              <span class="meta-tag">Cryptographic</span>
+            </div>
+          </div>
+          <div class="arrow"><svg viewBox="0 0 14 14" fill="none"><path d="M3 5 L7 9 L11 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="profile-body">
+          <div class="profile-body-inner">
+            <div>
+              <h4>Summary</h4>
+              <p>Enterprise-grade private, permissioned Layer 2 infrastructure combining institutional privacy controls with native Ethereum connectivity. Transactions execute privately within and across enterprise-controlled Zones while ZK proofs anchor integrity to Ethereum — enabling compliant tokenization with access to public liquidity.</p>
+            </div>
+            <div>
+              <h4>Privacy Approach</h4>
+              <p>Permissioned ZKsync L2 architecture with zero-knowledge proofs. Transaction data executes off-chain within operator-controlled infrastructure. Only ZK validity proofs and state root commitments post to Ethereum. No transaction details, amounts, or counterparty information ever reach outside the Prividium. Role-based access controls define granular permissions at the smart contract function level.</p>
+            </div>
+            <div>
+              <h4>Integration Requirements</h4>
+              <ul>
+                <li>Full EVM equivalence with standard tooling (Hardhat, Truffle, Foundry)</li>
+                <li>Deployment options: Matter Labs managed, customer cloud, or on-premises</li>
+                <li>Enterprise SSO integration (Okta, Azure AD)</li>
+                <li>Native interoperability to other ZKsync chains and Ethereum</li>
+                <li>Commercial agreement with Matter Labs required</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Case Studies</h4>
+              <ul>
+                <li><strong>Cari Network:</strong> Tokenized deposit network for US regional/community banks (testnet)</li>
+                <li><strong>Memento Blockchain + Deutsche Bank DAMA 2:</strong> Tokenized fund infrastructure in production</li>
+                <li><strong>35+ Global Financial Institutions:</strong> Interoperable Prividium pilot</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Solution Characteristics</h4>
+              <ul>
+                <li><strong>Cost:</strong> Sub-$0.001 per transaction including L1 settlement</li>
+                <li><strong>Performance:</strong> up to 15,000 TPS per Prividium; target sub-1 second ZK proof generation</li>
+                <li><strong>Ecosystem:</strong> Cross-chain privacy within ZKsync ecosystem + direct L1 interop</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Documentation</h4>
+              <div class="links">
+                <a href="https://docs.zksync.io/zk-stack/running-a-prividium" target="_blank" rel="noopener">Docs</a>
+                <a href="https://zksync.io/prividium" target="_blank" rel="noopener">Product Page</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. Polygon CDK -->
+      <div class="profile" id="profile-6">
+        <div class="profile-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="num">6</div>
+          <div class="logo-slot"><img src="https://entethalliance.github.io/wg-privacy/logos/polygon.png" alt="Polygon"></div>
+          <div class="info">
+            <p class="name">Polygon CDK</p>
+            <div class="meta">
+              <span class="meta-tag">Polygon</span>
+              <span class="meta-tag tech">Zero-Knowledge Proofs</span>
+              <span class="meta-tag">Cryptographic</span>
+            </div>
+          </div>
+          <div class="arrow"><svg viewBox="0 0 14 14" fill="none"><path d="M3 5 L7 9 L11 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="profile-body">
+          <div class="profile-body-inner">
+            <div>
+              <h4>Summary</h4>
+              <p>Recommended fit: institutions launching private <code>EVM</code> chains secured by <code>ZK</code> proofs, with configurable privacy and <code>Agglayer</code> connectivity. Polygon Labs and providers such as Conduit and Gateway co-design the chain architecture with the institution, then tune privacy mechanisms to the regulatory environment and the threat model.</p>
+            </div>
+            <div>
+              <h4>Privacy Approach</h4>
+              <p>Institutions can tune privacy across chain, application, and wallet layers.</p>
+              <ul>
+                <li><strong>Private validium (<code>CDK Shield</code>):</strong> Also called <code>CDK OP Succinct</code>, this uses <code>OP Succinct</code> with <code>Agglayer</code> as the bridge instead of Optimism's 7-day bridge. It keeps <code>SP1 Hypercube</code> proving and an institution-operated <code>AltDA</code> layer.</li>
+                <li><strong><code>FHE</code>:</strong> Homomorphic computation keeps balances and transfers encrypted during settlement. Reference deployment: <code>T-REX Ledger</code> with Zama on <code>ERC-3643</code>.</li>
+                <li><strong><code>TEE</code>:</strong> Trusted execution environments seal selected workloads from the chain operator.</li>
+                <li><strong>Permissioned access:</strong> Enterprise identity gates <code>RPC</code>, <code>mempool</code>, and explorer access.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Integration Requirements</h4>
+              <ul>
+                <li><strong>Delivery:</strong> Chain as a service, co-designed with Polygon Labs and providers such as Conduit and Gateway.</li>
+                <li><strong>Configurations:</strong> <code>zkRollup</code>, <code>Validium</code>, <code>CDK Shield</code>, or <code>Sovereign</code> mode. <code>CDK Shield</code> is <code>CDK OP Succinct</code>: <code>OP Succinct</code> with <code>Agglayer</code> as the bridge.</li>
+                <li><strong>Execution:</strong> Full <code>EVM</code> equivalence with multiclient options including <code>cdk-erigon</code> and <code>CDK OP Stack</code>.</li>
+                <li><strong>Identity:</strong> Azure ID SSO and other enterprise SSO; native support for <code>ERC-3643</code>.</li>
+                <li><strong>Interop:</strong> Native <code>Agglayer</code> connectivity reaches <code>OP Stack</code>, <code>cdk-erigon</code>, and <code>Miden</code> testnet.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Case Studies</h4>
+              <ul>
+                <li><strong><code>T-REX Ledger</code>:</strong> Apex Group, a $3.5T administrator, committed $100B in tokenized RWAs. The pilot uses <code>Polygon CDK</code> + <code>Zama FHE</code> on <code>ERC-3643</code> and was announced in March 2026.</li>
+                <li><strong>Katana:</strong> Mainnet <code>CDK OP Stack</code> chain generating <code>Succinct SP1</code> validity proofs in production.</li>
+                <li><strong>Conduit G3:</strong> Sequencer infrastructure for high-throughput <code>Polygon CDK</code> chains, with 3 Ggas/s sustained throughput.</li>
+                <li><strong><code>CDK</code> ecosystem:</strong> Live deployments include Katana, OKX, Immutable, and others.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Solution Characteristics</h4>
+              <ul>
+                <li><strong>Privacy:</strong> <code>FHE</code>, private validium, <code>TEE</code>, and permissioned access.</li>
+                <li><strong>Settlement:</strong> Validity proofs and cryptographic finality.</li>
+                <li><strong>Throughput:</strong> Conduit G3 provides 3 Ggas/s sustained throughput and 25K TPS.</li>
+                <li><strong>Cross-chain:</strong> Native <code>Agglayer</code> settlement across heterogeneous stacks.</li>
+                <li><strong>Maturity:</strong> <code>Polygon CDK</code> has been production-ready since 2024; <code>T-REX Ledger</code> entered pilot in March 2026.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Documentation</h4>
+              <div class="links">
+                <a href="https://docs.polygon.technology/chain-development/cdk" target="_blank" rel="noopener"><code>Polygon CDK</code> Docs</a>
+                <a href="https://github.com/0xPolygon/cdk-erigon" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://github.com/agglayer" target="_blank" rel="noopener"><code>Agglayer</code> GitHub</a>
+                <a href="https://succinctlabs.github.io/op-succinct/validity/experimental/altda.html" target="_blank" rel="noopener"><code>CDK Shield</code> Docs</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. Silent Data -->
+      <div class="profile" id="profile-7">
+        <div class="profile-head" onclick="this.parentElement.classList.toggle('open')">
+          <div class="num">7</div>
+          <div class="logo-slot"><img src="./sd-icon-circle-blue.png" alt="Silent Data"></div>
+          <div class="info">
+            <p class="name">Silent Data</p>
+            <div class="meta">
+              <span class="meta-tag">Applied Blockchain</span>
+              <span class="meta-tag tech">TEE</span>
+              <span class="meta-tag">HW-Anchored</span>
+            </div>
+          </div>
+          <div class="arrow"><svg viewBox="0 0 14 14" fill="none"><path d="M3 5 L7 9 L11 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="profile-body">
+          <div class="profile-body-inner">
+            <div>
+              <h4>Summary</h4>
+              <p>Silent Data is an Ethereum Layer 2 developed by Applied Blockchain that provides full Turing-complete programmable privacy for smart contract execution and transaction data. Privacy is enforced at the execution layer using trusted execution environments (TEEs), enabling regulated applications to control disclosure while maintaining standard EVM execution and connectivity to Ethereum.</p>
+            </div>
+            <div>
+              <h4>Privacy Approach</h4>
+              <p>Uses Trusted Execution Environments (TEEs) — specialized chips that process data in encrypted form. Infrastructure operators cannot observe processing. Privacy guarantees derive from hardware properties. Privacy controls are applied at the execution layer, allowing transaction inputs, intermediate state, and smart contract logic to execute confidentially. No custom cryptography. No changes to Solidity.</p>
+            </div>
+            <div>
+              <h4>Integration Requirements</h4>
+              <ul>
+                <li>Existing smart contracts deploy directly (standard EVM, no custom extensions)</li>
+                <li>First L2 deployed using OP Stack, part of Ethereum Superchain ecosystem</li>
+                <li>Assets bridge to Silent Data L2 (similar to Base, Unichain)</li>
+                <li>Works with standard Ethereum/EVM tooling</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Case Studies</h4>
+              <ul>
+                <li><strong>Archax:</strong> FCA-regulated digital securities exchange — Aberdeen money market fund live in production</li>
+                <li><strong>DHL Health Logistics — CRYOPDP:</strong> Award-winning supply chain logistics in production</li>
+                <li><strong>Shell:</strong> Energy trading applications with privacy</li>
+                <li><strong>Blueprints:</strong> Pre-built privacy-enabled application templates</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Solution Characteristics</h4>
+              <ul>
+                <li><strong>Performance:</strong> Up to 4,000 TPS (performance not impacted by privacy protocol)</li>
+                <li><strong>Trust model:</strong> Depends on hardware manufacturer attestation (Intel)</li>
+                <li><strong>Network:</strong> Standard Ethereum L2, assets can be bridged</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Documentation</h4>
+              <div class="links">
+                <a href="https://docs.silentdata.com" target="_blank" rel="noopener">Documentation</a>
+                <a href="https://github.com/appliedblockchain/silentdata-defi-enclave" target="_blank" rel="noopener">GitHub</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============= SECTION 11 — Decision Framework (top 13280) ============= -->
+    <div class="abs section-hdr sec11-hdr" id="sec-11">
+      <div class="lhs" style="align-items:flex-start">
+        <div class="pill-outline">11</div>
+        <div class="tt">
+          <p>Decision Framework</p>
+        </div>
+      </div>
+      <div class="rhs">
+        <p class="subtitle">Evaluation<br>Guide</p>
+      </div>
+    </div>
+
+    <div class="abs sec11-intro">
+      <p>Understanding the landscape is one thing; making a selection is another. This framework synthesizes the previous sections into a practical set of questions that guide enterprise decision-makers through the evaluation process.</p>
+    </div>
+
+    <p class="abs sec11-lead">When evaluating privacy solutions, enterprises should systematically consider the following questions:</p>
+
+    <div class="abs sec11-questions">
+      <div class="df-rail">
+        <div class="df-num">01</div>
+        <div class="df-line"></div>
+        <div class="df-num">02</div>
+        <div class="df-line"></div>
+        <div class="df-num">03</div>
+        <div class="df-line"></div>
+        <div class="df-num">04</div>
+        <div class="df-line"></div>
+        <div class="df-num">05</div>
+      </div>
+      <div class="df-cards">
+        <div class="df-card">
+          <p class="df-q">What needs to be private?</p>
+          <p class="df-desc">Transaction amounts, counterparty identities, business logic, or all three? Different solutions excel at protecting different data types.</p>
+        </div>
+        <div class="df-card">
+          <p class="df-q">What trust model is acceptable?</p>
+          <p class="df-desc">Pure cryptographic guarantees, hardware-dependent security, or organizational trust? Your risk tolerance and regulatory requirements will guide this choice.</p>
+        </div>
+        <div class="df-card">
+          <p class="df-q">What is the regulatory environment?</p>
+          <p class="df-desc">GDPR, MiCA, or sector-specific requirements? Ensure the solution supports necessary compliance mechanisms like selective disclosure.</p>
+        </div>
+        <div class="df-card">
+          <p class="df-q">What is the deployment timeline?</p>
+          <p class="df-desc">Production-ready solutions vs. emerging technology? Balance innovation with operational readiness based on your timeline.</p>
+        </div>
+        <div class="df-card">
+          <p class="df-q">What is the integration complexity?</p>
+          <p class="df-desc">Mainnet settlement vs. separate chain? Consider the technical resources required and existing infrastructure compatibility.</p>
+        </div>
+      </div>
+    </div>
+     <div class="abs sec11-iptf-ref">
+      <p class="iptf-ref-kicker">Related IPTF Framework</p>
+      <p class="iptf-ref-text">See IPTF's <a href="https://iptf.ethereum.org/public-rails-vs-private-ledgers/" target="_blank" rel="noopener">Public Rails vs Private Ledgers ↗</a> for a related decision framework covering public blockchains with cryptographic privacy and private ledgers with trust-based privacy.</p>
+    </div>
+
+    <div class="abs sec11-conclusion">
+      <div class="conc-bar"></div>
+      <p class="conc-text">No single solution addresses all enterprise privacy requirements. The optimal approach often involves combining solutions or selecting based on the specific use case.</p>
+    </div>
+
+    <!-- ============= SECTION 12 — Future Outlook & Open Questions (top 14720) ============= -->
+    <div class="abs section-hdr sec12-hdr" id="sec-12">
+      <div class="lhs" style="align-items:flex-start">
+        <div class="pill-outline">12</div>
+        <div class="tt">
+          <p>Future Outlook &amp; Open Questions</p>
+        </div>
+      </div>
+      <div class="rhs">
+        <p class="subtitle">Looking<br>Ahead</p>
+      </div>
+    </div>
+
+    <div class="abs sec12-intro">
+      <p>This report captures a moment in time. Privacy technology on Ethereum is evolving rapidly, and the questions that remain unanswered today will shape the next phase of enterprise adoption. This section highlights the open challenges and the working group's commitment to ongoing collaboration.</p>
+    </div>
+
+    <p class="abs sec12-lead">As the privacy landscape on Ethereum continues to evolve, several critical questions remain open for the enterprise community:</p>
+
+    <div class="abs sec12-questions">
+      <div class="oq-card">
+        <p class="oq-text">How will privacy solutions interact with each other across L1 and L2?</p>
+        
+      </div>
+      <div class="oq-card">
+        <p class="oq-text">What standards are needed for cross-solution interoperability?</p>
+        
+      </div>
+      <div class="oq-card">
+        <p class="oq-text">How will regulatory frameworks evolve to address on-chain privacy?</p>
+        
+      </div>
+      <div class="oq-card">
+        <p class="oq-text">What role will the EF Privacy Roadmap play in standardizing base-layer privacy?</p>
+        
+      </div>
+    </div>
+
+    <div class="abs sec12-joint">
+      <div class="sec12-joint-inner">
+        <p class="js-kicker">Joint Statement</p>
+        <p class="js-title">Building the future of <em>Compliant Privacy</em> on Ethereum</p>
+        <p class="js-body">The members of this working group, in collaboration with the wider Ethereum community and the Ethereum Foundation (EF), remain committed to the development of "Compliant Privacy." We believe that the future of the enterprise web is not just decentralized, but inherently confidential.</p>
+      </div>
+    </div>
+
+    <!-- ============= SECTION 13 — Additional Solutions (top 16240) ============= -->
+    <div class="abs section-hdr sec13-hdr" id="sec-13">
+      <div class="lhs" style="align-items:flex-start">
+        <div class="pill-outline">13</div>
+        <div class="tt">
+          <p>Additional Privacy Solutions</p>
+        </div>
+      </div>
+      <div class="rhs">
+        <p class="subtitle">Broader<br>Ecosystem</p>
+      </div>
+    </div>
+
+    <div class="abs sec13-intro">
+      <p>Solutions profiled in this report were contributed by EEA member organizations participating in the Privacy Working Group. Inclusion is a function of evidence and engagement, not endorsement.</p>
+      <p>Other privacy solutions exist in the Ethereum ecosystem. The most prominent are listed below based on publicly available information. Working group participation requires EEA membership. Organizations interested in contributing to a future edition may <a href="https://webforms.pipedrive.com/f/6UT1OXeG6VRdX4Cf4AHlF5B1f8tS5axIGahvukW1AEHafwmRuRGVAYo1SKByE9gRPR" target="_blank" rel="noopener">apply for EEA membership</a>.</p>
+    </div>
+
+    <div class="abs sec13-table">
+      <div class="as-head">
+        <div class="as-col-1">Company</div>
+        <div class="as-col-2">Solution</div>
+      </div>
+      <div class="as-row">
+        <div class="as-company">RAILGUN DAO</div>
+        <div class="as-solution">Privacy system enabling private transfers and DeFi interactions on Ethereum mainnet using ZK proofs</div>
+      </div>
+      <div class="as-row">
+        <div class="as-company">Aztec Labs</div>
+        <div class="as-solution">ZK rollup with native private smart contracts and encrypted state on Ethereum</div>
+      </div>
+      <div class="as-row">
+        <div class="as-company">Zama</div>
+        <div class="as-solution">Encrypted smart contracts using fully homomorphic encryption on EVM chains</div>
+      </div>
+      <div class="as-row">
+        <div class="as-company">Fhenix</div>
+        <div class="as-solution">FHE-powered L2 enabling computation on encrypted data</div>
+      </div>
+      <div class="as-row">
+        <div class="as-company">Panther</div>
+        <div class="as-solution">Privacy pools for compliant private transactions with selective disclosure</div>
+      </div>
+      <div class="as-row">
+        <div class="as-company">ScopeLift / Umbra</div>
+        <div class="as-solution">Stealth address protocol for private payments on Ethereum</div>
+      </div>
+    </div>
+
+    <!-- ============= SECTION 14 — Contact (top 17380) ============= -->
+    <div class="abs section-hdr sec14-hdr" id="sec-14">
+      <div class="lhs" style="align-items:flex-start">
+        <div class="pill-outline">14</div>
+        <div class="tt">
+          <p>Contact</p>
+        </div>
+      </div>
+      <div class="rhs">
+        <p class="subtitle">Get<br>In Touch</p>
+      </div>
+    </div>
+
+    <div class="abs sec14-contact">
+      <div class="sec14-contact-inner">
+        <p class="cx-text">Participation in the Privacy Working Group is open to EEA member organizations. For inquiries about privacy solutions on Ethereum, contact us at:</p>
+        <a class="cx-email" href="mailto:privacy-wg@entethalliance.org">privacy-wg@entethalliance.org</a>
+        <a class="cx-join" href="https://webforms.pipedrive.com/f/6UT1OXeG6VRdX4Cf4AHlF5B1f8tS5axIGahvukW1AEHafwmRuRGVAYo1SKByE9gRPR" target="_blank" rel="noopener">Apply for EEA Membership →</a>
+      </div>
+    </div>
+
+    <p class="abs sec14-wgc-label">Working Group Contributors</p>
+
+    <div class="abs sec14-wgc">
+      <div class="wgc-head">
+        <div class="wgc-c-1">Organization</div>
+        <div class="wgc-c-2">Solution</div>
+        <div class="wgc-c-3">Contributors</div>
+      </div>
+      <div class="wgc-row">
+        <div class="wgc-org">Applied Blockchain</div>
+        <div class="wgc-sol">Silent Data</div>
+        <div class="wgc-peo">Andrew Campbell, Adi Ben-Ari</div>
+      </div>
+      <div class="wgc-row">
+        <div class="wgc-org">Consensys</div>
+        <div class="wgc-sol">Linea Enterprise</div>
+        <div class="wgc-peo">Florian Huc, Arthur Remy</div>
+      </div>
+      <div class="wgc-row">
+        <div class="wgc-org">COTI</div>
+        <div class="wgc-sol">COTI V2</div>
+        <div class="wgc-peo">Brad Goodwin, Amateo Kaplan, Guy Mesika, Joshua Maddox</div>
+      </div>
+      <div class="wgc-row">
+        <div class="wgc-org">Enterprise Ethereum Alliance</div>
+        <div class="wgc-sol">Working Group Lead</div>
+        <div class="wgc-peo">Redwan Meslem</div>
+      </div>
+      <div class="wgc-row">
+        <div class="wgc-org">Ethereum Foundation</div>
+        <div class="wgc-sol">Privacy</div>
+        <div class="wgc-peo">Andy Guzman</div>
+      </div>
+      <div class="wgc-row">
+        <div class="wgc-org">EY</div>
+        <div class="wgc-sol">Nightfall</div>
+        <div class="wgc-peo">Kahina Khacef</div>
+      </div>
+      <div class="wgc-row">
+        <div class="wgc-org">Kaleido / LFDT</div>
+        <div class="wgc-sol">Paladin</div>
+        <div class="wgc-peo">Jim Zhang, Peter Broadhurst, Matthew Whitehead, Sophia Lopez, Josh Mercer-Deadman</div>
+      </div>
+      <div class="wgc-row">
+        <div class="wgc-org">Polygon</div>
+        <div class="wgc-sol">CDK</div>
+        <div class="wgc-peo">S. Kinney, Avi Atkin, Aishwary Gupta, Serena Leung</div>
+      </div>
+      <div class="wgc-row">
+        <div class="wgc-org">ZKsync / Matter Labs</div>
+        <div class="wgc-sol">Prividium</div>
+        <div class="wgc-peo">Omar Azhar</div>
+      </div>
+    </div>
+
+    <!-- ============= SECTION 15 — Contributors & Reviewers (top 18780) ============= -->
+    <p class="abs sec15-title" id="sec-15">Contributors &amp; Reviewers</p>
+
+    <div class="abs sec15-grid">
+      <div class="rev-card"><p class="rev-name">Aaryamann Challani</p><p class="rev-org">Ethereum Foundation</p></div>
+      <div class="rev-card"><p class="rev-name">Adi Ben-Ari</p><p class="rev-org">Applied Blockchain</p></div>
+      <div class="rev-card"><p class="rev-name">Aishwary Gupta</p><p class="rev-org">Polygon</p></div>
+      <div class="rev-card"><p class="rev-name">Amateo Kaplan</p><p class="rev-org">COTI</p></div>
+      <div class="rev-card"><p class="rev-name">Andrew Campbell</p><p class="rev-org">Applied Blockchain</p></div>
+      <div class="rev-card"><p class="rev-name">Andy Guzman</p><p class="rev-org">Ethereum Foundation</p></div>
+      <div class="rev-card"><p class="rev-name">Arthur Remy</p><p class="rev-org">Consensys</p></div>
+      <div class="rev-card"><p class="rev-name">Avi Atkin</p><p class="rev-org">Polygon</p></div>
+      <div class="rev-card"><p class="rev-name">Brad Goodwin</p><p class="rev-org">COTI</p></div>
+      <div class="rev-card"><p class="rev-name">Florian Huc</p><p class="rev-org">Consensys</p></div>
+      <div class="rev-card"><p class="rev-name">Grace Mackeith</p><p class="rev-org">Applied Blockchain</p></div>
+      <div class="rev-card"><p class="rev-name">Guy Mesika</p><p class="rev-org">COTI</p></div>
+      <div class="rev-card"><p class="rev-name">Jim Zhang</p><p class="rev-org">Kaleido</p></div>
+      <div class="rev-card"><p class="rev-name">Josh Mercer-Deadman</p><p class="rev-org">Kaleido</p></div>
+      <div class="rev-card"><p class="rev-name">Joshua Maddox</p><p class="rev-org">COTI</p></div>
+      <div class="rev-card"><p class="rev-name">Kahina Khacef</p><p class="rev-org">EY</p></div>
+      <div class="rev-card"><p class="rev-name">Matthew Whitehead</p><p class="rev-org">Kaleido</p></div>
+      <div class="rev-card"><p class="rev-name">Michal Zajac</p><p class="rev-org">Nethermind</p></div>
+      <div class="rev-card"><p class="rev-name">Omar Azhar</p><p class="rev-org">ZKsync</p></div>
+      <div class="rev-card"><p class="rev-name">Peter Broadhurst</p><p class="rev-org">Kaleido</p></div>
+      <div class="rev-card"><p class="rev-name">Redwan Meslem</p><p class="rev-org">EEA</p></div>
+      <div class="rev-card"><p class="rev-name">S. Kinney</p><p class="rev-org">Polygon</p></div>
+      <div class="rev-card"><p class="rev-name">Serena Leung</p><p class="rev-org">Polygon</p></div>
+      <div class="rev-card"><p class="rev-name">Sergey Shemyakov</p><p class="rev-org">L2BEAT</p></div>
+      <div class="rev-card"><p class="rev-name">Sophia Lopez</p><p class="rev-org">Kaleido</p></div>
+      <div class="rev-card"><p class="rev-name">Stefano De Angelis</p><p class="rev-org">Nethermind</p></div>
+    </div>
+
+    <!-- ============= FOOTER (top 19700) ============= -->
+    <div class="abs sec-footer">
+      <div class="footer-cols">
+        <div class="footer-col contact-col">
+          <div class="footer-brand" aria-label="Enterprise Ethereum Alliance"></div>
+          <p class="fc-head">Contact</p>
+          <p class="fc-row">Enterprise Ethereum Alliance</p>
+          <p class="fc-row"><a href="mailto:press@entethalliance.org">press@entethalliance.org</a></p>
+        </div>
+        <div class="footer-col">
+          <p class="fc-head">Resources</p>
+          <p class="fc-row"><a href="https://entethalliance.org" target="_blank" rel="noopener">entethalliance.org</a></p>
+          <p class="fc-row"><a href="#sec-09">Readiness Matrix</a></p>
+          <p class="fc-row"><a href="#sec-10">Solution Profiles</a></p>
+          <p class="fc-row"><a href="#sec-13">Additional Solutions</a></p>
+          <p class="fc-row"><a href="#sec-14">Contact</a></p>
+        </div>
+        <div class="footer-col">
+          <p class="fc-head">Working Group</p>
+          <p class="fc-row">Privacy Working Group</p>
+          <p class="fc-row">Version 1 · April 2026</p>
+        </div>
+      </div>
+      <div class="footer-legal">
+        <p class="fl-disclaimer"><strong>Disclaimer:</strong> This report is provided for informational purposes only and represents the collective findings of the EEA Privacy Working Group. The information contained herein should not be construed as legal, financial, or technical advice. Organizations should conduct their own due diligence before implementing any privacy solutions. The EEA and contributing organizations make no warranties regarding the accuracy, completeness, or suitability of the information presented.</p>
+        <p class="fl-copy">© 2026 Enterprise Ethereum Alliance. All rights reserved.</p>
+      </div>
+    </div>
+    </div>
+
+    <div id="sec-end" style="position:absolute;left:0;top:calc(20100px + var(--post-taxonomy-shift) + var(--after-roadmap-shift));width:1px;height:1px"></div>
+    </div> <!-- /.card-inner -->
+    </div> <!-- /.card-stage -->
+  </div> <!-- /.card -->
+</div> <!-- /.page -->
+
+<script>
+  /* scroll-spy: highlight sidebar item based on scroll position inside the card */
+  (function(){
+    var card = document.querySelector('.card');
+    var cardStage = document.querySelector('.card-stage');
+    var cardInner = document.querySelector('.card-inner');
+    var sidebar = document.querySelector('.sidebar');
+    var sidebarLogo = document.querySelector('.sidebar .logo');
+    var nav = document.querySelector('.nav');
+    var mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+    var mobileNavBackdrop = document.querySelector('.mobile-nav-backdrop');
+    var sec08Block = document.querySelector('.sec08-block');
+    var flowSections = document.querySelector('.flow-sections');
+    var secEnd = document.getElementById('sec-end');
+    var trustImage = document.querySelector('.trust-row img');
+    if (!card) return;
+    var allLinks = document.querySelectorAll('#nav a[data-target]');
+    var spyLinks = document.querySelectorAll('#nav a[data-spy]');
+    var internalLinks = Array.prototype.slice.call(document.querySelectorAll('a[href^="#"]'));
+    var BASE_CARD_WIDTH = 1153;
+    var BASE_CARD_HEIGHT = 20250;
+    var MAX_UPSCALE = 1.4;
+    var currentScale = 1;
+    var spySections = Array.prototype.map.call(spyLinks, function(a){
+      return { a:a, el: document.getElementById(a.getAttribute('data-target')) };
+    }).filter(function(x){ return x.el; });
+
+    var suppressUntil = 0;
+
+    function clamp(n, min, max){ return Math.min(max, Math.max(min, n)); }
+    function isMobileNav(){ return window.innerWidth <= 900; }
+    function setMobileNav(open){
+      document.body.classList.toggle('nav-open', !!open);
+      if (mobileNavToggle){
+        mobileNavToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobileNavToggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+      }
+    }
+    function getInnerOffset(el){
+      var top = 0;
+      var node = el;
+      while (node && node !== cardInner){
+        top += node.offsetTop || 0;
+        node = node.offsetParent;
+      }
+      return top;
+    }
+    function getScaledOffset(el){ return getInnerOffset(el) * currentScale; }
+    function updateFlowLayout(){
+      if (!sec08Block || !flowSections || !cardInner) return;
+      var nextTop = sec08Block.offsetTop + sec08Block.offsetHeight + 104;
+      flowSections.style.top = nextTop + 'px';
+      var contentBottom = nextTop + flowSections.offsetHeight + 24;
+      cardInner.style.height = contentBottom + 'px';
+      if (secEnd) secEnd.style.top = contentBottom + 'px';
+    }
+    function updateResponsiveSidebar(){
+      if (!sidebar || !card) return;
+      if (isMobileNav()){
+        sidebar.style.width = '';
+        sidebar.style.padding = '';
+        sidebar.style.gap = '';
+        if (sidebarLogo){
+          sidebarLogo.style.width = '';
+          sidebarLogo.style.height = '';
+        }
+        if (nav){
+          nav.style.fontSize = '';
+        }
+        Array.prototype.forEach.call(document.querySelectorAll('.nav a'), function(link){
+          link.style.padding = '';
+          link.style.borderRadius = '';
+        });
+        Array.prototype.forEach.call(document.querySelectorAll('.nav a .n'), function(num){
+          num.style.width = '';
+        });
+        card.style.left = '';
+        setMobileNav(false);
+        return;
+      }
+      var scale = clamp(window.innerWidth / 1440, 1, 1.3333);
+      var sidebarWidth = 260 * scale;
+      var sidebarGap = 24 * scale;
+      var sidebarPadY = 20 * scale;
+      var sidebarPadX = 4 * scale;
+      var logoWidth = 148 * scale;
+      var logoHeight = 56 * scale;
+      var navFont = 14 * scale;
+      var navPadY = 12 * scale;
+      var navPadX = 16 * scale;
+      var navRadius = 40 * scale;
+      var navNumWidth = 20 * scale;
+      var cardLeft = sidebarWidth + (11 * scale);
+
+      sidebar.style.width = sidebarWidth + 'px';
+      sidebar.style.padding = sidebarPadY + 'px ' + sidebarPadX + 'px';
+      sidebar.style.gap = sidebarGap + 'px';
+      if (sidebarLogo){
+        sidebarLogo.style.width = logoWidth + 'px';
+        sidebarLogo.style.height = logoHeight + 'px';
+      }
+      if (nav){
+        nav.style.fontSize = navFont + 'px';
+      }
+      Array.prototype.forEach.call(document.querySelectorAll('.nav a'), function(link){
+        link.style.padding = navPadY + 'px ' + navPadX + 'px';
+        link.style.borderRadius = navRadius + 'px';
+      });
+      Array.prototype.forEach.call(document.querySelectorAll('.nav a .n'), function(num){
+        num.style.width = navNumWidth + 'px';
+      });
+      card.style.left = cardLeft + 'px';
+    }
+    function updateResponsiveCard(){
+      if (!cardStage || !cardInner) return;
+      currentScale = clamp(card.clientWidth / BASE_CARD_WIDTH, 0, MAX_UPSCALE);
+      var scaledWidth = BASE_CARD_WIDTH * currentScale;
+      cardInner.style.left = Math.max(0, (card.clientWidth - scaledWidth) / 2) + 'px';
+      cardInner.style.transform = 'scale(' + currentScale.toFixed(4) + ')';
+      cardStage.style.height = Math.max(card.clientHeight, cardInner.offsetHeight * currentScale) + 'px';
+    }
+    function onScroll(){
+      if (Date.now() < suppressUntil) return;
+      var midline = card.scrollTop + card.clientHeight * 0.33;
+      var active = spySections[0];
+      for (var i=0; i<spySections.length; i++){
+        var top = getScaledOffset(spySections[i].el);
+        if (top <= midline) active = spySections[i];
+      }
+      allLinks.forEach(function(a){ a.classList.remove('active'); });
+      if (active) active.a.classList.add('active');
+    }
+    card.addEventListener('scroll', onScroll, { passive:true });
+    if (mobileNavToggle){
+      mobileNavToggle.addEventListener('click', function(){
+        setMobileNav(!document.body.classList.contains('nav-open'));
+      });
+    }
+    if (mobileNavBackdrop){
+      mobileNavBackdrop.addEventListener('click', function(){
+        setMobileNav(false);
+      });
+    }
+    window.addEventListener('resize', function(){
+      updateResponsiveSidebar();
+      updateFlowLayout();
+      updateResponsiveCard();
+      onScroll();
+    });
+    if (trustImage){
+      if (!trustImage.complete){
+        trustImage.addEventListener('load', function(){
+          updateFlowLayout();
+          updateResponsiveCard();
+          onScroll();
+        });
+      } else {
+        updateFlowLayout();
+      }
+    }
+    window.addEventListener('load', function(){
+      updateResponsiveSidebar();
+      updateFlowLayout();
+      updateResponsiveCard();
+      onScroll();
+    });
+    updateResponsiveSidebar();
+    updateFlowLayout();
+    updateResponsiveCard();
+    onScroll();
+
+    function setActiveLink(targetId){
+      allLinks.forEach(function(a){
+        a.classList.toggle('active', a.getAttribute('data-target') === targetId);
+      });
+    }
+
+    function scrollToTarget(id, updateHash){
+      var el = document.getElementById(id);
+      if (!el) return false;
+      setActiveLink(id);
+      suppressUntil = Date.now() + 900;
+      card.scrollTo({ top: getScaledOffset(el) - 20, behavior: 'smooth' });
+      if (updateHash && window.location.hash !== '#' + id){
+        history.replaceState(null, '', '#' + id);
+      }
+      return true;
+    }
+
+    /* smooth scroll inside the card + manual active for sidebar items */
+    allLinks.forEach(function(a){
+      a.addEventListener('click', function(e){
+        var id = a.getAttribute('data-target');
+        if (!document.getElementById(id)) return;
+        e.preventDefault();
+        if (isMobileNav()) setMobileNav(false);
+        scrollToTarget(id, true);
+      });
+    });
+
+    /* keep footer and any other in-page anchors working inside the scroll container */
+    internalLinks.forEach(function(a){
+      if (a.hasAttribute('data-target')) return;
+      a.addEventListener('click', function(e){
+        var href = a.getAttribute('href') || '';
+        var id = href.slice(1);
+        if (!id || !document.getElementById(id)) return;
+        e.preventDefault();
+        if (isMobileNav()) setMobileNav(false);
+        scrollToTarget(id, true);
+      });
+    });
+
+    function syncFromHash(){
+      var id = window.location.hash.replace(/^#/, '');
+      if (!id || !document.getElementById(id)) return;
+      requestAnimationFrame(function(){
+        scrollToTarget(id, false);
+      });
+    }
+
+    window.addEventListener('hashchange', syncFromHash);
+    syncFromHash();
+
+    // Mute "Not disclosed" / "Not applicable" disclosure values
+    document.querySelectorAll('.rm-d-v').forEach(function(el){
+      var t = el.textContent.trim();
+      if(t.startsWith('Not disclosed') || t.startsWith('Not applicable')){
+        el.classList.add('nd');
+      }
+    });
+  })();
+</script>
+</body>
+</html>
