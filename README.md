@@ -6,9 +6,9 @@ Cross-institutional report mapping enterprise privacy requirements to Ethereum p
 
 ## View
 
-Open `privacy-report.html` in any browser — no build step, no dependencies.
-
-Or visit the live site via GitHub Pages if enabled.
+- **Production:** https://entethalliance.github.io/wg-privacy/privacy-report.html
+- **Local:** open `privacy-report.html` in any browser — no build step, no dependencies.
+- **Branch previews:** every branch is auto-deployed to `https://entethalliance.github.io/wg-privacy/staging/<branch-name>/privacy-report.html` (see [Deployment](#deployment) below).
 
 ## Contents
 
@@ -29,6 +29,28 @@ Or visit the live site via GitHub Pages if enabled.
 - Filterable coverage matrix
 - Print stylesheet
 - Scroll animations
+
+## Deployment
+
+GitHub Pages is published automatically by [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) on every push.
+
+| Trigger | Action | Published URL |
+|---------|--------|---------------|
+| Push to `main` | Deploy to production root | `https://entethalliance.github.io/wg-privacy/privacy-report.html` |
+| Push to any other branch | Deploy to staging path | `https://entethalliance.github.io/wg-privacy/staging/<branch-name>/privacy-report.html` |
+
+**How it works**
+- Workflow runs on `push` to `**` (all branches) and uses `peaceiris/actions-gh-pages@v4`.
+- The branch name decides the target: `main` writes to the gh-pages root; everything else writes to `staging/<branch-name>/`.
+- `keep_files: true` preserves prior deploys, so multiple staging previews can coexist without wiping production.
+- Source `gh-pages` branch holds the published artifacts; do not edit it directly.
+
+**Editor workflow**
+1. Open a feature branch (e.g. `fix/zksync-edits`).
+2. Push — within ~1 minute the staging URL above is live for review.
+3. Open a PR to `main`. After merge, the same workflow republishes production.
+
+**CI status:** [Actions tab](https://github.com/EntEthAlliance/wg-privacy/actions/workflows/deploy.yml).
 
 ## Source
 
