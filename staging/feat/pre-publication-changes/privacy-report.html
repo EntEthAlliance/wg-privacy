@@ -350,7 +350,7 @@
   .stat-card.metrics{width:266px}
   .stat-card.metrics::before{background-image:var(--img-frame99);opacity:1}
   .stat-card.metrics .inner{width:187px;gap:32px}
-  .stat-card.orgs{width:489px}
+  .stat-card.orgs{width:489px;height:340px}
   .stat-card.orgs::before{background-image:var(--img-frame100);opacity:.6}
   .stat-card.orgs .inner{color:var(--ink);gap:16px}
 
@@ -442,7 +442,6 @@
   .av-polygon{background-image:url('https://entethalliance.github.io/wg-privacy/logos/polygon.png');border-radius:0}
   .av-zksync{background-image:url('https://entethalliance.github.io/wg-privacy/logos/zksync.png')}
   .av-applied{background-image:url('./Applied blockchain.jpg')}
-  .av-ethereum{background-image:url('./eth-glyph-colored.svg');background-size:70%;background-position:center;background-repeat:no-repeat;background-color:#f0f0ff;border-radius:40px}
 
   /* ============================================================
      Section 01 — Opening Statement (top 730)
@@ -2117,16 +2116,6 @@
 </style>
 </head>
 <body>
-<div id="staging-banner" style="
-  position:fixed;top:0;left:0;right:0;z-index:99999;
-  background:linear-gradient(90deg,#ff6b00,#ff9500);
-  color:#fff;font-family:monospace;font-size:13px;font-weight:700;
-  padding:8px 16px;text-align:center;letter-spacing:0.04em;
-  box-shadow:0 2px 8px rgba(0,0,0,0.25);
-  user-select:none;
-">&#9888; STAGING PREVIEW &nbsp;·&nbsp; feat/pre-publication-changes &nbsp;·&nbsp; Not for public distribution &nbsp;·&nbsp; <a href="https://entethalliance.github.io/wg-privacy/privacy-report.html" style="color:#fff;text-decoration:underline;font-weight:800;" target="_blank">&#8599; View production</a></div>
-<style>#staging-banner+* { margin-top: 36px !important; }</style>
-
 <div class="page">
   <button class="mobile-nav-toggle" type="button" aria-label="Open navigation" aria-controls="nav" aria-expanded="false">
     <span></span>
@@ -2216,7 +2205,6 @@
             <div class="org-chip"><div class="avatar av-polygon"></div><p>Polygon</p></div>
             <div class="org-chip"><div class="avatar av-zksync"></div><p>ZKsync</p></div>
             <div class="org-chip"><div class="avatar av-applied"></div><p>Applied Blockchain</p></div>
-            <div class="org-chip"><div class="avatar av-ethereum"></div><p>Ethereum Foundation</p></div>
           </div>
         </div>
       </div>
@@ -2916,22 +2904,21 @@
           <span class="rm-status pilot"><span class="dot"></span>Pilot</span>
         </div>
         <div class="rm-body">
-          <p class="rm-evidence">Recommended fit: institutions that need configurable privacy, structural compliance, and <code>Agglayer</code> connectivity on a private <code>EVM</code> chain. The named pilot is <code>T-REX Ledger</code>: Apex Group has committed $100B in tokenized RWAs, using <code>Zama FHE</code> on <code>ERC-3643</code> for confidential settlement.</p>
+          <p class="rm-evidence">CDK toolkit available for building privacy-enabled L2 chains. No named enterprise privacy deployment publicly linked.</p>
           <div class="rm-disclosure">
             <p class="rm-disclosure-label">Mandatory Disclosures</p>
             <div class="rm-d-grid">
-              <div class="rm-d-row"><span class="rm-d-k">Named customers + tier</span><span class="rm-d-v"><code>T-REX Ledger</code>: Apex Group committed $100B in tokenized RWAs. The pilot uses <code>ERC-3643</code> with <code>Zama FHE</code> for confidential settlement and was announced in March 2026.</span></div>
-              <div class="rm-d-row"><span class="rm-d-k">Months in production</span><span class="rm-d-v"><code>Polygon CDK</code> has been live as production infrastructure since 2024 across multiple deployments. <code>T-REX Ledger</code> with <code>Zama FHE</code> was announced in March 2026. <code>CDK Shield</code>, also called <code>CDK OP Succinct</code>, is <code>OP Succinct</code> with <code>Agglayer</code> as the bridge instead of Optimism's 7-day bridge; it uses <code>SP1 Hypercube</code> proving.</span></div>
-              <div class="rm-d-row"><span class="rm-d-k">Last audit firm + date</span><span class="rm-d-v"><code>OP Succinct</code> has a 2025 Spearbit audit. <code>Agglayer</code> security reports list 2025 audits by Sigma Prime, Hexens, and Spearbit. See <a href="https://github.com/succinctlabs/op-succinct/tree/main/audits" target="_blank" rel="noopener"><code>OP Succinct</code> audit</a> and <a href="https://docs.polygon.technology/tools/security/reports" target="_blank" rel="noopener"><code>Agglayer</code> security reports</a>.</span></div>
-              <div class="rm-d-row"><span class="rm-d-k">Regulatory engagement</span><span class="rm-d-v"><code>Gateway</code> regional node hosting supports data residency for EU and APAC frameworks. Role-based access gives regulators and auditors read-only views without exposing the full dataset. <code>T-REX Ledger</code> uses <code>ERC-3643</code> with <code>Zama FHE</code>.</span></div>
-              <div class="rm-d-row"><span class="rm-d-k">Public volume / TVL</span><span class="rm-d-v">Deployed public volume/TVL for the privacy configuration hasn't been disclosed. Apex Group has committed $100B in tokenized RWAs.</span></div>
-              <div class="rm-d-row"><span class="rm-d-k">License</span><span class="rm-d-v">Open source: <code>cdk-erigon</code> is <code>LGPL-3.0</code> / <code>GPL-3.0</code>; <code>op-reth</code>, <code>op-succinct</code>, <code>AggLayer node</code>, and <code>AggKit</code> are <code>MIT OR Apache-2.0</code>; <code>AggLayer contracts</code> are <code>AGPL-3.0</code>.</span></div>
-              <div class="rm-d-row"><span class="rm-d-k">Commercial model</span><span class="rm-d-v"><code>Polygon CDK</code> is delivered as chain as a service through Polygon Labs and implementation providers such as Conduit and Gateway. There are no protocol fees or token-gated licenses. Production deployments run under Conduit and Gateway enterprise SLAs.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Named customers + tier</span><span class="rm-d-v">None for the privacy configuration. General CDK adopters (Katana, OKX, Immutable, Silicon, Lumia) do not use the privacy features.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Months in production</span><span class="rm-d-v">CDK as infrastructure: ~7 months (Erigon production-ready Q3 2025). Privacy-configured CDK: not applicable.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Last audit firm + date</span><span class="rm-d-v">Not disclosed.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Regulatory engagement</span><span class="rm-d-v">None disclosed for the privacy configuration.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Public volume / TVL</span><span class="rm-d-v">Not applicable for the privacy configuration.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">License</span><span class="rm-d-v">LGPL-3.0 / GPL-3.0 (cdk-erigon — dual license inherited from Erigon)</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Commercial model</span><span class="rm-d-v">Open-source toolkit; commercial support via Polygon Labs not formally disclosed</span></div>
             </div>
           </div>
           <div class="rm-links">
-            <a class="rm-link" href="https://polygon.technology/chain-development-kit" target="_blank" rel="noopener">Product Page</a>
-            <a class="rm-link" href="https://docs.polygon.technology/chain-development/cdk" target="_blank" rel="noopener"><code>CDK</code> Docs</a>
+            <a class="rm-link" href="https://docs.agglayer.dev/cdk/" target="_blank" rel="noopener">CDK Docs</a>
           </div>
         </div>
       </div>
@@ -2960,7 +2947,6 @@
           <div class="rm-links">
             <a class="rm-link" href="https://zksync.io/prividium" target="_blank" rel="noopener">Product Page</a>
             <a class="rm-link" href="https://www.db.com/news/detail/20250618-dama-2-litepaper-institutional-blueprint-for-asset-tokenisation-and-servicing-on-ethereum-layer-2" target="_blank" rel="noopener">Deutsche Bank Litepaper</a>
-            <a class="rm-link" href="https://www.zksync.io/papers/reflexivity_research_memento_zk_chain.pdf" target="_blank" rel="noopener">Memento Report</a>
           </div>
         </div>
       </div>
@@ -3291,7 +3277,7 @@
           <div class="profile-body-inner">
             <div>
               <h4>Summary</h4>
-              <p>Enterprise-grade private, permissioned Layer 2 infrastructure combining institutional privacy controls with native Ethereum connectivity. Transactions execute privately within and across enterprise-controlled Zones while ZK proofs anchor integrity to Ethereum — enabling compliant tokenization with access to public liquidity.</p>
+              <p>Enterprise-grade private, permissioned Layer 2 infrastructure combining institutional privacy controls with native Ethereum connectivity. Transactions execute privately within enterprise-controlled environments while ZK proofs anchor integrity to Ethereum — enabling compliant tokenization with access to public liquidity.</p>
             </div>
             <div>
               <h4>Privacy Approach</h4>
@@ -3310,7 +3296,7 @@
             <div>
               <h4>Case Studies</h4>
               <ul>
-                <li><strong>Cari Network:</strong> Tokenized deposit network for US regional/community banks (testnet)</li>
+                <li><strong>Cari Network:</strong> Tokenized deposits for US regional/community banks (testnet)</li>
                 <li><strong>Memento Blockchain + Deutsche Bank DAMA 2:</strong> Tokenized fund infrastructure in production</li>
                 <li><strong>35+ Global Financial Institutions:</strong> Interoperable Prividium pilot</li>
               </ul>
@@ -3319,7 +3305,7 @@
               <h4>Solution Characteristics</h4>
               <ul>
                 <li><strong>Cost:</strong> Sub-$0.001 per transaction including L1 settlement</li>
-                <li><strong>Performance:</strong> up to 15,000 TPS per Prividium; target sub-1 second ZK proof generation</li>
+                <li><strong>Performance:</strong> 15,000+ TPS per Prividium; sub-1 second ZK proof generation</li>
                 <li><strong>Ecosystem:</strong> Cross-chain privacy within ZKsync ecosystem + direct L1 interop</li>
               </ul>
             </div>
@@ -3355,54 +3341,50 @@
           <div class="profile-body-inner">
             <div>
               <h4>Summary</h4>
-              <p>Recommended fit: institutions launching private <code>EVM</code> chains secured by <code>ZK</code> proofs, with configurable privacy and <code>Agglayer</code> connectivity. Polygon Labs and providers such as Conduit and Gateway co-design the chain architecture with the institution, then tune privacy mechanisms to the regulatory environment and the threat model.</p>
+              <p>A modular, open-source multistack toolkit by Polygon Labs for launching sovereign, ZK-secured EVM chains with configurable, financial-grade privacy, enterprise-grade controls, and native connectivity to Agglayer for access to Ethereum liquidity.</p>
             </div>
             <div>
               <h4>Privacy Approach</h4>
-              <p>Institutions can tune privacy across chain, application, and wallet layers.</p>
+              <p>Privacy with Polygon CDK is a configurable spectrum rather than a binary on/off switch. Available configurations:</p>
               <ul>
-                <li><strong>Private validium (<code>CDK Shield</code>):</strong> Also called <code>CDK OP Succinct</code>, this uses <code>OP Succinct</code> with <code>Agglayer</code> as the bridge instead of Optimism's 7-day bridge. It keeps <code>SP1 Hypercube</code> proving and an institution-operated <code>AltDA</code> layer.</li>
-                <li><strong><code>FHE</code>:</strong> Homomorphic computation keeps balances and transfers encrypted during settlement. Reference deployment: <code>T-REX Ledger</code> with Zama on <code>ERC-3643</code>.</li>
-                <li><strong><code>TEE</code>:</strong> Trusted execution environments seal selected workloads from the chain operator.</li>
-                <li><strong>Permissioned access:</strong> Enterprise identity gates <code>RPC</code>, <code>mempool</code>, and explorer access.</li>
+                <li><strong>Validium mode:</strong> Transaction data stored off-chain in operator infrastructure</li>
+                <li><strong>Private RPC, mempool, block explorers (Gateway):</strong> Users see only relevant transactions</li>
+                <li><strong>ZK Validity proofs:</strong> Only cryptographic commitments on-chain</li>
+                <li><strong>Access control lists (ACLs):</strong> Role-based permissions, selectively revealable</li>
+                <li><strong>Identity &amp; compliance:</strong> KYC via Billions, Microsoft Entra, AWS IAM SSO</li>
+                <li><strong>FHE via Zama:</strong> Computation on encrypted data (in implementation)</li>
               </ul>
             </div>
             <div>
               <h4>Integration Requirements</h4>
               <ul>
-                <li><strong>Delivery:</strong> Chain as a service, co-designed with Polygon Labs and providers such as Conduit and Gateway.</li>
-                <li><strong>Configurations:</strong> <code>zkRollup</code>, <code>Validium</code>, <code>CDK Shield</code>, or <code>Sovereign</code> mode. <code>CDK Shield</code> is <code>CDK OP Succinct</code>: <code>OP Succinct</code> with <code>Agglayer</code> as the bridge.</li>
-                <li><strong>Execution:</strong> Full <code>EVM</code> equivalence with multiclient options including <code>cdk-erigon</code> and <code>CDK OP Stack</code>.</li>
-                <li><strong>Identity:</strong> Azure ID SSO and other enterprise SSO; native support for <code>ERC-3643</code>.</li>
-                <li><strong>Interop:</strong> Native <code>Agglayer</code> connectivity reaches <code>OP Stack</code>, <code>cdk-erigon</code>, and <code>Miden</code> testnet.</li>
+                <li>Full EVM compatibility; existing contracts deploy without modification</li>
+                <li>Direct upgrade path from Hyperledger Besu for permissioned networks</li>
+                <li>Multiclient options: Erigon, CDK op-geth, Validium variants</li>
+                <li>Options: zkRollup, Validium, or Sovereign modes</li>
               </ul>
             </div>
             <div>
               <h4>Case Studies</h4>
               <ul>
-                <li><strong><code>T-REX Ledger</code>:</strong> Apex Group, a $3.5T administrator, committed $100B in tokenized RWAs. The pilot uses <code>Polygon CDK</code> + <code>Zama FHE</code> on <code>ERC-3643</code> and was announced in March 2026.</li>
-                <li><strong>Katana:</strong> Mainnet <code>CDK OP Stack</code> chain generating <code>Succinct SP1</code> validity proofs in production.</li>
-                <li><strong>Conduit G3:</strong> Sequencer infrastructure for high-throughput <code>Polygon CDK</code> chains, with 3 Ggas/s sustained throughput.</li>
-                <li><strong><code>CDK</code> ecosystem:</strong> Live deployments include Katana, OKX, Immutable, and others.</li>
+                <li>Polygon CDK launched an enterprise-focused privacy-first rollup in Q3 2025, per Messari</li>
+                <li>Polygon PoS: $2.4T stablecoin volume, 164M+ unique addresses, 6.7B+ transactions</li>
+                <li>CDK adopters: Katana, OKX, Immutable, Silicon, Lumia</li>
               </ul>
             </div>
             <div>
               <h4>Solution Characteristics</h4>
               <ul>
-                <li><strong>Privacy:</strong> <code>FHE</code>, private validium, <code>TEE</code>, and permissioned access.</li>
-                <li><strong>Settlement:</strong> Validity proofs and cryptographic finality.</li>
-                <li><strong>Throughput:</strong> Conduit G3 provides 3 Ggas/s sustained throughput and 25K TPS.</li>
-                <li><strong>Cross-chain:</strong> Native <code>Agglayer</code> settlement across heterogeneous stacks.</li>
-                <li><strong>Maturity:</strong> <code>Polygon CDK</code> has been production-ready since 2024; <code>T-REX Ledger</code> entered pilot in March 2026.</li>
+                <li><strong>Privacy model:</strong> Configurable spectrum including Validium, private explorers, ACLs, FHE</li>
+                <li><strong>Migration:</strong> Direct upgrade path from Hyperledger Besu</li>
+                <li><strong>Performance:</strong> 60+ MGas/s burst throughput currently</li>
               </ul>
             </div>
             <div>
               <h4>Documentation</h4>
               <div class="links">
-                <a href="https://docs.polygon.technology/chain-development/cdk" target="_blank" rel="noopener"><code>Polygon CDK</code> Docs</a>
+                <a href="https://docs.agglayer.dev/cdk/get-started/overview/" target="_blank" rel="noopener">Polygon CDK Docs</a>
                 <a href="https://github.com/0xPolygon/cdk-erigon" target="_blank" rel="noopener">GitHub</a>
-                <a href="https://github.com/agglayer" target="_blank" rel="noopener"><code>Agglayer</code> GitHub</a>
-                <a href="https://succinctlabs.github.io/op-succinct/validity/experimental/altda.html" target="_blank" rel="noopener"><code>CDK Shield</code> Docs</a>
               </div>
             </div>
           </div>
@@ -3698,7 +3680,7 @@
       <div class="wgc-row">
         <div class="wgc-org">Polygon</div>
         <div class="wgc-sol">CDK</div>
-        <div class="wgc-peo">S. Kinney, Avi Atkin, Aishwary Gupta, Serena Leung</div>
+        <div class="wgc-peo">Shelby Kinney-Lang, Avi Atkin, Aishwary Gupta, Serena Leung</div>
       </div>
       <div class="wgc-row">
         <div class="wgc-org">ZKsync / Matter Labs</div>
@@ -3732,9 +3714,9 @@
       <div class="rev-card"><p class="rev-name">Omar Azhar</p><p class="rev-org">ZKsync</p></div>
       <div class="rev-card"><p class="rev-name">Peter Broadhurst</p><p class="rev-org">Kaleido</p></div>
       <div class="rev-card"><p class="rev-name">Redwan Meslem</p><p class="rev-org">EEA</p></div>
-      <div class="rev-card"><p class="rev-name">S. Kinney</p><p class="rev-org">Polygon</p></div>
       <div class="rev-card"><p class="rev-name">Serena Leung</p><p class="rev-org">Polygon</p></div>
       <div class="rev-card"><p class="rev-name">Sergey Shemyakov</p><p class="rev-org">L2BEAT</p></div>
+      <div class="rev-card"><p class="rev-name">Shelby Kinney-Lang</p><p class="rev-org">Polygon</p></div>
       <div class="rev-card"><p class="rev-name">Sophia Lopez</p><p class="rev-org">Kaleido</p></div>
       <div class="rev-card"><p class="rev-name">Stefano De Angelis</p><p class="rev-org">Nethermind</p></div>
     </div>
