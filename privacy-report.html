@@ -2919,7 +2919,7 @@
             <p class="rm-disclosure-label">Mandatory Disclosures</p>
             <div class="rm-d-grid">
               <div class="rm-d-row"><span class="rm-d-k">Named customers + tier</span><span class="rm-d-v"><code>T-REX Ledger</code>: Apex Group committed $100B in tokenized RWAs. The pilot uses <code>ERC-3643</code> with <code>Zama FHE</code> for confidential settlement and was announced in March 2026.</span></div>
-              <div class="rm-d-row"><span class="rm-d-k">Months in production</span><span class="rm-d-v"><code>Polygon CDK</code> has been live as production infrastructure since 2024 across multiple deployments. <code>T-REX Ledger</code> with <code>Zama FHE</code> was announced in March 2026. <code>CDK Shield</code>, also called <code>CDK OP Succinct</code>, is <code>OP Succinct</code> with <code>Agglayer</code> as the bridge instead of Optimism's 7-day bridge; it uses <code>SP1 Hypercube</code> proving.</span></div>
+              <div class="rm-d-row"><span class="rm-d-k">Months in production</span><span class="rm-d-v"><code>Polygon CDK</code> has been live as production infrastructure since 2024 across multiple deployments. Privacy-focused <code>CDK</code> variants include <code>T-REX Ledger</code> with <code>Zama FHE</code> was announced in March 2026, and <code>ZK Private Validium</code> with Succinct.</span></div>
               <div class="rm-d-row"><span class="rm-d-k">Last audit firm + date</span><span class="rm-d-v"><code>OP Succinct</code> has a 2025 Spearbit audit. <code>Agglayer</code> security reports list 2025 audits by Sigma Prime, Hexens, and Spearbit. See <a href="https://github.com/succinctlabs/op-succinct/tree/main/audits" target="_blank" rel="noopener"><code>OP Succinct</code> audit</a> and <a href="https://docs.polygon.technology/tools/security/reports" target="_blank" rel="noopener"><code>Agglayer</code> security reports</a>.</span></div>
               <div class="rm-d-row"><span class="rm-d-k">Regulatory engagement</span><span class="rm-d-v"><code>Gateway</code> regional node hosting supports data residency for EU and APAC frameworks. Role-based access gives regulators and auditors read-only views without exposing the full dataset. <code>T-REX Ledger</code> uses <code>ERC-3643</code> with <code>Zama FHE</code>.</span></div>
               <div class="rm-d-row"><span class="rm-d-k">Public volume / TVL</span><span class="rm-d-v">Deployed public volume/TVL for the privacy configuration hasn't been disclosed. Apex Group has committed $100B in tokenized RWAs.</span></div>
@@ -3357,7 +3357,7 @@
               <h4>Privacy Approach</h4>
               <p>Institutions can tune privacy across chain, application, and wallet layers.</p>
               <ul>
-                <li><strong>Private validium (<code>CDK Shield</code>):</strong> Also called <code>CDK OP Succinct</code>, this uses <code>OP Succinct</code> with <code>Agglayer</code> as the bridge instead of Optimism's 7-day bridge. It keeps <code>SP1 Hypercube</code> proving and an institution-operated <code>AltDA</code> layer.</li>
+                <li><strong>Private validium:</strong> <code>CDK</code> offers a <code>ZK validium</code> with Succinct's <code>SP1</code> proving, an institution-operated <code>AltDA</code> layer, and origin transaction shielding for maximum privacy.</li>
                 <li><strong><code>FHE</code>:</strong> Homomorphic computation keeps balances and transfers encrypted during settlement. Reference deployment: <code>T-REX Ledger</code> with Zama on <code>ERC-3643</code>.</li>
                 <li><strong><code>TEE</code>:</strong> Trusted execution environments seal selected workloads from the chain operator.</li>
                 <li><strong>Permissioned access:</strong> Enterprise identity gates <code>RPC</code>, <code>mempool</code>, and explorer access.</li>
@@ -3367,7 +3367,7 @@
               <h4>Integration Requirements</h4>
               <ul>
                 <li><strong>Delivery:</strong> Chain as a service, co-designed with Polygon Labs and providers such as Conduit and Gateway.</li>
-                <li><strong>Configurations:</strong> <code>zkRollup</code>, <code>Validium</code>, <code>CDK Shield</code>, or <code>Sovereign</code> mode. <code>CDK Shield</code> is <code>CDK OP Succinct</code>: <code>OP Succinct</code> with <code>Agglayer</code> as the bridge.</li>
+                <li><strong>Configurations:</strong> <code>ZK Rollup</code> (<code>cdk-op-reth</code>) or <code>Validium with Private DA</code> (<code>cdk-op-succinct</code>), with <code>Agglayer</code> native bridging.</li>
                 <li><strong>Execution:</strong> Full <code>EVM</code> equivalence with multiclient options including <code>cdk-erigon</code> and <code>CDK OP Stack</code>.</li>
                 <li><strong>Identity:</strong> Azure ID SSO and other enterprise SSO; native support for <code>ERC-3643</code>.</li>
                 <li><strong>Interop:</strong> Native <code>Agglayer</code> connectivity reaches <code>OP Stack</code>, <code>cdk-erigon</code>, and <code>Miden</code> testnet.</li>
@@ -3398,7 +3398,7 @@
                 <a href="https://docs.polygon.technology/chain-development/cdk" target="_blank" rel="noopener"><code>Polygon CDK</code> Docs</a>
                 <a href="https://github.com/0xPolygon/cdk-erigon" target="_blank" rel="noopener">GitHub</a>
                 <a href="https://github.com/agglayer" target="_blank" rel="noopener"><code>Agglayer</code> GitHub</a>
-                <a href="https://succinctlabs.github.io/op-succinct/validity/experimental/altda.html" target="_blank" rel="noopener"><code>CDK Shield</code> Docs</a>
+                <a href="https://succinctlabs.github.io/op-succinct/validity/experimental/altda.html" target="_blank" rel="noopener"><code>CDK</code> Docs</a>
               </div>
             </div>
           </div>
