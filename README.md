@@ -1,13 +1,13 @@
 # EEA Privacy Working Group Report
 
-**State of Privacy on Ethereum for Enterprise** — Version 1 · April 2026
+**State of Privacy on Ethereum for Enterprise**: Version 1 · April 2026
 
 Cross-institutional report mapping enterprise privacy requirements to Ethereum privacy solutions, published by the Enterprise Ethereum Alliance Privacy Working Group.
 
 ## View
 
 - **Production:** https://entethalliance.github.io/wg-privacy/privacy-report.html
-- **Local:** open `privacy-report.html` in any browser — no build step, no dependencies.
+- **Local:** open `privacy-report.html` in any browser: no build step, no dependencies.
 - **Branch previews:** every branch is auto-deployed to `https://entethalliance.github.io/wg-privacy/staging/<branch-name>/privacy-report.html` (see [Deployment](#deployment) below).
 
 ## Contents
@@ -47,7 +47,7 @@ GitHub Pages is published automatically by [`.github/workflows/deploy.yml`](.git
 
 **Editor workflow**
 1. Open a feature branch (e.g. `fix/zksync-edits`).
-2. Push — within ~1 minute the staging URL above is live for review.
+2. Push: within ~1 minute the staging URL above is live for review.
 3. Open a PR to `main`. After merge, the same workflow republishes production.
 
 **CI status:** [Actions tab](https://github.com/EntEthAlliance/wg-privacy/actions/workflows/deploy.yml).
